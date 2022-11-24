@@ -13,10 +13,6 @@ info:
     For testing purposes, you may use the Alpha (testing) server with client_id xxxxxx
     and client_secret xxxxx.
 
-    Some useful links:
-    - [internal-api](https://github.com/IDN-Media/internal-api.ice.id.git)
-    - [public-api](https://github.com/IDN-Media/public-api.ice.id.git)
-
 servers:
   - url: https://partner-api.estidar-dev.com/
     description: Alpha (testing)
