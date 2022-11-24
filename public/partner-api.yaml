@@ -1,0 +1,1936 @@
+openapi: "3.0.3"
+
+info:
+  version: 0.1.0
+  title: ICE Partner API
+  description: |-
+    To be used by ICE partners to create and manage business users and campaigns for their
+    business uers.
+
+    Partner must first obtain access_token using OAuth2 Client Credential then
+    use the access_token to access the other endpoints.
+
+    For testing purposes, you may use the Alpha (testing) server with client_id xxxxxx
+    and client_secret xxxxx.
+
+servers:
+  - url: https://partner-api.estidar-dev.com/
+    description: Alpha (testing)
+  - url: https://partner-api.estidar.com/
+    description: Beta (staging)
+  - url: https://partner-api.ice.id/
+    description: Production (live data)
+
+paths:
+  /oauth/token:
+    post:
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  description: Set this to 'client_credentials'
+                  example: client_credentials
+                client_id:
+                  description: Your application's client_id
+                  type: string
+                client_secret:
+                  description: Your application's client_secret
+                  type: string
+      responses:
+        "200":
+          description: Succesful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_key:
+                    type: string
+                    example: eyJz93a...k4laUWw
+                  token_type:
+                    type: string
+                    example: Bearer
+                  expires_in:
+                    type: integer
+                    example: 86400
+        "400":
+          description: Invalid input
+
+  /businessUser/listBusinessUsers:
+    get:
+      tags:
+        - Discover business users
+      summary: Get list of business users based on supplied filters and sorting rule
+      operationId: businessUser/listBusinessUsers
+      parameters:
+        - name: searchQuery
+          in: query
+          description: name or email, partial
+          schema:
+            type: string
+        - name: sortBy
+          in: query
+          description: column name to use for sorting (businessUserId, name, email, status, createdAt)
+          schema:
+            default: businessUserId
+            type: string
+            example: name
+        - name: sortOrder
+          in: query
+          description: sorting order (ASC or DESC)
+          schema:
+            default: ASC
+            type: string
+            example: DESC
+        - name: page
+          in: query
+          schema:
+            type: integer
+            format: int64
+            example: 1
+            default: 1
+        - name: pageSize
+          in: query
+          description: min is 10 and max is 1000
+          schema:
+            type: integer
+            format: int64
+            example: 100
+            default: 10
+        - name: businessPartnerId
+          in: query
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  records:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/BusinessUser"
+                  totalRecords:
+                    type: integer
+                  currentPage:
+                    type: integer
+                  pageSize:
+                    type: integer
+        "400":
+          description: Invalid input
+
+  /businessUser/getBusinessUser:
+    get:
+      tags:
+        - Discover business users
+      summary: Returns business user's profile object with full details
+      operationId: businessUser/getBusinessUser
+      parameters:
+        - name: businessUserId
+          in: query
+          description: Id of the business user
+          required: true
+          schema:
+            type: string
+            example: 47612437311
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BusinessUser"
+        "400":
+          description: Invalid input
+  /businessUser/createBusinessUser:
+    post:
+      tags:
+        - Manage business users
+      summary: Creates a new business user profile
+      description: "Please note: Can provide businessUserId as blank while hitting this api."
+      operationId: businessUser/createBusinessUser
+      requestBody:
+        description: Object containing details of the new business user
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BusinessUserDraft"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BusinessUser"
+        "400":
+          description: Invalid input
+  /businessUser/updateBusinessUser:
+    put:
+      tags:
+        - "Manage business users"
+      summary: "Updates the business users profile details"
+      operationId: "businessUser/updateBusinessUser"
+      requestBody:
+        description: "Object containing details of the business user"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BusinessUserDraft"
+      parameters:
+        - name: businessUserId
+          in: "query"
+          description: "Id of the business user"
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 164
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BusinessUser"
+        "400":
+          description: "Invalid input"
+  /businessUser/deleteBusinessUser:
+    delete:
+      tags:
+        - Manage business users
+      summary: Deletes the business user profile
+      operationId: businessUser/deleteBusinessUser
+      parameters:
+        - name: businessUserId
+          in: query
+          description: Id of the business user
+          required: true
+          schema:
+            type: integer
+            example: 16481234
+      responses:
+        "200":
+          description: Successful operation
+        "405":
+          description: Invalid input
+
+  /campaign/listCampaigns:
+    get:
+      tags:
+        - "Discover campaigns"
+      summary: "Get list of campaigns based on supplied filters and sorting rule"
+      description: "[WIP] Need to update the headers and remove body. Returns 10 items in each page."
+      operationId: "campaign/listCampaigns"
+      parameters:
+        - name: "searchQuery"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+          example: "Unilever"
+        - name: "status"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "AWAITING_PAYMENT,COMPLETED"
+        - name: "createdByIceOpId"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "1,2"
+        - name: "createdByBusinessPartnerId"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "1,2"
+        - name: "createdByBusinessUserId"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "1,2"
+        - name: "influencerId"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "1,2"
+        - name: "categoryId"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "1,2"
+        - name: "createdTimeFromInMillis"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "6413984634"
+        - name: "createdTimeToInMillis"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "6413984634"
+        - name: "startTimeFromInMillis"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "6413984634"
+        - name: "startTimeToInMillis"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "6413984634"
+        - name: "sortBy"
+          in: "query"
+          description: "Can have one of the following value: CREATED_TIME, TITLE, PRICE, INFLUENCERS_COUNT"
+          required: false
+          schema:
+            type: "string"
+            example: "TITLE"
+        - name: "orderBy"
+          in: "query"
+          description: "Can have one of the following value: ASCENDING, DESCENDING"
+          required: false
+          schema:
+            type: "string"
+            example: "ASCENDING"
+        - name: "page"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "integer"
+            example: "1"
+        - name: "pageSize"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "integer"
+            example: "10"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCampaignRespObj"
+        "405":
+          description: "Invalid input"
+
+  /campaign/listSubCampaigns:
+    get:
+      tags:
+        - "Discover campaigns"
+      summary: "Get list of sub-campaigns based on supplied filters and sorting rule"
+      description: "Get list of sub-campaigns based on supplied filters and sorting rule. This API is specially good for influencers who wants to get the list of all of their sub-campaigns. Returns 10 items in each page."
+      operationId: "campaign/listSubCampaigns"
+      parameters:
+        - name: "searchQuery"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "Unilever"
+        - name: "status"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "AWAITING_PAYMENT,COMPLETED"
+        - name: "createdByIceOpId"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "1,2"
+        - name: "createdByBusinessPartnerId"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "1,2"
+        - name: "createdByBusinessUserId"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "1,2"
+        - name: "influencerId"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "1,2"
+        - name: "categoryId"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "1,2"
+        - name: "createdTimeFromInMillis"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "6413984634"
+        - name: "createdTimeToInMillis"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "6413984634"
+        - name: "startTimeFromInMillis"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "6413984634"
+        - name: "startTimeToInMillis"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "string"
+            example: "6413984634"
+        - name: "sortBy"
+          in: "query"
+          description: "Can have one of the following value: CREATED_TIME, PRICE"
+          required: false
+          schema:
+            type: "string"
+            example: "PRICE"
+        - name: "orderBy"
+          in: "query"
+          description: "Can have one of the following value: ASCENDING, DESCENDING"
+          required: false
+          schema:
+            type: "string"
+            example: "ASCENDING"
+        - name: "page"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "integer"
+            example: "1"
+        - name: "pageSize"
+          in: "query"
+          description: ""
+          required: false
+          schema:
+            type: "integer"
+            example: "10"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSubCampaignRespObj"
+        "405":
+          description: "Invalid input"
+
+  /campaign/getCampaign:
+    get:
+      tags:
+        - "Discover campaigns"
+      summary: "Returns campaign object with full details"
+      description: ""
+      operationId: "campaign/getCampaign"
+      parameters:
+        - name: "campaignId"
+          in: "query"
+          description: "Id of the campaign"
+          required: true
+          schema:
+            type: "string"
+            example: "47612437311"
+        - name: "includeSubCampaigns"
+          in: "query"
+          description: "default value is false"
+          required: false
+          schema:
+            type: "boolean"
+            example: "true"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Campaign"
+        "400":
+          description: "Invalid input"
+
+  /campaign/getSubCampaign:
+    get:
+      tags:
+        - "Discover campaigns"
+      summary: "Returns sub-campaign object with full details"
+      description: ""
+      operationId: "campaign/getSubCampaign"
+      parameters:
+        - name: "subCampaignId"
+          in: "query"
+          description: "Id of the sub-campaign"
+          required: true
+          schema:
+            type: "string"
+            example: "47612437311"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubCampaign"
+        "400":
+          description: "Invalid input"
+
+  /campaign/listCampaignActivityHistory:
+    get:
+      tags:
+        - "Discover campaigns"
+      summary: "Returns campaign's activity history details"
+      description: ""
+      operationId: "campaign/listCampaignActivityHistory"
+      parameters:
+        - name: "campaignId"
+          in: "query"
+          description: "Id of the campaign"
+          required: true
+          schema:
+            type: "string"
+            example: "47612437311"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                $ref: "#/components/schemas/CampaignActivity"
+        "400":
+          description: "Invalid input"
+
+  /campaign/listSubCampaignActivityHistory:
+    get:
+      tags:
+        - "Discover campaigns"
+      summary: "Returns sub-campaign's activity history details"
+      description: ""
+      operationId: "campaign/listSubCampaignActivityHistory"
+      parameters:
+        - name: "subCampaignId"
+          in: "query"
+          description: "Id of the sub-campaign"
+          required: true
+          schema:
+            type: "string"
+            example: "47612437311"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                $ref: "#/components/schemas/SubCampaignActivity"
+        "400":
+          description: "Invalid input"
+
+  /campaign/getCart:
+    get:
+      tags:
+        - "Discover campaigns"
+      summary: "Returns this campaign's cart details"
+      description: ""
+      operationId: "campaign/getCart"
+      parameters:
+        - name: "campaignId"
+          in: "query"
+          description: "Id of the campaign"
+          required: true
+          schema:
+            type: "string"
+            example: "47612437311"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cart"
+        "400":
+          description: "Invalid input"
+
+  /campaign/getCampaignInvoice:
+    get:
+      tags:
+        - "Discover campaigns"
+      summary: "Returns this campaign's invoice details"
+      description: ""
+      operationId: "campaign/getCampaignInvoice"
+      parameters:
+        - name: "campaignId"
+          in: "query"
+          description: "Id of the campaign"
+          required: true
+          schema:
+            type: "string"
+            example: "47612437311"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CampaignInvoice"
+        "400":
+          description: "Invalid input"
+
+  /campaign/getSubCampaignInvoice:
+    get:
+      tags:
+        - "Discover campaigns"
+      summary: "Returns this sub-campaign's invoice details"
+      description: ""
+      operationId: "campaign/getSubCampaignInvoice"
+      parameters:
+        - name: "subCampaignId"
+          in: "query"
+          description: "Id of the sub-campaign"
+          required: true
+          schema:
+            type: "string"
+            example: "47612437311"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            applcation/json:
+              schema:
+                $ref: "#/components/schemas/SubCampaignInvoice"
+        "400":
+          description: "Invalid input"
+
+  /campaign/createCampaign:
+    post:
+      tags:
+        - "Manage campaign"
+      summary: "Creates a new campaign in draft state"
+      description: ""
+      operationId: "campaign/createCampaign"
+      requestBody:
+        description: "Object containing details of the new campaign"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CampaignDraft"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Campaign"
+        "400":
+          description: "Invalid input"
+
+  /campaign/updateCampaign:
+    put:
+      tags:
+        - "Manage campaign"
+      summary: "Updates the campaign details"
+      description: ""
+      operationId: "campaign/updateCampaign"
+      requestBody:
+        description: "Object containing details of the campaign"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CampaignDraft"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Campaign"
+        "400":
+          description: "Invalid input"
+
+  /campaign/deleteCampaign:
+    delete:
+      tags:
+        - "Manage campaign"
+      summary: "Deletes the campaign"
+      description: ""
+      operationId: "campaign/deleteCampaign"
+      parameters:
+        - name: "campaignId"
+          in: "query"
+          description: "Id of the campaign"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+            example: "16481234"
+      responses:
+        "200":
+          description: "Successful operation"
+        "405":
+          description: "Invalid input"
+
+  /campaign/setUpFrontPayment:
+    put:
+      tags:
+        - "Manage campaign"
+      summary: "Moves the campaign out of draft state and sets status as IN_PROGRESS"
+      description: ""
+      operationId: "campaign/setUpFrontPayment"
+      requestBody:
+        description: "Object containing details of payment"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetUpFrontPaymentReqObj"
+      responses:
+        "200":
+          description: "Successful operation"
+        "405":
+          description: "Invalid input"
+
+  /campaign/setNonUpFrontPayment:
+    put:
+      tags:
+        - "Manage campaign"
+      summary: "Moves the campaign out of draft state and sets status as AWAITING_PAYMENT"
+      description: ""
+      operationId: "campaign/setNonUpFrontPayment"
+      parameters:
+        - name: "campaignId"
+          in: "query"
+          description: "Id of the campaign"
+          required: true
+          schema:
+            type: "integer"
+            example: "16481234"
+      responses:
+        "200":
+          description: "Successful operation"
+        "405":
+          description: "Invalid input"
+
+  /campaign/setProofOfPayment:
+    put:
+      tags:
+        - "Manage campaign"
+      summary: "Uploads the payment proof."
+      description: "Uploads the payment proof. Also, moves the campaign from AWAITING_PAYMENT status to AWAITING_PAYMENT_VERIFICATION"
+      operationId: "campaign/setProofOfPayment"
+      requestBody:
+        description: "Object containing details of payment"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetProofOfPaymentReqObj"
+      responses:
+        "200":
+          description: "Successful operation"
+        "405":
+          description: "Invalid input"
+
+  /campaign/verifyProofOfPayment:
+    put:
+      tags:
+        - "Manage campaign"
+      summary: "Verifies the payment proof."
+      description: "Moves the campaign from AWAITING_PAYMENT_VERIFICATION status to IN_PROGRESS or REJECTED"
+      operationId: "campaign/verifyProofOfPayment"
+      parameters:
+        - name: "campaignId"
+          in: "query"
+          description: "Id of the campaign"
+          required: true
+          schema:
+            type: "integer"
+            example: "16481234"
+        - name: "isPaymentProofValid"
+          in: "query"
+          description: ""
+          required: true
+          schema:
+            type: "boolean"
+            example: "true"
+        - name: "rejectionReason"
+          in: "query"
+          description: ""
+          required: true
+          schema:
+            type: "string"
+            example: "reason of acceptance/rejection/etc, goes here"
+      responses:
+        "200":
+          description: "Successful operation"
+        "405":
+          description: "Invalid input"
+
+  /campaign/addSubCampaign:
+    post:
+      tags:
+        - "Manage sub-campaign"
+      summary: "Adds a sub-service to the campaign. This later becomes a sub-campaign."
+      description: ""
+      operationId: "campaign/addSubCampaign"
+      requestBody:
+        description: "Object containing sub-service details"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubCampaignDraft"
+      responses:
+        "200":
+          description: "Successful operation"
+        "405":
+          description: "Invalid input"
+
+  /campaign/removeSubCampaign:
+    delete:
+      tags:
+        - "Manage sub-campaign"
+      summary: "Removes a sub-campaign (or sub-service) from the campaign."
+      description: ""
+      operationId: "campaign/removeSubCampaign"
+      parameters:
+        - name: "subCampaignId"
+          in: "query"
+          description: "Id of the sub-campaign"
+          required: true
+          schema:
+            type: "integer"
+            example: "1230873425"
+      responses:
+        "200":
+          description: "Successful operation"
+        "405":
+          description: "Invalid input"
+
+  /campaign/setSubCampaignQuantity:
+    put:
+      tags:
+        - "Manage sub-campaign"
+      summary: "Sets the quanitity of the sub-service selected as part of this sub-campaign"
+      description: ""
+      operationId: "campaign/setSubCampaignQuantity"
+      parameters:
+        - name: "subCampaignId"
+          in: "query"
+          description: "Corresponding subCampaignId for this sub-service"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+            example: "1230873425"
+        - name: "quantity"
+          in: "query"
+          description: ""
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+            example: "3"
+      responses:
+        "200":
+          description: "Successful operation"
+        "405":
+          description: "Invalid input"
+
+  /campaign/confirmSubCampaign:
+    put:
+      tags:
+        - "Manage sub-campaign"
+      summary: "Moves the sub-campaign from AWAITING_CONFIRMATION status to AWAITING_CONTENT"
+      description: ""
+      operationId: "campaign/confirmSubCampaign"
+      parameters:
+        - name: "subCampaignId"
+          in: "query"
+          description: "Id of the sub-campaign"
+          required: true
+          schema:
+            type: "integer"
+            example: "16481234"
+        - name: "isConfirmed"
+          in: "query"
+          description: "Is sub-campaign confirmed or rejected"
+          required: true
+          schema:
+            type: "boolean"
+            example: "true"
+        - name: "rejectionReason"
+          in: "query"
+          description: "Reason of rejection"
+          required: true
+          schema:
+            type: "string"
+            example: "(Rejection reason goes here)"
+      responses:
+        "200":
+          description: "Successful operation"
+        "405":
+          description: "Invalid input"
+
+  /campaign/setContent:
+    post:
+      tags:
+        - "Manage sub-campaign"
+      summary: "Adds multiple images/videos links as the sub-campaign content"
+      description: "Adds multiple images/videos links as the sub-campaign content. Also checkout APIs: [ api/v1/util/uploadImage ] and [ api/v1/util/uploadFile ]"
+      operationId: "campaign/setContent"
+      parameters:
+        - name: "subCampaignId"
+          in: "query"
+          description: "Id of the sub-campaign"
+          required: true
+          schema:
+            type: "string"
+            example: "16481234"
+      requestBody:
+        description: "Json array containing the links of the images/videos"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "array"
+              items:
+                type: "string"
+                example: "https://s3.aws.com/image1.jpg"
+      responses:
+        "200":
+          description: "Successful operation"
+        "400":
+          description: "Invalid input"
+
+  /campaign/verifyContent:
+    put:
+      tags:
+        - "Manage sub-campaign"
+      summary: "Verifies the sub-campaign content"
+      description: "Verifies the sub-campaign content. Also, moves the sub-campaign from AWAITING_CONTENT_VERIFICATION status to LIVE or REJECTED status."
+      operationId: "campaign/verifyContent"
+      parameters:
+        - name: "subCampaignId"
+          in: "query"
+          description: ""
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+            example: "1230873425"
+        - name: "isContentValid"
+          in: "query"
+          description: ""
+          required: true
+          schema:
+            type: "boolean"
+            example: "false"
+        - name: "rejectionReason"
+          in: "query"
+          description: "Reason why the content is invalid."
+          required: true
+          schema:
+            type: "string"
+            example: "Need more croud in the photo"
+      responses:
+        "200":
+          description: "Successful operation"
+        "405":
+          description: "Invalid input"
+
+  /campaign/setProofOfPost:
+    post:
+      tags:
+        - "Manage sub-campaign"
+      summary: "Adds multiple images/videos links as the sub-campaign's proof of post."
+      description: "Adds multiple images/videos links as the sub-campaign's proof of post. Also checkout APIs: [ api/v1/util/uploadImage ] and [ api/v1/util/uploadFile ]"
+      operationId: "campaign/setProofOfPost"
+      parameters:
+        - name: "subCampaignId"
+          in: "query"
+          description: "Id of the sub-campaign"
+          required: true
+          schema:
+            type: "string"
+            example: "16481234"
+      requestBody:
+        description: "Json array containing the links of the images/videos"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "array"
+              items:
+                type: "string"
+                example: "https://s3.aws.com/image1.jpg"
+      responses:
+        "200":
+          description: "Successful operation"
+        "400":
+          description: "Invalid input"
+
+  /campaign/verifyProofOfPost:
+    put:
+      tags:
+        - "Manage sub-campaign"
+      summary: "Verifies the sub-campaign's proof of post"
+      description: "Verifies the sub-campaign's proof of post. Also, moves the sub-campaign from AWAITING_POP_VERIFICATION status to LIVE or REJECTED status."
+      operationId: "campaign/verifyProofOfPost"
+      parameters:
+        - name: "subCampaignId"
+          in: "query"
+          description: ""
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+            example: "1230873425"
+        - name: "isProofOfPostValid"
+          in: "query"
+          description: ""
+          required: true
+          schema:
+            type: "boolean"
+            example: "false"
+        - name: "rejectionReason"
+          in: "query"
+          description: "Reason why the proof is invalid."
+          required: true
+          schema:
+            type: "string"
+            example: "Unable to open the file."
+      responses:
+        "200":
+          description: "Successful operation"
+        "405":
+          description: "Invalid input"
+
+  /campaign/setProofOfInsight:
+    post:
+      tags:
+        - "Manage sub-campaign"
+      summary: "Adds multiple images/videos links as the sub-campaign's proof of insight."
+      description: "Adds multiple images/videos links as the sub-campaign's proof of insight. Also checkout APIs: [ api/v1/util/uploadImage ] and [ api/v1/util/uploadFile ]"
+      operationId: "campaign/setProofOfInsight"
+      parameters:
+        - name: "subCampaignId"
+          in: "query"
+          description: "Id of the sub-campaign"
+          required: true
+          schema:
+            type: "string"
+            example: "16481234"
+      requestBody:
+        description: "Json array containing the links of the images/videos"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "array"
+              items:
+                type: "string"
+                example: "https://s3.aws.com/image1.jpg"
+      responses:
+        "200":
+          description: "Successful operation"
+        "400":
+          description: "Invalid input"
+
+  /campaign/verifyProofOfInsight:
+    put:
+      tags:
+        - "Manage sub-campaign"
+      summary: "Verifies the sub-campaign's proof of insight"
+      description: "Verifies the sub-campaign's proof of insight. Also, moves the sub-campaign from LIVE_AND_AWAITING_POI_VERIFICATION status to COMPLETED or REJECTED status."
+      operationId: "campaign/verifyProofOfInsight"
+      parameters:
+        - name: "subCampaignId"
+          in: "query"
+          description: ""
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+            example: "1230873425"
+        - name: "isProofOfInsightValid"
+          in: "query"
+          description: ""
+          required: true
+          schema:
+            type: "boolean"
+            example: "false"
+        - name: "rejectionReason"
+          in: "query"
+          description: "Reason why the proof is invalid."
+          required: true
+          schema:
+            type: "string"
+            example: "Unable to open the file."
+      responses:
+        "200":
+          description: "Successful operation"
+        "405":
+          description: "Invalid input"
+
+components:
+  securitySchemes:
+    partnerAccess:
+      type: oauth2
+      description: This API uses client credentials flow
+      flows:
+        clientCredentials:
+          tokenUrl: /oauth/token
+    # publicAccess:
+    #   type: oauth2
+    #   flows:
+    #     authorizationCode:
+    #       authorizationUrl: /api/oauth/dialog
+    #       tokenUrl: /oauth/token
+
+  schemas:
+    FilterSortDetails:
+      type: object
+      properties:
+        filter:
+          type: object
+          properties:
+            searchQuery:
+              type: string
+              example: gendh
+        sortBy:
+          type: string
+          example: SORT_BY_NAME_A_Z
+
+    BusinessUserDraft:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Unilever
+        email:
+          type: string
+          example: unilever@unilever.com
+        phoneNumber:
+          type: string
+          example: 62854555936
+
+    BusinessUser:
+      type: object
+      properties:
+        businessUserId:
+          type: integer
+          format: int64
+        businessPartnerId:
+          type: integer
+          format: int64
+        name:
+          type: string
+          example: Tokopedia
+        email:
+          type: string
+          example: tokopedia@tokopedia.com
+        phoneNumber:
+          type: string
+          example: 62854555931
+
+    Activity:
+      type: object
+      properties:
+        activityId:
+          type: integer
+          example: 91834623413
+        activityCategory:
+          type: string
+          example: CAMPAIGN
+        activityType:
+          type: string
+          example: RENAME_TITLE
+        campaignId:
+          type: integer
+          example: 91834623413
+        campaignStatus:
+          type: string
+          example: IN_PROGRESS
+
+    CampaignLite:
+      type: "object"
+      properties:
+        campaignId:
+          type: "integer"
+          example: "39847239764"
+        title:
+          type: "string"
+          example: "This is the title of the campaign"
+        forBusinessUserName:
+          type: "string"
+          example: "Nature Shop"
+        createdByUserType:
+          type: "string"
+          example: "ICE_OP"
+        createdByUserName:
+          type: "string"
+          example: "Ahmed Ali"
+        campaignImageLink:
+          type: "string"
+          example: "https://s3.aws/image1.jpg"
+        campaignImageLinkKey:
+          type: "string"
+          example: "https://s3.aws/image1.jpg"
+        productFileLinks:
+          type: array
+          items:
+            type: "object"
+            properties:
+              link:
+                type: "string"
+                example: "https://s3.aws/image1.jpg"
+              linkKey:
+                type: "string"
+                example: "https://s3.aws/image1.jpg"
+        totalInfluencers:
+          type: "integer"
+          example: "4"
+        totalSubCampaigns:
+          type: "integer"
+          example: "6"
+        totalPrice:
+          type: "integer"
+          example: "10000"
+        startTimeInMillis:
+          type: "integer"
+          example: "763192836821"
+        endTimeInMillis:
+          type: "integer"
+          example: "63129836213"
+        createdTimeInMillis:
+          type: "integer"
+          example: "342934982374"
+        status:
+          type: "string"
+          example: "DRAFT"
+
+    CampaignDraft:
+      type: "object"
+      properties:
+        campaignId:
+          type: "integer"
+          example: "39847239764"
+        createdByUserId:
+          type: "integer"
+          example: "713827463"
+        createdByUserType:
+          type: "string"
+          example: "ICE_OP"
+        forBusinessUserId:
+          type: "integer"
+          example: "76514983635"
+        title:
+          type: "string"
+          example: "This is the title of the campaign"
+        productName:
+          type: "string"
+          example: "Name of the product"
+        categoryIds:
+          type: "array"
+          items:
+            type: "integer"
+            example: "2"
+        campaignImageLinkKey:
+          type: "string"
+          example: "https://s3.aws/image1.jpg"
+        productFileLinkKeys:
+          type: "array"
+          items:
+            type: "string"
+            example: "https://s3.aws/image1.jpg"
+        description:
+          type: "string"
+          example: "This is the description of this campaign."
+        objective:
+          type: "string"
+          example: "This is the objective of this campaign."
+        referenceLink:
+          type: "string"
+          example: "https://example.com/refLink"
+        startTimeInMillis:
+          type: "integer"
+          example: "763192836821"
+        endTimeInMillis:
+          type: "integer"
+          example: "63129836213"
+
+    Campaign:
+      type: "object"
+      properties:
+        campaignId:
+          type: "integer"
+          example: "39847239764"
+        createdByUserId:
+          type: "integer"
+          example: "713827463"
+        createdByUserType:
+          type: "string"
+          example: "ICE_OP"
+        createdByUserName:
+          type: "string"
+          example: "Ahmed Ali"
+        forBusinessUserId:
+          type: "integer"
+          example: "76514983635"
+        forBusinessUserName:
+          type: "string"
+          example: "Nature Shop"
+        title:
+          type: "string"
+          example: "This is the title of the campaign"
+        productName:
+          type: "string"
+          example: "Name of the product"
+        categories:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              categoryId:
+                type: "integer"
+                example: "3"
+              category:
+                type: "string"
+                example: "FOOD"
+        campaignImageLink:
+          type: "string"
+          example: "https://s3.aws/image1.jpg"
+        campaignImageLinkKey:
+          type: "string"
+          example: "https://s3.aws/image1.jpg"
+        productFileLinks:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              link:
+                type: "string"
+                example: "https://s3.aws/image1.jpg"
+              linkKey:
+                type: "string"
+                example: "https://s3.aws/image1.jpg"
+        description:
+          type: "string"
+          example: "This is the description of this campaign."
+        objective:
+          type: "string"
+          example: "This is the objective of this campaign."
+        referenceLink:
+          type: "string"
+          example: "https://example.com/refLink"
+        startTimeInMillis:
+          type: "integer"
+          example: "763192836821"
+        endTimeInMillis:
+          type: "integer"
+          example: "63129836213"
+        createdTimeInMillis:
+          type: "integer"
+          example: "342934982374"
+        totalPrice:
+          type: "integer"
+          example: "4000000"
+        totalTax:
+          type: "integer"
+          example: "100000"
+        totalTaxDeduction:
+          type: "integer"
+          example: "50000"
+        totalChargeablePriceWithTaxAndDeduction:
+          type: "integer"
+          example: "4050000"
+        invoiceNumber:
+          type: "string"
+          example: "INV/AHJDHJ/4676HG"
+        orderNumber:
+          type: "string"
+          example: "429462399"
+        proofOfPaymentFileLink:
+          type: "string"
+          example: "https://s3.aws/file1.pdf"
+        proofOfPaymentFileLinkKey:
+          type: "string"
+          example: "https://s3.aws/file1.pdf"
+        proofOfPaymentBankName:
+          type: "string"
+          example: "BCA"
+        proofOfPaymentBankAccNumber:
+          type: "string"
+          example: "0000235873947"
+        isProofOfPaymentValid:
+          type: "boolean"
+          example: "false"
+        proofOfPaymentRejectionReason:
+          type: "string"
+          example: "Cannot open the file."
+        proofOfPaymentUpdateTimeInMillis:
+          type: "integer"
+          example: "923084792342"
+        status:
+          type: "string"
+          example: "DRAFT"
+        rejectionReason:
+          type: "string"
+          example: "Campaign rejection reason goes here"
+        subCampaigns:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/SubCampaign"
+
+    Cart:
+      type: "object"
+      properties:
+        campaignId:
+          type: "integer"
+          example: "39847239764"
+        totalPrice:
+          type: "integer"
+          example: "4000000"
+        totalTax:
+          type: "integer"
+          example: "100000"
+        totalTaxDeduction:
+          type: "integer"
+          example: "50000"
+        totalChargeablePriceWithTaxAndDeduction:
+          type: "integer"
+          example: "4050000"
+        subCampaigns:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/SubCampaign"
+
+    SubCampaignDraft:
+      type: "object"
+      properties:
+        campaignId:
+          type: "integer"
+          example: "2759723423466"
+        serviceId:
+          type: "integer"
+          example: "62353463753"
+        isSubServiceSelected:
+          type: "boolean"
+          example: "true"
+        subServiceId:
+          type: "integer"
+          example: "62353463753"
+        quantity:
+          type: "integer"
+          example: "3"
+
+    SubCampaign:
+      type: "object"
+      properties:
+        subCampaignId:
+          type: "integer"
+          example: "2759723423466"
+        campaignId:
+          type: "integer"
+          example: "2759723423466"
+        campaignCreatedByUserId:
+          type: "integer"
+          example: "4362424"
+        campaignCreatedByUserType:
+          type: "string"
+          example: "BUSINESS_PARTNER"
+        campaignCreatedByUserName:
+          type: "string"
+          example: "Tokopedia"
+        forBusinessUserId:
+          type: "integer"
+          example: "76514983635"
+        forBusinessUserName:
+          type: "string"
+          example: "Nature Shop"
+        campaignTitle:
+          type: "string"
+          example: "Campaign title goes here"
+        campaignImageLink:
+          type: "string"
+          example: "https://s3.aws/image1.jpg"
+        campaignImageLinkKey:
+          type: "string"
+          example: "https://s3.aws/image1.jpg"
+        campaignStartTimeInMillis:
+          type: "integer"
+          example: "632918649234"
+        campaignEndTimeInMillis:
+          type: "integer"
+          example: "632918649234"
+        categories:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              categoryId:
+                type: "integer"
+                example: "3"
+              category:
+                type: "string"
+                example: "FOOD"
+        influencerId:
+          type: "integer"
+          example: "652149649324"
+        influencerName:
+          type: "string"
+          example: "Bianca Kartika"
+        influencerCity:
+          type: "string"
+          example: "Jakarta"
+        influencerProfileImageLink:
+          type: "string"
+          example: "https://s3.aws.com/image1.jpg"
+        influencerProfileImageLinkKey:
+          type: "string"
+          example: "https://s3.aws.com/image1.jpg"
+        isInfluencerIndividual:
+          type: "boolean"
+          example: "false"
+        isInfluencerBusiness:
+          type: "boolean"
+          example: "true"
+        isPKP:
+          type: "boolean"
+          example: "true"
+        socialPlatformTypeId:
+          type: "integer"
+          example: "2347"
+        socialPlatformType:
+          type: "string"
+          example: "INSTAGRAM"
+        serviceTypeId:
+          type: "integer"
+          example: "1724"
+        serviceType:
+          type: "string"
+          example: "FEED"
+        serviceDescription:
+          type: "string"
+          example: "FEED"
+        servicePrice:
+          type: "number"
+          example: "10000.00"
+        serviceMarkupPrice:
+          type: "number"
+          example: "12000.00"
+        isSubServiceSelected:
+          type: "boolean"
+          example: "true"
+        subServiceType:
+          type: "string"
+          example: "PLUS ONE PHOTO"
+        subServicePrice:
+          type: "number"
+          example: "1000.00"
+        subServiceMarkupPrice:
+          type: "number"
+          example: "1200.00"
+        quantity:
+          type: "integer"
+          example: "3"
+        price:
+          type: "number"
+          example: "33000"
+        markupPrice:
+          type: "number"
+          example: "39600"
+        invoiceNumber:
+          type: "string"
+          example: "INV/22131927873"
+        orderNumber:
+          type: "string"
+          example: "5346477"
+        totalTax:
+          type: "number"
+          example: "1000"
+        totalChargeablePrice:
+          type: "number"
+          example: "34000"
+        isConfirmedByInfluencer:
+          type: "boolean"
+          example: "true"
+        influencerRejectionReason:
+          type: "string"
+          example: "(Rejection reason goes here)"
+        isConfirmedTimeInMillis:
+          type: "integer"
+          example: "7146239354653"
+        isContentValid:
+          type: "boolean"
+          example: "true"
+        contentRejectionReason:
+          type: "string"
+          example: "(Rejection reason goes here)"
+        contentUpdateTimeInMillis:
+          type: "integer"
+          example: "62938623957345"
+        contentFileLinks:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              link:
+                type: "string"
+                example: "https://www.amazon.com/image.jpg"
+              linkKey:
+                type: "string"
+                example: "https://www.amazon.com/image.jpg"
+        isProofOfPostValid:
+          type: "boolean"
+          example: "true"
+        proofOfPostRejectionReason:
+          type: "string"
+          example: "(Rejection reason goes here)"
+        proofOfPostUpdateTimeInMillis:
+          type: "integer"
+          example: "62938623957345"
+        proofOfPostFileLinks:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              link:
+                type: "string"
+                example: "https://www.amazon.com/image.jpg"
+              linkKey:
+                type: "string"
+                example: "https://www.amazon.com/image.jpg"
+        isProofOfInsightValid:
+          type: "boolean"
+          example: "true"
+        proofOfInsightRejectionReason:
+          type: "string"
+          example: "(Rejection reason goes here)"
+        proofOfInsightUpdateTimeInMillis:
+          type: "integer"
+          example: "62938623957345"
+        proofOfInsightFileLinks:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              link:
+                type: "string"
+                example: "https://www.amazon.com/image.jpg"
+              linkKey:
+                type: "string"
+                example: "https://www.amazon.com/image.jpg"
+        status:
+          type: "string"
+          example: "NOT_ACTIVE"
+
+    CampaignActivity:
+      type: "object"
+      properties:
+        timeInMillis:
+          type: "integer"
+          example: "239875234646"
+        action:
+          type: "string"
+          example: "ACTION_SET_CONTENT"
+        campaign:
+          $ref: "#/components/schemas/Campaign"
+
+    SubCampaignActivity:
+      type: "object"
+      properties:
+        timeInMillis:
+          type: "integer"
+          example: "239875234646"
+        action:
+          type: "string"
+          example: "ACTION_SET_CONTENT"
+        contentRevisionNumber:
+          type: "integer"
+          example: "0"
+        subCampaign:
+          $ref: "#/components/schemas/SubCampaign"
+
+    CampaignInvoice:
+      type: "object"
+      properties:
+        campaignId:
+          type: "integer"
+          example: "632918649128"
+        invoiceNumber:
+          type: "string"
+          example: "INV/AHJDHJ/4676HG"
+        orderNumber:
+          type: "string"
+          example: "1213SGYWGSU"
+        paymentTimeInMillis:
+          type: "integer"
+          example: "734543536547"
+        paymentMethod:
+          type: "string"
+          example: "Transfer Bank BCA"
+        campaignTitle:
+          type: "string"
+          example: "Campaign title goes here"
+        businessUserName:
+          type: "string"
+          example: "Nature Shop"
+        businessPartnerName:
+          type: "string"
+          example: "Tokopedia"
+        subCampaigns:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              influencerId:
+                type: "integer"
+                example: "24235346"
+              influencerName:
+                type: "string"
+                example: "Zahra Abigail"
+              serviceType:
+                type: "string"
+                example: "FEED"
+              serviceMarkupPrice:
+                type: "number"
+                format: double
+                example: "10000000"
+              isSubServiceSelected:
+                type: "boolean"
+                example: "true"
+              subServiceType:
+                type: "string"
+                example: "Tambah 2 slide"
+              subServiceMarkupPrice:
+                type: number
+                format: double
+                example: "1000"
+              quantity:
+                type: "integer"
+                example: "3"
+              markupPrice:
+                type: number
+                format: double
+                example: "30003000"
+        totalPrice:
+          type: "integer"
+          example: "4000000"
+        totalTax:
+          type: "integer"
+          example: "100000"
+        totalTaxDeduction:
+          type: "integer"
+          example: "50000"
+        totalChargeablePriceWithTaxAndDeduction:
+          type: "integer"
+          example: "4050000"
+        idPaid:
+          type: "boolean"
+          example: "true"
+        lastUpdatedTimeInMillis:
+          type: "integer"
+          example: "734543536547"
+
+    SubCampaignInvoice:
+      type: "object"
+      properties:
+        subCampaignId:
+          type: "integer"
+          example: "632918649128"
+        invoiceNumber:
+          type: "string"
+          example: "INV/AHJDHJ/4676HG"
+        orderNumber:
+          type: "string"
+          example: "1213SGYWGSU"
+        paymentTimeInMillis:
+          type: "integer"
+          example: "734543536547"
+        paymentMethod:
+          type: "string"
+          example: "Transfer Bank BCA"
+        campaignTitle:
+          type: "string"
+          example: "Campaign title goes here"
+        businessUserName:
+          type: "string"
+          example: "Nature Shop"
+        businessPartnerName:
+          type: "string"
+          example: "Tokopedia"
+        influencerId:
+          type: "integer"
+          example: "24235346"
+        influencerName:
+          type: "string"
+          example: "Zahra Abigail"
+        isIndividual:
+          type: "boolean"
+          example: "false"
+        isBusiness:
+          type: "boolean"
+          example: "true"
+        isPKP:
+          type: "boolean"
+          example: "true"
+        serviceType:
+          type: "string"
+          example: "FEED"
+        servicePrice:
+          type: number
+          format: double
+          example: "10000000"
+        isSubServiceSelected:
+          type: "boolean"
+          example: "true"
+        subServiceType:
+          type: "string"
+          example: "Tambah 2 slide"
+        subServicePrice:
+          type: number
+          format: double
+          example: "1000"
+        quantity:
+          type: "integer"
+          example: "3"
+        totalPrice:
+          type: "integer"
+          example: "4000000"
+        totalTax:
+          type: "integer"
+          example: "100000"
+        totalChargeablePriceWithTax:
+          type: "integer"
+          example: "4100000"
+        lastUpdatedTimeInMillis:
+          type: "integer"
+          example: "734543536547"
+
+    SetUpFrontPaymentReqObj:
+      type: "object"
+      properties:
+        campaignId:
+          type: "integer"
+          example: "632918649128"
+        bankId:
+          type: "integer"
+          example: "2"
+        bankAccNumber:
+          type: "string"
+          example: "0001011389453"
+        proofOfPaymentImageLinkKey:
+          type: "string"
+          example: "https://s3.aws.com/image1.jpg"
+
+    SetProofOfPaymentReqObj:
+      type: "object"
+      properties:
+        campaignId:
+          type: "integer"
+          example: "632918649128"
+        bankId:
+          type: "integer"
+          example: "2"
+        bankAccNumber:
+          type: "string"
+          example: "0001011389453"
+        proofOfPaymentImageLinkKey:
+          type: "string"
+          example: "https://s3.aws.com/image1.jpg"
+
+    ListCampaignRespObj:
+      type: "object"
+      properties:
+        totalResults:
+          type: "integer"
+          example: "100"
+        pageSize:
+          type: "integer"
+          example: "10"
+        currentPage:
+          type: "integer"
+          example: "2"
+        campaigns:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CampaignLite"
+
+    ListSubCampaignRespObj:
+      type: "object"
+      properties:
+        totalResults:
+          type: "integer"
+          example: "100"
+        pageSize:
+          type: "integer"
+          example: "10"
+        currentPage:
+          type: "integer"
+          example: "2"
+        subCampaigns:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/SubCampaign"
