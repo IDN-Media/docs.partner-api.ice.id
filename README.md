@@ -2,5 +2,5 @@
 
 Content:
 
-- [OpenAPI spec](pages/swagger/partner-api.yaml)
+- [OpenAPI spec](public/partner-api.yaml)
 - [ice-notification-service documentation](pages/ice-notification-service.mdx)
