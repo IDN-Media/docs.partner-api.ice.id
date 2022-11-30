@@ -59,7 +59,7 @@ paths:
                     example: Bearer
                   expires_in:
                     type: integer
-                    example: 86400
+                    example: 315360000
         "400":
           description: Invalid input
 
