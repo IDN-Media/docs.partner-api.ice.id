@@ -1934,3 +1934,357 @@ components:
           type: "array"
           items:
             $ref: "#/components/schemas/SubCampaign"
+            
+/api/v1/util/uploadFile:
+    post:
+      tags:
+        - "Uploading files"
+      summary: "For uploading images, videos, files, etc"
+      description: ""
+      operationId: "/api/v1/util/uploadFile"
+      consumes:
+        - "multipart/form-data"
+      parameters:
+        - in: formData
+          name: "file"
+          type: "file"
+          required: true
+          description: The file to upload.
+      produces:
+        - "text/plain"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/UploadFileResponse"
+        "400":
+          description: "Invalid input"
+
+  /api/v1/util/uploadFiles:
+    post:
+      tags:
+        - "Uploading files"
+      summary: "For uploading images, videos, files, etc"
+      description: "Send an array of files. You will get an array of S3 links to those files.\nIf any file fails to upload, then the link at that index will be blank"
+      operationId: "/api/v1/util/uploadFiles"
+      consumes:
+        - "multipart/form-data"
+      parameters:
+        - in: formData
+          type: string
+          name: "files"
+          schema:
+            type: "array"
+            items:
+              type: "file"
+          required: true
+          description: The array of files to upload.
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/UploadFileResponse"
+        "400":
+          description: "Invalid input"
+
+  /api/v1/util/getMetaData:
+    get:
+      tags:
+        - "List constants"
+      description: "List cities, categories, banks, etc"
+      operationId: "/api/v1/util/getMetaData"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "object"
+            properties:
+              banks:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Bank"
+              countries:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Country"
+              genders:
+                type: "array"
+                items:
+                  type: "string"
+                  example: "MALE"
+              languages:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Language"
+              productTypes:
+                type: "array"
+                items:
+                  $ref: "#/definitions/ProductType"
+              skbTypes:
+                type: "array"
+                items:
+                  type: "string"
+                  example: "SKB_0"
+              userTypes:
+                type: "array"
+                items:
+                  type: "string"
+                  example: "INFLUENCER"
+              businessPartner:
+                type: "object"
+                properties:
+                  accessStatuses:
+                    type: "array"
+                    items:
+                      type: "string"
+                      example: "ACTIVE"
+              iceOp:
+                type: "object"
+                properties:
+                  roles:
+                    type: "array"
+                    items:
+                      type: "string"
+                      example: "SUPER_ADMIN"
+                  accessStatuses:
+                    type: "array"
+                    items:
+                      type: "string"
+                      example: "ACTIVE"
+              influencer:
+                type: "object"
+                properties:
+                  categories:
+                    type: "array"
+                    items:
+                      $ref: "#/definitions/Category"
+                  socialPlatformTypes:
+                    type: "array"
+                    items:
+                      $ref: "#/definitions/SocialPlatformType"
+                  approvalStatuses:
+                    type: "array"
+                    items:
+                      type: "string"
+                      example: "APPROVED"
+              campaign:
+                type: "object"
+                properties:
+                  statuses:
+                    type: "array"
+                    items:
+                      type: "string"
+                      example: "DRAFT"
+                  actions:
+                    type: "array"
+                    items:
+                      type: "string"
+                      example: "ACTION_NON_UP_FRONT_PAYMENT"
+              subCampaign:
+                type: "object"
+                properties:
+                  statuses:
+                    type: "array"
+                    items:
+                      type: "string"
+                      example: "NOT_ACTIVE"
+                  actions:
+                    type: "array"
+                    items:
+                      type: "string"
+                      example: "ACTION_SET_CONTENT"
+        "400":
+          description: "Invalid input"
+
+  /api/v1/util/refreshMetaData:
+    post:
+      tags:
+        - "List constants"
+      description: "Refreshes metaData returned in getMetaData API from DB<br>**Should NOT be called from front-end**<br>Should only be called when there are any db changes for the related data"
+      operationId: "/api/v1/util/refreshMetaData"
+      responses:
+        "204":
+          description: "Successful operation"
+
+  /api/v1/util/downloadTemplate:
+    get:
+      tags:
+        - "Download template"
+      summary: "To download a template"
+      description: ""
+      operationId: "/api/v1/util/downloadTemplate"
+      parameters:
+        - name: "templateFor"
+          in: "query"
+          required: true
+          description: "(bulkCreateInfluencers)"
+          type: "string"
+        - name: "fileExtension"
+          in: "query"
+          description: "(.csv)"
+          type: "string"
+          default: ".csv"
+      produces:
+        - "Content-Disposition"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: string
+            format: binary
+        "400":
+          description: "Invalid input"
+
+  /health:
+    get:
+      tags:
+        - "Other"
+      summary: "Server health check API"
+      description: ""
+      operationId: "/health"
+      produces:
+        - "text/plain"
+      responses:
+        "200":
+          description: "Successful operation"
+
+definitions:
+  UploadFileResponse:
+    type: "object"
+    properties:
+      key:
+        type: "string"
+        example: "ICE_OP/1/a.jpg"
+      preSignedURL:
+        type: "string"
+
+  Bank:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: "0"
+      code:
+        type: "string"
+        example: "ABC"
+      name:
+        type: "string"
+        example: "Bank Indonesia"
+
+  Country:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+        example: "0"
+      isoCode2:
+        type: "string"
+        example: "ID"
+      isoCode3:
+        type: "string"
+        example: "IDN"
+      isoNumCode:
+        type: "string"
+        example: "360"
+      name:
+        type: "string"
+        example: "Indonesia"
+      slug:
+        type: "string"
+        example: "indonesia"
+      provinces:
+        type: "array"
+        items:
+          $ref: "#/definitions/Province"
+
+  Province:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+        example: "0"
+      name:
+        type: "string"
+        example: "DKI Jakarta"
+      slug:
+        type: "string"
+        example: "dki-jakarta"
+      cities:
+        type: "array"
+        items:
+          $ref: "#/definitions/City"
+
+  City:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: "0"
+      name:
+        type: "string"
+        example: "Kota Adm. Jakarta Pusat"
+      slug:
+        type: "string"
+        example: "kota-adm-jakarta-pusat"
+
+  Language:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: "0"
+      name:
+        type: "string"
+        example: "English"
+
+  ProductType:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: "0"
+      name:
+        type: "string"
+        example: "Food"
+
+  Category:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: "0"
+      name:
+        type: "string"
+        example: "Food"
+
+  SocialPlatformType:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: "0"
+      name:
+        type: "string"
+        example: "Instagram"
+      serviceTypes:
+        type: "array"
+        items:
+          $ref: "#/definitions/ServiceType"
+
+  ServiceType:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: "0"
+      name:
+        type: "string"
+        example: "Story"
