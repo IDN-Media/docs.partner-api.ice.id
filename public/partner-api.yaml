@@ -154,6 +154,7 @@ paths:
                 $ref: "#/components/schemas/BusinessUser"
         "400":
           description: Invalid input
+  
   /businessUser/createBusinessUser:
     post:
       tags:
@@ -177,6 +178,7 @@ paths:
                 $ref: "#/components/schemas/BusinessUser"
         "400":
           description: Invalid input
+  
   /businessUser/updateBusinessUser:
     put:
       tags:
@@ -208,6 +210,7 @@ paths:
                 $ref: "#/components/schemas/BusinessUser"
         "400":
           description: "Invalid input"
+  
   /businessUser/deleteBusinessUser:
     delete:
       tags:
@@ -1131,6 +1134,89 @@ paths:
         "200":
           description: "Successful operation"
         "405":
+          description: "Invalid input"
+
+  /chats/joinChatRoom:
+    get:
+      tags:
+        - "Chat"
+      summary: "Join Chat Room"
+      description: ""
+      operationId: "chats/joinChatRoom"
+      parameters:
+        - name: "roomName"
+          in: "query"
+          description: "Room Name to Join"
+          required: true
+          schema:
+            type: "string"
+            example: "I_10_C_34"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JoinChatRoomResponse"
+        "400":
+          description: "Invalid input"
+
+  /chats/upload:
+    post:
+      tags:
+        - "Chat"
+      summary: "Upload file"
+      description: ""
+      operationId: "chats/upload"
+      parameters:
+        - name: "file"
+          in: "formData"
+          description: "File to upload"
+          required: true
+          schema:
+            type: "file"
+        - name: "roomName"
+          in: "query"
+          required: true
+          description: "Chat Room Name"
+          schema:
+            type: "string"
+            example: "I_10_C_34"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatUploadResponse"
+        "400":
+          description: "Invalid input"
+
+  /chats/deactivateChatRoom:
+    post:
+      tags:
+        - "Chat"
+      summary: "Deactivate room"
+      description: ""
+      operationId: "chats/upload"
+      requestBody:
+        description: "Object containing details of the campaign"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                roomName:
+                  type: "string"
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatUploadResponse"
+        "400":
           description: "Invalid input"
 
 components:
@@ -2288,3 +2374,34 @@ definitions:
       name:
         type: "string"
         example: "Story"
+
+    JoinChatRoomResponse:
+      type: "object"
+      properties:
+        token:
+          type: "string"
+        userId:
+          type: "string"
+        roomId:
+          type: "string"
+        roomName:
+          type: "string"
+        lastMessages:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              payload:
+                type: "string"
+              id:
+                type: "string"
+              sortkey:
+                type: "string"
+        messageLastKey:
+          type: "object"
+          properties:
+            id:
+              type: "string"
+            sortkey:
+              type: "string"
+
