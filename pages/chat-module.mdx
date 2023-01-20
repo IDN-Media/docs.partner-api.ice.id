@@ -1,0 +1,288 @@
+# Chat Module
+
+## Chat API
+
+### Base URL : 
+
+https://c79hdiiirb.execute-api.us-east-1.amazonaws.com
+
+### Header
+
+```
+{
+  Authorization: Basic [API_Key]
+}
+```
+
+### Get/create Chat Room
+
+`GET /rooms/getOrCreateChatRoom`
+
+#### Query Params
+
+| Key                | Required | Description                                                                      |
+| ------------------ | :------: | -------------------------------------------------------------------------------- |
+| `roomName`         |   yes    | Chat Room Name                                                                   |
+| `userId`           |   yes    | User ID for chat room                                                            |
+| `email`            |   yes    | User EmailName                                                                   |
+| `userName`         |          | User Name to show on chat room. If omitted, User Email will be used as User Name |
+| `messageCount`     |          | Number of last message retrieved, if any. Default = 10                           |
+| `userProfileImage` |          | URL of user profile image (avatar)                                               |
+
+#### Response
+
+```typescript
+{
+  token: string;
+  userId: string;
+  roomId: string;
+  roomName: string;
+  lastMessages?: {
+    payload: string;
+    id: string;
+    sortkey: string;
+  }[];
+  messageLastKey?: {
+    id: string;
+    sortkey: string;
+  };
+}
+```
+
+#### Notes
+- Room name : I_[influencerId]\_C\_[campaignId]
+- User type : I (Influencer), B (Business User), ICE (ICE Ops)
+- UserId format : [userType]_[userId]
+  - I_40 : influencer with id 40
+  - ICE_105 : influencer with id 105
+  - etc…
+
+
+### Deactivate Chat Room
+
+`POST rooms/deactivateChatRoom`
+
+#### Payload
+
+```typescript
+{
+  roomName: string
+}
+```
+
+#### Response
+
+```typescript
+{}
+```
+
+### Generate Presigned URL for Uploading File
+
+`POST /utils/generateUploadUrl`
+
+#### Payload
+
+```typescript
+{
+  "roomName": "chat_room_01",
+  "contentType": "image/jpeg"
+}
+```
+
+#### Response
+
+```typescript
+{
+  "uploadUrl": string,
+  "fileKey": string
+}
+```
+
+### Get Presigned URL for Downloading/Open File
+
+`GET /rooms/getSignedUrl`
+
+#### Query Params
+
+| Key   | Required | Description |
+| ----- | :------: | ----------- |
+| `key` |   yes    | Object key  |
+
+#### Response
+
+```typescript
+"https://bucket-name.s3.us-east-1.amazonaws.com/I_191_C_184/chat-80b474iah.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256...&x-id=GetObject"
+```
+
+## Chat Client
+
+### Connect and Listen to Room
+
+```typescript
+const websocketUrl = '[chatWsUrl_value_from_cdk_output]';
+
+// connecting to room
+// token retrieved from /rooms/getOrCreateChatRoom response
+const connection = new WebSocket(websocketUrl, token);
+
+// listen to message
+connection.onmessage = ((event:MessageEvent) => {
+  console.log('chat event : ', JSON.parse(event.data.toString()));
+})
+
+// listen to error
+connection.onerror = (event:ErrorEvent) => {
+  console.log(`CONN ERR FOR ${userId}`);
+}
+```
+
+### Chat _onmessage_ Event
+
+#### MESSAGE Payload
+
+```typescript
+{
+  Type: 'MESSAGE',
+  Id: string,
+  RequestId: string,
+  Attributes: {
+    MessageType: 'TEXT|IMAGE|DOCUMENT|UPLOADING_COMPLETE',
+    Reason: '',
+    RoomName: 'room_test',
+    SendTime: '2023-01-09T11:20:17.253Z',
+    UniqueId: 'sktwi4x1lcopptgl'
+  },
+  Content: 'message from user at 2023-01-09T11:20:17.253Z',
+  SendTime: '2023-01-09T11:20:17.376895408Z',
+  Sender: {
+    UserId: 'B_35',
+    Attributes: {
+      email: 'user2@email.com',
+      iceUserId: '35',
+      iceUserType: 'BUSINESS_USER',
+      userName: 'Raffi Ahmad'
+    }
+  }
+}
+```
+
+#### ERROR Payload
+
+```typescript
+{
+  "Type": "ERROR",
+  "Id": "xTUET9fgwZ7Q",
+  "RequestId": "l8toq05c",
+  "ErrorCode": 406,
+  "ErrorMessage": "scid not found"
+}
+```
+This payload received when message reviewer lambda fail to validate sent message
+
+### Send Text Message
+
+```typescript
+const sendText = async (value, connection, roomName) => {
+  const textValue = value || "";
+  if (textValue.length <= 0) {
+    return;
+  }
+
+  // manually generate request id
+  const requestId = uniqid();
+
+  const ivsChatPayload = {
+    "Action": "SEND_MESSAGE",
+    "Attributes": {
+      "MessageType": "TEXT",
+      "SendTime": new Date().toISOString(),
+      "RoomName": roomName,
+      "UniqueId": requestId
+    },
+    "Content": value,
+    "RequestId": requestId
+  }
+
+  connection.send(JSON.stringify(ivsChatPayload));
+}
+```
+
+### Send File Message
+
+#### Send Uploading in Progress Info
+
+```typescript
+const sendUploadInfo = async (value, roomName) => {
+  const textValue = value || "";
+  if (textValue.length <= 0) {
+    return;
+  }
+
+  const requestId = uniqid();
+
+  const ivsChatPayload = {
+    "Action": "SEND_MESSAGE",
+    "Attributes": {
+      "MessageType": messageType,
+      "SendTime": new Date().toISOString(),
+      "RoomName": roomName,
+      "UniqueId": requestId,
+      "IsUploading": "True",
+      "FileUrl": "",
+      "FileType": fileType
+      "UniqueId": requestId
+    },
+    "Content": value,
+    "RequestId": requestId
+  }
+
+  this.connection.send(JSON.stringify(ivsChatPayload));
+}
+```
+
+#### Send Upload Complete
+
+```typescript
+const sendUploadComplete = async (uniqueId: string, fileUrl: string, messageType: "IMAGE" | "DOCUMENT", fileType: string) {
+    const textValue = "UPLOAD_COMPLETE";
+    if(textValue.length <= 0){
+      return;
+    }
+    const requestId = uniqueId;
+
+    const phase1Message = this.ChatMessages.find(cm => cm.UniqueId === uniqueId);
+    if(!phase1Message){
+      console.log('Previous message not found!');
+      return;
+    }
+
+    const ivsChatPayload = {
+      "Action": "SEND_MESSAGE",
+      "Attributes": {
+        "MessageType": messageType,
+        "SendTime": phase1Message.SendTime,
+        "scid": this.subCampaign.subCampaignId + "",
+        "UniqueId": requestId,
+        "IsUploading": "False",
+        "FileUrl": fileUrl,
+        "FileType": fileType
+      },
+      "Content": phase1Message.MessageContent,
+      "RequestId": requestId
+    }
+    console.log(ivsChatPayload)
+    this.connection.send(JSON.stringify(ivsChatPayload));
+  }
+```
+
+
+## Diagrams
+
+### Event Handling
+
+![get room credential](event-handling.jpg)
+
+### Send File Message
+
+![get room credential](send-message.jpg)
+

@@ -11,6 +11,11 @@ export default function Home() {
             <Link href="swagger">Swagger</Link>
           </li>
           <li>
+            <Link href="chat-module">
+              Chat Module
+            </Link>
+          </li>
+          <li>
             <Link href="ice-notification-service">
               Ice Notification Service
             </Link>
