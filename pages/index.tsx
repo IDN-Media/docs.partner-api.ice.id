@@ -11,6 +11,11 @@ export default function Home() {
             <Link href="swagger">Swagger</Link>
           </li>
           <li>
+            <Link href="upload-flow">
+              Upload Flow
+            </Link>
+          </li>
+          <li>
             <Link href="chat-module">
               Chat Module
             </Link>
