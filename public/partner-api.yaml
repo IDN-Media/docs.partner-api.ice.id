@@ -1166,15 +1166,14 @@ paths:
       summary: "Deactivate room"
       description: ""
       operationId: "chats/upload"
-      parameters:
-        - in: "body"
-          name: "Payload"
-          required: true
-          schema:
-            type: object
-            properties:
-              roomName:
-                type: "string"
+      requestBody:
+        content:
+          applcation/json:
+            schema:
+              type: object
+              properties:
+                roomName:
+                  type: string
       responses:
         "200":
           description: "Successful operation"
@@ -1188,27 +1187,28 @@ paths:
       summary: "Generate Presigned URL to upload file to S3"
       description: "Generate Presigned URL to upload file to S3"
       operationId: "api/v1/chats/generateUploadUrl"
-      parameters:
-        - in: "body"
-          name: "Payload"
-          required: true
-          schema:
-            type: object
-            properties:
-              roomName:
-                type: "string"
-              contentType:
-                type: "string"
+      requestBody:
+        content:
+          applcation/json:
+            schema:
+              type: object
+              properties:
+                roomName:
+                  type: string
+                contentType:
+                  type: string
       responses:
         "200":
           description: "Successful operation"
-          schema:
-            type: object
-            properties:
-              uploadUrl:
-                type: string
-              fileKey:
-                type: string
+          content:
+            schema:
+              schema:
+                type: object
+                properties:
+                  uploadUrl:
+                    type: string
+                  fileKey:
+                    type: string
 
   /chats/getSignedUrl:
     get:
@@ -1228,58 +1228,6 @@ paths:
           description: "Successful operation"
           schema:
             type: string
-
-  # /util/uploadFile:
-  #     post:
-  #       tags:
-  #         - "Uploading files"
-  #       summary: "For uploading images, videos, files, etc"
-  #       description: ""
-  #       operationId: "/util/uploadFile"
-  #       parameters:
-  #         - in: formData
-  #           name: "file"
-  #           required: true
-  #           description: The file to upload.
-  #           schema:
-  #             type: "file"
-  #       responses:
-  #         "200":
-  #           description: "Successful operation"
-  #           content:
-  #             applcation/json:
-  #               schema:
-  #                 $ref: "#/components/schemas/UploadFileResponse"
-  #         "400":
-  #           description: "Invalid input"
-
-  # /util/uploadFiles:
-  #   post:
-  #     tags:
-  #       - "Uploading files"
-  #     summary: "For uploading images, videos, files, etc"
-  #     description: "Send an array of files. You will get an array of S3 links to those files.\nIf any file fails to upload, then the link at that index will be blank"
-  #     operationId: "/util/uploadFiles"
-  #     parameters:
-  #       - in: formData
-  #         name: "files"
-  #         schema:
-  #           type: "array"
-  #           items:
-  #             type: "file"
-  #         required: true
-  #         description: The array of files to upload.
-  #     responses:
-  #       "200":
-  #         description: "Successful operation"
-  #         content:
-  #           applcation/json:
-  #             schema:
-  #               type: "array"
-  #               items:
-  #                 $ref: "#/components/schemas/UploadFileResponse"
-  #       "400":
-  #         description: "Invalid input"
 
   /util/getMetaData:
     get:
@@ -1440,29 +1388,22 @@ paths:
       summary: "Generate S3 Presgined URL for uploading file"
       description: "Generate S3 Presgined URL for uploading file"
       operationId: "util/generateUploadUrl"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
-      parameters:
-        - in: "body"
-          name: "fileKey"
-          description: "Object file key"
-          required: true
-          schema:
-            type: string
-        - in: "body"
-          name: "contentType"
-          description: "File mime type"
-          required: true
-          schema:
-            type: string
+      requestBody:
+        content:
+          applcation/json:
+            schema:
+              type: object
+              properties:
+                fileKey:
+                  type: string
+                contentType:
+                  type: string
       responses:
         "200":
           description: "Successful operation"
-          schema:
-            type: "string"
-            example: "https://dev-core-s3stack-bucket83908e77-kp6y3g61zd1h.s3.ap-southeast-1.amazonaws.com/temporary/cat-2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIATFJYCJXTTPXUSJ56%2F20230118%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Date=20230118T092514Z&X-Amz-Expires=216000&X-Amz-Signature=fc7facb4a0bd37d799e48305c3b5a59bf46ab59d2644a74312975917e7e2e11a&X-Amz-SignedHeaders=host&x-id=PutObject"
+          content:
+            schema:
+              example: "https://dev-core-s3stack-bucket83908e77-kp6y3g61zd1h.s3.ap-southeast-1.amazonaws.com/temporary/cat-2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIATFJYCJXTTPXUSJ56%2F20230118%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Date=20230118T092514Z&X-Amz-Expires=216000&X-Amz-Signature=fc7facb4a0bd37d799e48305c3b5a59bf46ab59d2644a74312975917e7e2e11a&X-Amz-SignedHeaders=host&x-id=PutObject"
         "400":
           description: "Invalid input"
 
