@@ -231,6 +231,29 @@ paths:
         "405":
           description: Invalid input
 
+  /businessUser/listChatRoom:
+    get:
+      tags:
+        - "Discover business users"
+      summary: "Returns list of available chat room for business user"
+      description: ""
+      operationId: "businessUser/listChatRoom"
+      parameters:
+        - name: businessUserId
+          in: query
+          description: "Business User Id"
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            applcation/json:
+              schema:
+                $ref: "#/components/schemas/BusinessUserChatRoom"
+        "400":
+          description: "Invalid input"
+
   /campaign/listCampaigns:
     get:
       tags:
@@ -1155,7 +1178,7 @@ paths:
         "200":
           description: "Successful operation"
           schema:
-            $ref: "#/definitions/JoinChatRoomResponse"
+            $ref: "#/components/schemas/JoinChatRoomResponse"
         "400":
           description: "Invalid input"
 
@@ -2438,3 +2461,32 @@ components:
               type: "string"
             sendTime:
               type: "string"
+
+    BusinessUserChatRoom:
+      type: "array"
+      items:
+        type: "object"
+        properties:
+          influencerId:
+            type: "string"
+          campaignId:
+            type: "string"
+          roomName:
+            type: "string"
+          influencerName:
+            type: "string"
+          campaignTitle:
+            type: "string"
+          subCampaignCount:
+            type: integer
+          influencerImageKey:
+            type: "string"
+          influencerImageUrl:
+            type: "string"
+          lastMessage:
+            type: "string"
+          messageType:
+            type: "string"
+          lastMessageTimeInMillis:
+            type: integer
+
