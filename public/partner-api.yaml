@@ -1139,137 +1139,147 @@ paths:
   /chats/joinChatRoom:
     get:
       tags:
-        - "Chat"
-      summary: "Join Chat Room"
-      description: ""
-      operationId: "chats/joinChatRoom"
+        - "Chat Room"
+      summary: "Get list of campaigns based on supplied filters and sorting rule"
+      description: "[WIP] Need to update the headers and remove body. Returns 10 items in each page."
+      operationId: "campaign/listCampaigns"
+      produces:
+        - "application/json"
       parameters:
         - name: "roomName"
           in: "query"
-          description: "Room Name to Join"
+          description: "Chat room name"
           required: true
-          schema:
-            type: "string"
-            example: "I_10_C_34"
+          type: "string"
       responses:
         "200":
           description: "Successful operation"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JoinChatRoomResponse"
-        "400":
-          description: "Invalid input"
-
-  /chats/upload:
-    post:
-      tags:
-        - "Chat"
-      summary: "Upload file"
-      description: ""
-      operationId: "chats/upload"
-      parameters:
-        - name: "file"
-          in: "formData"
-          description: "File to upload"
-          required: true
           schema:
-            type: "file"
-        - name: "roomName"
-          in: "query"
-          required: true
-          description: "Chat Room Name"
-          schema:
-            type: "string"
-            example: "I_10_C_34"
-      responses:
-        "200":
-          description: "Successful operation"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ChatUploadResponse"
+            $ref: "#/definitions/JoinChatRoomResponse"
         "400":
           description: "Invalid input"
 
   /chats/deactivateChatRoom:
     post:
       tags:
-        - "Chat"
+        - "Chat Room"
       summary: "Deactivate room"
       description: ""
       operationId: "chats/upload"
-      requestBody:
-        description: "Object containing details of the campaign"
-        required: true
-        content:
-          application/json:
-            schema:
-              type: "object"
-              properties:
-                roomName:
-                  type: "string"
+      parameters:
+        - in: "body"
+          name: "Payload"
+          required: true
+          schema:
+            type: object
+            properties:
+              roomName:
+                type: "string"
       responses:
         "200":
           description: "Successful operation"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ChatUploadResponse"
         "400":
           description: "Invalid input"
 
-  /util/uploadFile:
-      post:
-        tags:
-          - "Uploading files"
-        summary: "For uploading images, videos, files, etc"
-        description: ""
-        operationId: "/util/uploadFile"
-        parameters:
-          - in: formData
-            name: "file"
-            required: true
-            description: The file to upload.
-            schema:
-              type: "file"
-        responses:
-          "200":
-            description: "Successful operation"
-            content:
-              applcation/json:
-                schema:
-                  $ref: "#/components/schemas/UploadFileResponse"
-          "400":
-            description: "Invalid input"
-
-  /util/uploadFiles:
+  /chats/generateUploadUrl:
     post:
       tags:
-        - "Uploading files"
-      summary: "For uploading images, videos, files, etc"
-      description: "Send an array of files. You will get an array of S3 links to those files.\nIf any file fails to upload, then the link at that index will be blank"
-      operationId: "/util/uploadFiles"
+        - "Chat Room"
+      summary: "Generate Presigned URL to upload file to S3"
+      description: "Generate Presigned URL to upload file to S3"
+      operationId: "api/v1/chats/generateUploadUrl"
       parameters:
-        - in: formData
-          name: "files"
-          schema:
-            type: "array"
-            items:
-              type: "file"
+        - in: "body"
+          name: "Payload"
           required: true
-          description: The array of files to upload.
+          schema:
+            type: object
+            properties:
+              roomName:
+                type: "string"
+              contentType:
+                type: "string"
       responses:
         "200":
           description: "Successful operation"
-          content:
-            applcation/json:
-              schema:
-                type: "array"
-                items:
-                  $ref: "#/components/schemas/UploadFileResponse"
-        "400":
-          description: "Invalid input"
+          schema:
+            type: object
+            properties:
+              uploadUrl:
+                type: string
+              fileKey:
+                type: string
+
+  /chats/getSignedUrl:
+    get:
+      tags:
+        - "Chat Room"
+      summary: "Generate Presigned URL to download/open file"
+      description: "Generate Presigned URL to download/open file"
+      operationId: "api/v1/chats/getSignedUrl"
+      parameters:
+        - name: "key"
+          in: "query"
+          description: "Object key"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: string
+
+  # /util/uploadFile:
+  #     post:
+  #       tags:
+  #         - "Uploading files"
+  #       summary: "For uploading images, videos, files, etc"
+  #       description: ""
+  #       operationId: "/util/uploadFile"
+  #       parameters:
+  #         - in: formData
+  #           name: "file"
+  #           required: true
+  #           description: The file to upload.
+  #           schema:
+  #             type: "file"
+  #       responses:
+  #         "200":
+  #           description: "Successful operation"
+  #           content:
+  #             applcation/json:
+  #               schema:
+  #                 $ref: "#/components/schemas/UploadFileResponse"
+  #         "400":
+  #           description: "Invalid input"
+
+  # /util/uploadFiles:
+  #   post:
+  #     tags:
+  #       - "Uploading files"
+  #     summary: "For uploading images, videos, files, etc"
+  #     description: "Send an array of files. You will get an array of S3 links to those files.\nIf any file fails to upload, then the link at that index will be blank"
+  #     operationId: "/util/uploadFiles"
+  #     parameters:
+  #       - in: formData
+  #         name: "files"
+  #         schema:
+  #           type: "array"
+  #           items:
+  #             type: "file"
+  #         required: true
+  #         description: The array of files to upload.
+  #     responses:
+  #       "200":
+  #         description: "Successful operation"
+  #         content:
+  #           applcation/json:
+  #             schema:
+  #               type: "array"
+  #               items:
+  #                 $ref: "#/components/schemas/UploadFileResponse"
+  #       "400":
+  #         description: "Invalid input"
 
   /util/getMetaData:
     get:
@@ -1420,6 +1430,62 @@ paths:
               schema:
                 type: string
                 format: binary
+        "400":
+          description: "Invalid input"
+
+  /util/generateUploadUrl:
+    post:
+      tags:
+        - "S3 Presigned URL"
+      summary: "Generate S3 Presgined URL for uploading file"
+      description: "Generate S3 Presgined URL for uploading file"
+      operationId: "util/generateUploadUrl"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "fileKey"
+          description: "Object file key"
+          required: true
+          schema:
+            type: string
+        - in: "body"
+          name: "contentType"
+          description: "File mime type"
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
+            example: "https://dev-core-s3stack-bucket83908e77-kp6y3g61zd1h.s3.ap-southeast-1.amazonaws.com/temporary/cat-2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIATFJYCJXTTPXUSJ56%2F20230118%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Date=20230118T092514Z&X-Amz-Expires=216000&X-Amz-Signature=fc7facb4a0bd37d799e48305c3b5a59bf46ab59d2644a74312975917e7e2e11a&X-Amz-SignedHeaders=host&x-id=PutObject"
+        "400":
+          description: "Invalid input"
+
+  /util/getSignedUrl:
+    get:
+      tags:
+        - "S3 Presigned URL"
+      summary: "Generate S3 Presgined URL for downloading file"
+      description: "Generate S3 Presgined URL for downloading file"
+      operationId: "campaign/getCart"
+      produces:
+        - "util/getSignedUrl"
+      parameters:
+        - name: "key"
+          in: "query"
+          description: "Object key"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "string"
         "400":
           description: "Invalid input"
 
@@ -2400,3 +2466,34 @@ components:
               sortkey:
                 type: "string"
 
+    JoinChatRoomResponse:
+      type: "object"
+      properties:
+        token:
+          type: "string"
+        userId:
+          type: "string"
+        roomId:
+          type: "string"
+        roomName:
+          type: "string"
+        roomStatus:
+          type: "string"
+        lastMessages:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              payload:
+                type: "string"
+              id:
+                type: "string"
+              sendTime:
+                type: "string"
+        messageLastKey:
+          type: "object"
+          properties:
+            id:
+              type: "string"
+            sendTime:
+              type: "string"
