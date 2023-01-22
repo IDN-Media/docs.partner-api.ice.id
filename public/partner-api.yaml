@@ -1166,19 +1166,20 @@ paths:
       summary: "Get list of campaigns based on supplied filters and sorting rule"
       description: "[WIP] Need to update the headers and remove body. Returns 10 items in each page."
       operationId: "campaign/listCampaigns"
-      produces:
-        - "application/json"
       parameters:
         - name: "roomName"
           in: "query"
           description: "Chat room name"
           required: true
-          type: "string"
+          schema:
+            type: "string"
       responses:
         "200":
           description: "Successful operation"
-          schema:
-            $ref: "#/components/schemas/JoinChatRoomResponse"
+          content: 
+            applcation/json:
+              schema:
+                $ref: "#/components/schemas/JoinChatRoomResponse"
         "400":
           description: "Invalid input"
 
@@ -1245,12 +1246,15 @@ paths:
           in: "query"
           description: "Object key"
           required: true
-          type: "string"
+          schema:
+            type: "string"
       responses:
         "200":
           description: "Successful operation"
-          schema:
-            type: string
+          content:
+            applcation/json:
+              schema:
+                type: string
 
   /util/getMetaData:
     get:
@@ -1436,20 +1440,21 @@ paths:
         - "S3 Presigned URL"
       summary: "Generate S3 Presgined URL for downloading file"
       description: "Generate S3 Presgined URL for downloading file"
-      operationId: "campaign/getCart"
-      produces:
-        - "util/getSignedUrl"
+      operationId: "util/getSignedUrl"
       parameters:
         - name: "key"
           in: "query"
           description: "Object key"
           required: true
-          type: "string"
+          schema:
+            type: "string"
       responses:
         "200":
           description: "Successful operation"
-          schema:
-            type: "string"
+          content:
+            applcation/json:
+              schema:
+                type: "string"
         "400":
           description: "Invalid input"
 
@@ -2399,36 +2404,6 @@ components:
         name:
           type: "string"
           example: "Story"
-
-      JoinChatRoomResponse:
-        type: "object"
-        properties:
-          token:
-            type: "string"
-          userId:
-            type: "string"
-          roomId:
-            type: "string"
-          roomName:
-            type: "string"
-          lastMessages:
-            type: "array"
-            items:
-              type: "object"
-              properties:
-                payload:
-                  type: "string"
-                id:
-                  type: "string"
-                sortkey:
-                  type: "string"
-          messageLastKey:
-            type: "object"
-            properties:
-              id:
-                type: "string"
-              sortkey:
-                type: "string"
 
     JoinChatRoomResponse:
       type: "object"
