@@ -2,21 +2,9 @@
 
 ## Chat API
 
-### Base URL : 
-
-https://chat-api.estidar-dev.com
-
-### Header
-
-```
-{
-  Authorization: Basic [API_Key]
-}
-```
-
 ### Get/create Chat Room
 
-`GET /rooms/getOrCreateChatRoom`
+`GET /rooms/joinChatRoom`
 
 #### Query Params
 
@@ -24,7 +12,7 @@ https://chat-api.estidar-dev.com
 | ------------------ | :------: | -------------------------------------------------------------------------------- |
 | `roomName`         |   yes    | Chat Room Name                                                                   |
 | `userId`           |   yes    | User ID for chat room                                                            |
-| `email`            |   yes    | User EmailName                                                                   |
+| `email`            |   yes    | User Email                                                                   |
 | `userName`         |          | User Name to show on chat room. If omitted, User Email will be used as User Name |
 | `messageCount`     |          | Number of last message retrieved, if any. Default = 10                           |
 | `userProfileImage` |          | URL of user profile image (avatar)                                               |
@@ -56,25 +44,6 @@ https://chat-api.estidar-dev.com
   - I_40 : influencer with id 40
   - ICE_105 : influencer with id 105
   - etc…
-
-
-### Deactivate Chat Room
-
-`POST rooms/deactivateChatRoom`
-
-#### Payload
-
-```typescript
-{
-  roomName: string
-}
-```
-
-#### Response
-
-```typescript
-{}
-```
 
 ### Generate Presigned URL for Uploading File
 
@@ -278,11 +247,13 @@ const sendUploadComplete = async (uniqueId: string, fileUrl: string, messageType
 
 ## Diagrams
 
+### Get Room Credentials
+
+![get room credential](get-room.jpg)
+
+### Send Message
+
+![send message](send-message.jpg)
+
 ### Event Handling
-
-![get room credential](event-handling.jpg)
-
-### Send File Message
-
-![get room credential](send-message.jpg)
-
+![event handling](event-handling.jpg)
