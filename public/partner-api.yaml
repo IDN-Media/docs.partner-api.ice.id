@@ -43,6 +43,9 @@ paths:
                 client_secret:
                   description: Your application's client_secret
                   type: string
+                scope:
+                  description: Scope
+                  type: string
       responses:
         "200":
           description: Succesful operation
