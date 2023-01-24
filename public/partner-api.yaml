@@ -16,13 +16,13 @@ info:
 servers:
   - url: https://partner-api.estidar-dev.com/
     description: Alpha (testing)
-  - url: https://partner-api.estidar.com/
-    description: Beta (staging)
-  - url: https://partner-api.ice.id/
-    description: Production (live data)
+  # - url: https://partner-api.estidar.com/
+  #   description: Beta (staging)
+  # - url: https://partner-api.ice.id/
+  #   description: Production (live data)
 
 paths:
-  /oauth/token:
+  /api/v1/oauth/token:
     post:
       tags:
         - Authentication
@@ -66,13 +66,15 @@ paths:
         "400":
           description: Invalid input
 
-  /chats/joinChatRoom:
+  /api/v1/chats/joinChatRoom:
     get:
       tags:
         - "Chat Room"
       summary: "Get list of campaigns based on supplied filters and sorting rule"
       description: "[WIP] Need to update the headers and remove body. Returns 10 items in each page."
       operationId: "campaign/listCampaigns"
+      security:
+        - bearerAuth: []
       parameters:
         - name: "roomName"
           in: "query"
@@ -120,14 +122,17 @@ paths:
         "400":
           description: "Invalid input"
 
-  /chats/generateUploadUrl:
+  /api/v1/chats/generateUploadUrl:
     post:
       tags:
         - "Chat Room"
       summary: "Generate Presigned URL to upload file to S3"
       description: "Generate Presigned URL to upload file to S3"
       operationId: "api/v1/chats/generateUploadUrl"
+      security:
+        - bearerAuth: []
       requestBody:
+        required: true
         content:
           applcation/json:
             schema:
@@ -150,7 +155,7 @@ paths:
                   fileKey:
                     type: string
 
-  /chats/getSignedUrl:
+  /api/v1/chats/getSignedUrl:
     get:
       tags:
         - "Chat Room"
@@ -1483,12 +1488,15 @@ paths:
 
 components:
   securitySchemes:
-    partnerAccess:
-      type: oauth2
-      description: This API uses client credentials flow
-      flows:
-        clientCredentials:
-          tokenUrl: /oauth/token
+    bearerAuth:
+      type: http
+      scheme: bearer
+    # partnerAccess:
+    #   type: oauth2
+    #   description: This API uses client credentials flow
+    #   flows:
+    #     clientCredentials:
+    #       tokenUrl: /oauth/token
     # publicAccess:
     #   type: oauth2
     #   flows:
@@ -2477,3 +2485,5 @@ components:
     #       lastMessageTimeInMillis:
     #         type: integer
 
+security:
+  - bearerAuth: []
