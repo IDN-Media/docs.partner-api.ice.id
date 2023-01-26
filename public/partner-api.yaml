@@ -71,8 +71,8 @@ paths:
       tags:
         - "Chat Room"
       summary: "Get list of campaigns based on supplied filters and sorting rule"
-      description: "[WIP] Need to update the headers and remove body. Returns 10 items in each page."
-      operationId: "campaign/listCampaigns"
+      description: "Get list of campaigns based on supplied filters and sorting rule"
+      operationId: "chats/joinChatRoom"
       security:
         - bearerAuth: []
       parameters:
@@ -119,6 +119,50 @@ paths:
             applcation/json:
               schema:
                 $ref: "#/components/schemas/JoinChatRoomResponse"
+        "400":
+          description: "Invalid input"
+
+  /api/v1/chats/listMessageHistory:
+    get:
+      tags:
+        - "Chat Room"
+      summary: "Get list of chat messages"
+      description: "Get list of chat messages"
+      operationId: "chats/listMessageHistory"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: "roomName"
+          in: "query"
+          description: "Chat room name"
+          required: true
+          schema:
+            type: "string"
+        - name: "lastId"
+          in: "query"
+          description: "`id` value from `messageLastKey` object"
+          required: true
+          schema:
+            type: "string"
+        - name: "lastSortkey"
+          in: "query"
+          description: "`sortkey` value from `messageLastKey` object"
+          required: true
+          schema:
+            type: "string"
+        - name: "messageCount"
+          in: "query"
+          description: "Number of message retrieved"
+          required: false
+          schema:
+            type: number
+      responses:
+        "200":
+          description: "Successful operation"
+          content: 
+            applcation/json:
+              schema:
+                $ref: "#/components/schemas/ListMessageHistoryResponse"
         "400":
           description: "Invalid input"
 
@@ -1519,6 +1563,28 @@ components:
         roomStatus:
           type: "string"
         lastMessages:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              payload:
+                type: "string"
+              id:
+                type: "string"
+              sendTime:
+                type: "string"
+        messageLastKey:
+          type: "object"
+          properties:
+            id:
+              type: "string"
+            sendTime:
+              type: "string"
+
+    ListMessageHistoryResponse:
+      type: "object"
+      properties:
+        items:
           type: "array"
           items:
             type: "object"
