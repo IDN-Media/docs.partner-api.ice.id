@@ -178,14 +178,18 @@ paths:
       requestBody:
         required: true
         content:
-          applcation/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
               properties:
                 roomName:
                   type: string
-                contentType:
+                  description: Room Name
+                  example: room_name
+                fileExtension:
+                  description: Uploaded file extension
                   type: string
+                  example: jpeg
       responses:
         "200":
           description: "Successful operation"
