@@ -22,7 +22,7 @@ servers:
     description: Production (live data)
 
 paths:
-  /api/v1/oauth/token:
+  /api/v1/oauth2/token:
     post:
       tags:
         - Authentication
