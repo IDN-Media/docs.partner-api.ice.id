@@ -47,7 +47,7 @@
 
 ### Get chat message history
 
-`GET /rooms/listMessageHistory`
+`GET /chats/listMessageHistory`
 
 #### Query Params
 
@@ -120,7 +120,7 @@
 const websocketUrl = 'wss://edge.ivschat.us-east-1.amazonaws.com';
 
 // connecting to room
-// token retrieved from /rooms/getOrCreateChatRoom response
+// token retrieved from /chats/joinChatRoom response
 const connection = new WebSocket(websocketUrl, token);
 
 // listen to message
