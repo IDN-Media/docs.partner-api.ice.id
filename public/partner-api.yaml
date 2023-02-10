@@ -1639,6 +1639,34 @@ paths:
         "405":
           description: Invalid input
 
+  /influencer/getInfluencer:
+    get:
+      tags:
+        - Discover influencers
+      summary: Returns influencer profile object with full details
+      description: ""
+      operationId: influencer/getInfluencer
+      parameters:
+        - name: influencerId
+          in: query
+          description: Id of the influencer
+          required: true
+          example: "47612437311"
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Influencer"
+        "400":
+          description: invalid influencer id
+        "403":
+          description: forbidden access
+        "500":
+          description: internal server error
 components:
   securitySchemes:
     bearerAuth:
@@ -2727,5 +2755,212 @@ components:
         isVisible:
           type: boolean
           example: "false"
+
+    Influencer:
+      type: object
+      properties:
+        influencerId:
+          type: integer
+          example: "5"
+        fullName:
+          type: string
+          example: Ahmed Ali
+        categories:
+          type: array
+          items:
+            type: object
+            properties:
+              categoryId:
+                type: integer
+                example: "3"
+              category:
+                type: string
+                example: FOOD
+        description:
+          type: string
+          example: This is the description of this influencer.
+        profileImageLink:
+          type: string
+          example: https://s3.aws.com/example/link/image1.jpg
+        profileImageLinkKey:
+          type: string
+          example: ICE_OP/48/ccr90s8tksh0n6n1ukmg_ktp.jpg
+        gender:
+          type: string
+          example: male
+        cityId:
+          type: integer
+          example: "1"
+        city:
+          type: string
+          example: Kab. Aceh Selatan
+        languageId:
+          type: integer
+          example: "1"
+        language:
+          type: string
+          example: ENGLISH
+        portfolios:
+          type: array
+          items:
+            $ref: "#/components/schemas/InfluencerPortfolios"
+        termsAndConditions:
+          type: string
+          example: 1) Only halal products. 2) Payment in advance.
+        contactPerson:
+          type: object
+          properties:
+            name:
+              type: string
+              example: Jehian
+        assignedIceOpId:
+          type: integer
+          example: "123"
+        isIndividual:
+          type: boolean
+          example: "true"
+        isBusiness:
+          type: boolean
+          example: "false"
+        draftStepNo:
+          type: integer
+          example: "1"
+        totalFollowers:
+          type: integer
+          example: "13235000"
+        socialPlatforms:
+          type: array
+          items:
+            $ref: "#/components/schemas/SocialPlatform"
+        createdAt:
+          type: time
+          example: "2022-08-18T11:45:53.734654Z"
+        createdByUserId:
+          type: integer
+          example: "76"
+        createdByUserType:
+          type: string
+          example: ICE_OP
+        updatedByUserId:
+          type: integer
+          example: "76"
+        updatedByUserType:
+          type: string
+          example: ICE_OP
+        updatedAt:
+          type: time
+          example: "2022-08-21T20:12:43.934264Z"
+        profileStatus:
+          type: string
+          example: DRAFT
+        isVisible:
+          type: boolean
+          example: "true"
+        rejectionReason:
+          type: string
+          example: ""
+        inProgressCampaign:
+          type: integer
+          example: "2"
+        liveCampaign:
+          type: integer
+          example: "3"
+        completedCampaign:
+          type: integer
+          example: "3"
+
+    InfluencerPortfolios:
+      type: object
+      properties:
+        portfolioLink:
+          type: string
+          example: https://s3.aws.com/file4.pdf
+        portfolioLinkKey:
+          type: string
+          example: ICE_OP/48/ccr90s8tksh0n6n1ukmg_ktp.pdf
+
+    SocialPlatform:
+      type: object
+      properties:
+        socialPlatformId:
+          type: integer
+          example: "9"
+        influencerId:
+          type: integer
+          example: "5"
+        socialPlatformTypeId:
+          type: integer
+          example: "2"
+        socialPlatformType:
+          type: string
+          example: INSTAGRAM
+        username:
+          type: string
+          example: "@akuncreator"
+        noOfFollowers:
+          type: number
+          example: "9123000"
+        socialProfileLink:
+          type: string
+          example: https://www.instagram.com/akuncreator
+        services:
+          type: array
+          items:
+            $ref: "#/components/schemas/Service"
+
+    Service:
+      type: object
+      properties:
+        serviceId:
+          type: integer
+          example: "36"
+        influencerId:
+          type: integer
+          example: "2"
+        socialPlatformId:
+          type: integer
+          example: "21"
+        serviceTypeId:
+          type: integer
+          example: "1"
+        serviceType:
+          type: string
+          example: STORY
+        price:
+          type: number
+          example: "10000"
+        description:
+          type: string
+          example: This is service description for Story.
+        totalSubServices:
+          type: number
+          example: "8"
+        subServices:
+          type: array
+          items:
+            $ref: "#/components/schemas/SubService"
+
+    SubService:
+      type: object
+      properties:
+        subServiceId:
+          type: integer
+          example: "21"
+        serviceId:
+          type: integer
+          example: "3"
+        socialPlatformId:
+          type: integer
+          example: "11"
+        influencerId:
+          type: integer
+          example: "1"
+        subServiceType:
+          type: string
+          example: ONE IMAGE SLIDE
+        price:
+          type: number
+          example: "1000"
+
 security:
   - bearerAuth: []
