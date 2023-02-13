@@ -1864,15 +1864,9 @@ components:
     CampaignDraft:
       type: "object"
       properties:
-        campaignId:
-          type: "integer"
-          example: "39847239764"
         createdByUserId:
           type: "integer"
           example: "713827463"
-        createdByUserType:
-          type: "string"
-          example: "ICE_OP"
         forBusinessUserId:
           type: "integer"
           example: "76514983635"
