@@ -885,7 +885,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CampaignDraft"
+              $ref: "#/components/schemas/CampaignUpdate"
       responses:
         "200":
           description: "Successful operation"
@@ -1864,6 +1864,53 @@ components:
     CampaignDraft:
       type: "object"
       properties:
+        createdByUserId:
+          type: "integer"
+          example: "713827463"
+        forBusinessUserId:
+          type: "integer"
+          example: "76514983635"
+        title:
+          type: "string"
+          example: "This is the title of the campaign"
+        productName:
+          type: "string"
+          example: "Name of the product"
+        categoryIds:
+          type: "array"
+          items:
+            type: "integer"
+            example: "2"
+        campaignImageLinkKey:
+          type: "string"
+          example: "https://s3.aws/image1.jpg"
+        productFileLinkKeys:
+          type: "array"
+          items:
+            type: "string"
+            example: "https://s3.aws/image1.jpg"
+        description:
+          type: "string"
+          example: "This is the description of this campaign."
+        objective:
+          type: "string"
+          example: "This is the objective of this campaign."
+        referenceLink:
+          type: "string"
+          example: "https://example.com/refLink"
+        startTimeInMillis:
+          type: "integer"
+          example: "763192836821"
+        endTimeInMillis:
+          type: "integer"
+          example: "63129836213"
+
+    CampaignUpdate:
+      type: "object"
+      properties:
+        campaignId:
+          type: "integer"
+          example: "39847239764"
         createdByUserId:
           type: "integer"
           example: "713827463"
