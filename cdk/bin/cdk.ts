@@ -39,7 +39,7 @@ const BETA: AppStageProps = {
 const PROD: AppStageProps = {
   ...commonProps,
   env: {
-    account: '',
+    account: '459021761895',
     region: region
   }
 }
