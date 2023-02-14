@@ -912,6 +912,14 @@ paths:
             type: "integer"
             format: "int32"
             example: "16481234"
+        - name: "forBusinessUserId"
+          in: "query"
+          description: "Id of the business user"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+            example: "32451234"
       responses:
         "200":
           description: "Successful operation"
@@ -1534,7 +1542,7 @@ paths:
         "200":
           description: "Successful operation"
 
-  /influencer/listInfluencers:
+  /api/v1/influencer/listInfluencers:
     get:
       tags:
         - Discover influencers
@@ -1633,13 +1641,25 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/InfluencerLite"
+                type: object
+                properties:
+                  currentPage:
+                    type: integer
+                    example: "1"
+                  pageSize:
+                    type: integer
+                    example: "10"
+                  records:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/InfluencerLite"
+                  totalRecords:
+                    type: integer
+                    example: "1"
         "405":
           description: Invalid input
 
-  /influencer/getInfluencer:
+  /api/v1/influencer/getInfluencer:
     get:
       tags:
         - Discover influencers
