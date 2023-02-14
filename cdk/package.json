@@ -10,7 +10,8 @@
     "test": "jest",
     "cdk": "cdk",
 	 "deploy:dev": "GITHUB_REF=Dev cdk deploy 'Dev-IceDocsPartnerWebsite/EcsStack' --require-approval never",
-	 "deploy:beta": "GITHUB_REF=refs/heads/master cdk deploy 'Beta-IceDocsPartnerWebsite/**' --require-approval never"
+	 "deploy:beta": "GITHUB_REF=refs/heads/master cdk deploy 'Beta-IceDocsPartnerWebsite/**' --require-approval never",
+	 "deploy:prod": "GITHUB_REF=refs/tags/release cdk deploy 'Prod-IceDocsPartnerWebsite/**' --require-approval never"
   },
   "devDependencies": {
     "@types/jest": "^29.2.5",
