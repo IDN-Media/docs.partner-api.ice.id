@@ -55,6 +55,7 @@ const nextConfig = {
       "swagger-ui-react",
     ],
   },
+  output: 'standalone'
 };
 
 const withMDX = nextMdx({

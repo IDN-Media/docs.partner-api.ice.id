@@ -1,0 +1,96 @@
+{
+  "ssm:account=217550310887:parameterName=/idn/ice/zoneName:region=ap-southeast-1": "estidar-dev.com",
+  "ssm:account=217550310887:parameterName=/idn/ice/core/VpcName:region=ap-southeast-1": "ice",
+  "ssm:account=217550310887:parameterName=/idn/ice/acmArn:region=ap-southeast-1": "arn:aws:acm:ap-southeast-1:217550310887:certificate/a59a78d6-519d-46d0-ac1a-4a1d5ff88bfb",
+  "hosted-zone:account=217550310887:domainName=estidar-dev.com:region=ap-southeast-1": {
+    "Id": "/hostedzone/Z0721306BZDVL49KH6Q",
+    "Name": "estidar-dev.com."
+  },
+  "vpc-provider:account=217550310887:filter.tag:Name=ice:region=ap-southeast-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-0456f8847b74b9633",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-0a643686299b5ceba",
+            "cidr": "10.0.0.0/24",
+            "availabilityZone": "ap-southeast-1a",
+            "routeTableId": "rtb-053ab41ded09f3fea"
+          },
+          {
+            "subnetId": "subnet-04b5ea2ff356dd3c3",
+            "cidr": "10.0.1.0/24",
+            "availabilityZone": "ap-southeast-1b",
+            "routeTableId": "rtb-09a4618f341b87b38"
+          }
+        ]
+      },
+      {
+        "name": "private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-01ca37d3ddbbc025f",
+            "cidr": "10.0.2.0/24",
+            "availabilityZone": "ap-southeast-1a",
+            "routeTableId": "rtb-05b0e739253396a05"
+          },
+          {
+            "subnetId": "subnet-02db959e5d8493691",
+            "cidr": "10.0.3.0/24",
+            "availabilityZone": "ap-southeast-1b",
+            "routeTableId": "rtb-0121edbfd95e77429"
+          }
+        ]
+      }
+    ]
+  },
+  "ssm:account=182828636299:parameterName=/idn/ice/core/VpcName:region=ap-southeast-1": "ice",
+  "vpc-provider:account=182828636299:filter.tag:Name=ice:region=ap-southeast-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-0661d3f7ddfcea831",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-05e50c745c7f908b3",
+            "cidr": "10.0.0.0/24",
+            "availabilityZone": "ap-southeast-1a",
+            "routeTableId": "rtb-0e98e87de686fd9e7"
+          },
+          {
+            "subnetId": "subnet-0623b12573e934c00",
+            "cidr": "10.0.1.0/24",
+            "availabilityZone": "ap-southeast-1b",
+            "routeTableId": "rtb-0913223c60d958eb1"
+          }
+        ]
+      },
+      {
+        "name": "private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-0cbdee53a7239ecd1",
+            "cidr": "10.0.2.0/24",
+            "availabilityZone": "ap-southeast-1a",
+            "routeTableId": "rtb-032965a9437c6ed12"
+          },
+          {
+            "subnetId": "subnet-05bed9a08a65df2b5",
+            "cidr": "10.0.3.0/24",
+            "availabilityZone": "ap-southeast-1b",
+            "routeTableId": "rtb-01c9a9b222dc4ab3f"
+          }
+        ]
+      }
+    ]
+  }
+}
