@@ -872,7 +872,7 @@ paths:
         "400":
           description: "Invalid input"
 
-  /api/v1//campaign/updateCampaign:
+  /api/v1/campaign/updateCampaign:
     put:
       tags:
         - "Manage campaign"
@@ -895,8 +895,12 @@ paths:
                 $ref: "#/components/schemas/Campaign"
         "400":
           description: "Invalid input"
+        "403":
+          description: "user not authorize to perform operation on campaign id : 39847239764"
+        "404":
+          description: "campaign do not exist with id : 39847239764"
 
-  /campaign/deleteCampaign:
+  /api/v1/campaign/deleteCampaign:
     delete:
       tags:
         - "Manage campaign"
@@ -925,6 +929,10 @@ paths:
           description: "Successful operation"
         "405":
           description: "Invalid input"
+        "403":
+          description: "user not authorize to perform operation on campaign id : 16481234"
+        "404":
+          description: "campaign do not exist with id : 16481234"
 
   /campaign/setUpFrontPayment:
     put:
