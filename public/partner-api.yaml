@@ -848,7 +848,7 @@ paths:
         "400":
           description: "Invalid input"
 
-  /campaign/createCampaign:
+  /api/v1/campaign/createCampaign:
     post:
       tags:
         - "Manage campaign"
@@ -868,7 +868,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Campaign"
+                $ref: "#/components/schemas/CampaignCreated"
         "400":
           description: "Invalid input"
 
@@ -1687,6 +1687,7 @@ paths:
           description: forbidden access
         "500":
           description: internal server error
+
 components:
   securitySchemes:
     bearerAuth:
@@ -1887,9 +1888,6 @@ components:
         createdByUserId:
           type: "integer"
           example: "713827463"
-        forBusinessUserId:
-          type: "integer"
-          example: "76514983635"
         title:
           type: "string"
           example: "This is the title of the campaign"
@@ -2095,6 +2093,83 @@ components:
           items:
             $ref: "#/components/schemas/SubCampaign"
 
+    CampaignCreated:
+      type: "object"
+      properties:
+        campaignId:
+          type: "integer"
+          example: "39847239764"
+        createdByUserId:
+          type: "integer"
+          example: "713827463"
+        createdByUserType:
+          type: "string"
+          example: "ICE_OP"
+        createdByUserName:
+          type: "string"
+          example: "Ahmed Ali"
+        forBusinessUserId:
+          type: "integer"
+          example: "76514983635"
+        forBusinessUserName:
+          type: "string"
+          example: "Nature Shop"
+        title:
+          type: "string"
+          example: "This is the title of the campaign"
+        productName:
+          type: "string"
+          example: "Name of the product"
+        campaignImageLink:
+          type: "string"
+          example: "https://s3.aws/image1.jpg"
+        campaignImageLinkKey:
+          type: "string"
+          example: "https://s3.aws/image1.jpg"
+        description:
+          type: "string"
+          example: "This is the description of this campaign."
+        objective:
+          type: "string"
+          example: "This is the objective of this campaign."
+        referenceLink:
+          type: "string"
+          example: "https://example.com/refLink"
+        startTimeInMillis:
+          type: "integer"
+          example: "763192836821"
+        endTimeInMillis:
+          type: "integer"
+          example: "63129836213"
+        createdTimeInMillis:
+          type: "integer"
+          example: "342934982374"
+        status:
+          type: "string"
+          example: "DRAFT"
+        categories:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              categoryId:
+                type: "integer"
+                example: "3"
+              category:
+                type: "string"
+                example: "FOOD"
+        productFileLinks:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              link:
+                type: "string"
+                example: "https://s3.aws/image1.jpg"
+              linkKey:
+                type: "string"
+                example: "https://s3.aws/image1.jpg"
+
     Cart:
       type: "object"
       properties:
@@ -2229,9 +2304,6 @@ components:
         servicePrice:
           type: "number"
           example: "10000.00"
-        serviceMarkupPrice:
-          type: "number"
-          example: "12000.00"
         isSubServiceSelected:
           type: "boolean"
           example: "true"
@@ -2241,18 +2313,12 @@ components:
         subServicePrice:
           type: "number"
           example: "1000.00"
-        subServiceMarkupPrice:
-          type: "number"
-          example: "1200.00"
         quantity:
           type: "integer"
           example: "3"
         price:
           type: "number"
           example: "33000"
-        markupPrice:
-          type: "number"
-          example: "39600"
         invoiceNumber:
           type: "string"
           example: "INV/22131927873"
