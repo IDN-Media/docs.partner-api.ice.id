@@ -1030,7 +1030,7 @@ paths:
         "405":
           description: "Invalid input"
 
-  /campaign/addSubCampaign:
+  /api/v1/campaign/addSubCampaign:
     post:
       tags:
         - "Manage sub-campaign"
@@ -1047,8 +1047,16 @@ paths:
       responses:
         "200":
           description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Campaign"
         "405":
           description: "Invalid input"
+        "403":
+          description: "user not authorize to perform operation on campaign id : 2759723423466"
+        "404":
+          description: "campaign do not exist with id : 2759723423466"
 
   /campaign/removeSubCampaign:
     delete:
@@ -2201,6 +2209,9 @@ components:
     SubCampaignDraft:
       type: "object"
       properties:
+        forBusinessUserId:
+          type: "integer"
+          example: "76514983635"
         campaignId:
           type: "integer"
           example: "2759723423466"
