@@ -872,7 +872,7 @@ paths:
         "400":
           description: "Invalid input"
 
-  /campaign/updateCampaign:
+  /api/v1//campaign/updateCampaign:
     put:
       tags:
         - "Manage campaign"
@@ -1929,9 +1929,6 @@ components:
         campaignId:
           type: "integer"
           example: "39847239764"
-        createdByUserId:
-          type: "integer"
-          example: "713827463"
         forBusinessUserId:
           type: "integer"
           example: "76514983635"
