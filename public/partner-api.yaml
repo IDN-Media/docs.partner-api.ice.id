@@ -1205,11 +1205,25 @@ paths:
           schema:
             type: "string"
             example: "Need more croud in the photo"
+        - name: "forBusinessUserId"
+          in: "query"
+          description: ""
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+            example: "1230873425"
       responses:
         "200":
           description: "Successful operation"
         "405":
           description: "Invalid input"
+        "403":
+          description: "user not authorize to perform operation on campaign id : 39847239764"
+        "404":
+          description: "sub campaign do not exist with id : 39847239764"
+        "500":
+          description: "Internal server error"
 
   /campaign/setProofOfPost:
     post:
@@ -1272,11 +1286,25 @@ paths:
           schema:
             type: "string"
             example: "Unable to open the file."
+        - name: "forBusinessUserId"
+          in: "query"
+          description: ""
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+            example: "1230873425"
       responses:
         "200":
           description: "Successful operation"
         "405":
           description: "Invalid input"
+        "403":
+          description: "user not authorize to perform operation on campaign id : 39847239764"
+        "404":
+          description: "sub campaign do not exist with id : 39847239764"
+        "500":
+          description: "Internal server error"
 
   /campaign/setProofOfInsight:
     post:
@@ -1339,11 +1367,25 @@ paths:
           schema:
             type: "string"
             example: "Unable to open the file."
+        - name: "forBusinessUserId"
+          in: "query"
+          description: ""
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+            example: "1230873425"
       responses:
         "200":
           description: "Successful operation"
         "405":
           description: "Invalid input"
+        "403":
+          description: "user not authorize to perform operation on campaign id : 39847239764"
+        "404":
+          description: "sub campaign do not exist with id : 39847239764"
+        "500":
+          description: "Internal server error"
 
   /util/getMetaData:
     get:
