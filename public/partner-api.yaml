@@ -1216,7 +1216,7 @@ paths:
       responses:
         "200":
           description: "Successful operation"
-        "405":
+        "400":
           description: "Invalid input"
         "403":
           description: "user not authorize to perform operation on campaign id : 39847239764"
@@ -1297,7 +1297,7 @@ paths:
       responses:
         "200":
           description: "Successful operation"
-        "405":
+        "400":
           description: "Invalid input"
         "403":
           description: "user not authorize to perform operation on campaign id : 39847239764"
@@ -1378,7 +1378,7 @@ paths:
       responses:
         "200":
           description: "Successful operation"
-        "405":
+        "400":
           description: "Invalid input"
         "403":
           description: "user not authorize to perform operation on campaign id : 39847239764"
