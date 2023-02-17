@@ -871,6 +871,8 @@ paths:
                 $ref: "#/components/schemas/CampaignCreated"
         "400":
           description: "Invalid input"
+        "500":
+          description: "Internal server error"
 
   /api/v1/campaign/updateCampaign:
     put:
@@ -896,9 +898,11 @@ paths:
         "400":
           description: "Invalid input"
         "403":
-          description: "user not authorize to perform operation on campaign id : 39847239764"
+          description: "User not authorize to perform operation on campaign id : 39847239764"
         "404":
-          description: "campaign do not exist with id : 39847239764"
+          description: "Campaign do not exist with id : 39847239764"
+        "500":
+          description: "Internal server error"
 
   /api/v1/campaign/deleteCampaign:
     delete:
@@ -930,11 +934,13 @@ paths:
         "405":
           description: "Invalid input"
         "403":
-          description: "user not authorize to perform operation on campaign id : 16481234"
+          description: "User not authorize to perform operation on campaign id : 16481234"
         "404":
-          description: "campaign do not exist with id : 16481234"
+          description: "Campaign do not exist with id : 16481234"
+        "500":
+          description: "Internal server error"
 
-  /campaign/setUpFrontPayment:
+  /api/v1/campaign/setUpFrontPayment:
     put:
       tags:
         - "Manage campaign"
@@ -951,8 +957,14 @@ paths:
       responses:
         "200":
           description: "Successful operation"
-        "405":
+        "400":
           description: "Invalid input"
+        "403":
+          description: "User not authorize to perform operation on campaign id : 632918649128"
+        "404":
+          description: "Campaign do not exist with id : 632918649128"
+        "500":
+          description: "Internal server error"
 
   /campaign/setNonUpFrontPayment:
     put:
@@ -1051,12 +1063,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Campaign"
-        "405":
+        "400":
           description: "Invalid input"
         "403":
-          description: "user not authorize to perform operation on campaign id : 2759723423466"
+          description: "User not authorize to perform operation on campaign id : 2759723423466"
         "404":
-          description: "campaign do not exist with id : 2759723423466"
+          description: "Campaign do not exist with id : 2759723423466"
+        "500":
+          description: "Internal server error"
 
   /campaign/removeSubCampaign:
     delete:
@@ -1716,6 +1730,8 @@ paths:
                     example: "1"
         "405":
           description: Invalid input
+        "500":
+          description: Internal server error
 
   /api/v1/influencer/getInfluencer:
     get:
@@ -1943,7 +1959,7 @@ components:
     CampaignDraft:
       type: "object"
       properties:
-        createdByUserId:
+        forBusinessUserId:
           type: "integer"
           example: "713827463"
         title:
@@ -2648,6 +2664,9 @@ components:
     SetUpFrontPaymentReqObj:
       type: "object"
       properties:
+        forBusinessUserId:
+          type: "integer"
+          example: "32451234"
         campaignId:
           type: "integer"
           example: "632918649128"
