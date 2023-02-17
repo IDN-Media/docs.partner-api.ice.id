@@ -1175,7 +1175,7 @@ paths:
         "400":
           description: "Invalid input"
 
-  /campaign/verifyContent:
+  /api/v1/campaign/verifyContent:
     put:
       tags:
         - "Manage sub-campaign"
@@ -1256,7 +1256,7 @@ paths:
         "400":
           description: "Invalid input"
 
-  /campaign/verifyProofOfPost:
+  /api/v1/campaign/verifyProofOfPost:
     put:
       tags:
         - "Manage sub-campaign"
@@ -1337,7 +1337,7 @@ paths:
         "400":
           description: "Invalid input"
 
-  /campaign/verifyProofOfInsight:
+  /api/v1/campaign/verifyProofOfInsight:
     put:
       tags:
         - "Manage sub-campaign"
