@@ -1959,7 +1959,7 @@ components:
     CampaignDraft:
       type: "object"
       properties:
-        createdByUserId:
+        forBusinessUserId:
           type: "integer"
           example: "713827463"
         title:
