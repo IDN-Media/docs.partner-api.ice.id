@@ -92,5 +92,10 @@
         ]
       }
     ]
+  },
+  "ssm:account=182828636299:parameterName=/idn/ice/zoneName:region=ap-southeast-1": "estidar.com",
+  "hosted-zone:account=182828636299:domainName=estidar.com:region=ap-southeast-1": {
+    "Id": "/hostedzone/Z0932327TAJ812Z7I5RC",
+    "Name": "estidar.com."
   }
 }
