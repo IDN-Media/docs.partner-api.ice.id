@@ -567,6 +567,14 @@ paths:
       description: "[WIP] Need to update the headers and remove body. Returns 10 items in each page."
       operationId: "campaign/listCampaigns"
       parameters:
+        - name: "forBusinessUserId"
+          in: "query"
+          description: "Id of business user"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+            example: "1"
         - name: "searchQuery"
           in: "query"
           description: ""
@@ -580,28 +588,7 @@ paths:
           required: false
           schema:
             type: "string"
-            example: "AWAITING_PAYMENT,COMPLETED"
-        - name: "createdByIceOpId"
-          in: "query"
-          description: ""
-          required: false
-          schema:
-            type: "string"
-            example: "1,2"
-        - name: "createdByBusinessPartnerId"
-          in: "query"
-          description: ""
-          required: false
-          schema:
-            type: "string"
-            example: "1,2"
-        - name: "createdByBusinessUserId"
-          in: "query"
-          description: ""
-          required: false
-          schema:
-            type: "string"
-            example: "1,2"
+            example: "AWAITING_PAYMENT,COMPLETED" 
         - name: "influencerId"
           in: "query"
           description: ""
@@ -690,6 +677,14 @@ paths:
       description: "Get list of sub-campaigns based on supplied filters and sorting rule. This API is specially good for influencers who wants to get the list of all of their sub-campaigns. Returns 10 items in each page."
       operationId: "campaign/listSubCampaigns"
       parameters:
+        - name: "forBusinessUserId"
+          in: "query"
+          description: "Id of business user"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+            example: "1"
         - name: "searchQuery"
           in: "query"
           description: ""
@@ -703,28 +698,7 @@ paths:
           required: false
           schema:
             type: "string"
-            example: "AWAITING_PAYMENT,COMPLETED"
-        - name: "createdByIceOpId"
-          in: "query"
-          description: ""
-          required: false
-          schema:
-            type: "string"
-            example: "1,2"
-        - name: "createdByBusinessPartnerId"
-          in: "query"
-          description: ""
-          required: false
-          schema:
-            type: "string"
-            example: "1,2"
-        - name: "createdByBusinessUserId"
-          in: "query"
-          description: ""
-          required: false
-          schema:
-            type: "string"
-            example: "1,2"
+            example: "AWAITING_PAYMENT,COMPLETED" 
         - name: "influencerId"
           in: "query"
           description: ""
@@ -818,15 +792,24 @@ paths:
           description: "Id of the campaign"
           required: true
           schema:
-            type: "string"
+            type: "integer"
+            format: "int32"
             example: "47612437311"
-        - name: "includeSubCampaigns"
+        - name: "forBusinessUserId"
           in: "query"
-          description: "default value is false"
-          required: false
+          description: "Id of business user"
+          required: true
           schema:
-            type: "boolean"
-            example: "true"
+            type: "integer"
+            format: "int32"
+            example: "1"
+        # - name: "includeSubCampaigns"
+        #   in: "query"
+        #   description: "default value is false"
+        #   required: false
+        #   schema:
+        #     type: "boolean"
+        #     example: "true"
       responses:
         "200":
           description: "Successful operation"
@@ -902,8 +885,17 @@ paths:
           description: "Id of the sub-campaign"
           required: true
           schema:
-            type: "string"
-            example: "47612437311"
+            type: "integer"
+            format: "int32"
+            example: "1"
+        - name: "forBusinessUserId"
+          in: "query"
+          description: "Id of business user"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+            example: "1"
       responses:
         "200":
           description: "Successful operation"
