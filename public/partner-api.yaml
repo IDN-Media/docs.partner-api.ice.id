@@ -26,6 +26,7 @@ paths:
     post:
       tags:
         - Authentication
+      summary: "TESTED"
       requestBody:
         required: true
         content:
@@ -70,7 +71,7 @@ paths:
     get:
       tags:
         - "Chat Room"
-      summary: "Get list of campaigns based on supplied filters and sorting rule"
+      summary: "Get list of campaigns based on supplied filters and sorting rule (TESTED)"
       description: "Get list of campaigns based on supplied filters and sorting rule"
       operationId: "chats/joinChatRoom"
       security:
@@ -126,7 +127,7 @@ paths:
     get:
       tags:
         - "Chat Room"
-      summary: "Get list of chat messages"
+      summary: "Get list of chat messages (TESTED)"
       description: "Get list of chat messages"
       operationId: "chats/listMessageHistory"
       security:
@@ -170,7 +171,7 @@ paths:
     post:
       tags:
         - "Chat Room"
-      summary: "Generate Presigned URL to upload file to S3"
+      summary: "Generate Presigned URL to upload file to S3 (TESTED)"
       description: "Generate Presigned URL to upload file to S3"
       operationId: "api/v1/chats/generateUploadUrl"
       security:
@@ -207,7 +208,7 @@ paths:
     get:
       tags:
         - "Chat Room"
-      summary: "Generate Presigned URL to download/open file"
+      summary: "Generate Presigned URL to download/open file (TESTED)"
       description: "Generate Presigned URL to download/open file"
       operationId: "api/v1/chats/getSignedUrl"
       parameters:
@@ -229,7 +230,7 @@ paths:
     get:
       tags:
         - Discover influencers
-      summary: Get list of influencers based on supplied filters and sorting rule
+      summary: Get list of influencers based on supplied filters and sorting rule (TESTED)
       description: Returns  1-10 items in each page.
       operationId: influencer/listInfluencers
       parameters:
@@ -343,7 +344,7 @@ paths:
     get:
       tags:
         - Discover influencers
-      summary: Returns influencer profile object with full details
+      summary: Returns influencer profile object with full details (TESTED) 
       description: ""
       operationId: influencer/getInfluencer
       parameters:
@@ -563,7 +564,7 @@ paths:
     get:
       tags:
         - "Discover campaigns"
-      summary: "Get list of campaigns based on supplied filters and sorting rule"
+      summary: "Get list of campaigns based on supplied filters and sorting rule (TESTED)"
       description: "[WIP] Need to update the headers and remove body. Returns 10 items in each page."
       operationId: "campaign/listCampaigns"
       parameters:
@@ -673,7 +674,7 @@ paths:
     get:
       tags:
         - "Discover campaigns"
-      summary: "Get list of sub-campaigns based on supplied filters and sorting rule"
+      summary: "Get list of sub-campaigns based on supplied filters and sorting rule (TESTED)"
       description: "Get list of sub-campaigns based on supplied filters and sorting rule. This API is specially good for influencers who wants to get the list of all of their sub-campaigns. Returns 10 items in each page."
       operationId: "campaign/listSubCampaigns"
       parameters:
@@ -783,7 +784,7 @@ paths:
     get:
       tags:
         - "Discover campaigns"
-      summary: "Returns campaign object with full details"
+      summary: "Returns campaign object with full details (TESTED)"
       description: ""
       operationId: "campaign/getCampaign"
       parameters:
@@ -876,7 +877,7 @@ paths:
     get:
       tags:
         - "Discover campaigns"
-      summary: "Returns sub-campaign's activity history details"
+      summary: "Returns sub-campaign's activity history details (TESTED)"
       description: ""
       operationId: "campaign/listSubCampaignActivityHistory"
       parameters:
@@ -987,7 +988,7 @@ paths:
     post:
       tags:
         - "Manage campaign"
-      summary: "Creates a new campaign in draft state"
+      summary: "Creates a new campaign in draft state (TESTED)"
       description: ""
       operationId: "campaign/createCampaign"
       requestBody:
@@ -1013,7 +1014,7 @@ paths:
     put:
       tags:
         - "Manage campaign"
-      summary: "Updates the campaign details"
+      summary: "Updates the campaign details (TESTED)"
       description: ""
       operationId: "campaign/updateCampaign"
       requestBody:
@@ -1043,7 +1044,7 @@ paths:
     delete:
       tags:
         - "Manage campaign"
-      summary: "Deletes the campaign"
+      summary: "Deletes the campaign (TESTED)"
       description: ""
       operationId: "campaign/deleteCampaign"
       parameters:
@@ -1079,7 +1080,7 @@ paths:
     put:
       tags:
         - "Manage campaign"
-      summary: "Moves the campaign out of draft state and sets status as IN_PROGRESS"
+      summary: "Moves the campaign out of draft state and sets status as IN_PROGRESS (TESTED)"
       description: ""
       operationId: "campaign/setUpFrontPayment"
       requestBody:
@@ -1328,7 +1329,7 @@ paths:
     put:
       tags:
         - "Manage sub-campaign"
-      summary: "Verifies the sub-campaign content"
+      summary: "Verifies the sub-campaign content (TESTED)"
       description: "Verifies the sub-campaign content. Also, moves the sub-campaign from AWAITING_CONTENT_VERIFICATION status to LIVE or REJECTED status."
       operationId: "campaign/verifyContent"
       parameters:
@@ -1409,7 +1410,7 @@ paths:
     put:
       tags:
         - "Manage sub-campaign"
-      summary: "Verifies the sub-campaign's proof of post"
+      summary: "Verifies the sub-campaign's proof of post (TESTED)"
       description: "Verifies the sub-campaign's proof of post. Also, moves the sub-campaign from AWAITING_POP_VERIFICATION status to LIVE or REJECTED status."
       operationId: "campaign/verifyProofOfPost"
       parameters:
@@ -1490,7 +1491,7 @@ paths:
     put:
       tags:
         - "Manage sub-campaign"
-      summary: "Verifies the sub-campaign's proof of insight"
+      summary: "Verifies the sub-campaign's proof of insight (TESTED)"
       description: "Verifies the sub-campaign's proof of insight. Also, moves the sub-campaign from LIVE_AND_AWAITING_POI_VERIFICATION status to COMPLETED or REJECTED status."
       operationId: "campaign/verifyProofOfInsight"
       parameters:
