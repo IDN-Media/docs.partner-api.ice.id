@@ -311,13 +311,13 @@ paths:
           example: "10"
           schema:
             type: string
-        - name: createdBy
-          in: query
-          description: ICE_OP,INFLUENCER
-          required: false
-          example: "ICE_OP"
-          schema:
-            type: string
+        # - name: createdBy
+        #   in: query
+        #   description: ICE_OP,INFLUENCER
+        #   required: false
+        #   example: "ICE_OP"
+        #   schema:
+        #     type: string
       responses:
         "200":
           description: Successful operation
