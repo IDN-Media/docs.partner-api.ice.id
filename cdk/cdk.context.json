@@ -97,5 +97,54 @@
   "hosted-zone:account=182828636299:domainName=estidar.com:region=ap-southeast-1": {
     "Id": "/hostedzone/Z0932327TAJ812Z7I5RC",
     "Name": "estidar.com."
+  },
+  "ssm:account=459021761895:parameterName=/idn/ice/zoneName:region=ap-southeast-1": "ice.id",
+  "ssm:account=459021761895:parameterName=/idn/ice/core/VpcName:region=ap-southeast-1": "ice",
+  "hosted-zone:account=459021761895:domainName=ice.id:region=ap-southeast-1": {
+    "Id": "/hostedzone/Z05804742OKVZOTZIIBLS",
+    "Name": "ice.id."
+  },
+  "vpc-provider:account=459021761895:filter.tag:Name=ice:region=ap-southeast-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-0fe9ac179627eeb6d",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-0ec710a38096d83c9",
+            "cidr": "10.0.0.0/24",
+            "availabilityZone": "ap-southeast-1a",
+            "routeTableId": "rtb-092aa73972303221d"
+          },
+          {
+            "subnetId": "subnet-0be6bb30227d98c1a",
+            "cidr": "10.0.1.0/24",
+            "availabilityZone": "ap-southeast-1b",
+            "routeTableId": "rtb-0a32758631a3640e7"
+          }
+        ]
+      },
+      {
+        "name": "private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-06fa98b336c9e6824",
+            "cidr": "10.0.2.0/24",
+            "availabilityZone": "ap-southeast-1a",
+            "routeTableId": "rtb-01d76c626fd621fdc"
+          },
+          {
+            "subnetId": "subnet-0e0a6241ed57a62c4",
+            "cidr": "10.0.3.0/24",
+            "availabilityZone": "ap-southeast-1b",
+            "routeTableId": "rtb-0ba71f670ef0aee78"
+          }
+        ]
+      }
+    ]
   }
 }

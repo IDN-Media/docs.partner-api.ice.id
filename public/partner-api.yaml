@@ -26,7 +26,7 @@ paths:
     post:
       tags:
         - Authentication
-      summary: "TESTED"
+      summary: "(TESTED)"
       requestBody:
         required: true
         content:
