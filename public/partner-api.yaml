@@ -235,37 +235,37 @@ paths:
       parameters:
         - name: socialPlatformId
           in: query
-          description: ""
+          description: "1,2"
           required: false
-          example: 1,2
+          example: ""
           schema:
             type: string
         - name: categoryId
           in: query
-          description: ""
+          description: "1,2"
           required: false
-          example: 1,2
+          example: ""
           schema:
             type: string
         - name: cityId
           in: query
-          description: ""
+          description: "1,3"
           required: false
-          example: 1,3
+          example: "" 
           schema:
             type: string
         - name: gender
           in: query
-          description: ""
+          description: "male,female"
           required: false
-          example: male,female
+          example: "" 
           schema:
             type: string
         - name: profileStatus
           in: query
-          description: ""
+          description: "DRAFT,AWAITING_APPROVAL,REJECTED,APPROVED"
           required: false
-          example: DRAFT,AWAITING_APPROVAL,REJECTED,APPROVED
+          example: "" 
           schema:
             type: string
         - name: isVisible
@@ -277,9 +277,9 @@ paths:
             type: string
         - name: searchQuery
           in: query
-          description: name
+          description: "e.g: test"
           required: false
-          example: divyam
+          example: ""
           schema:
             type: string
         - name: sortBy
@@ -287,14 +287,14 @@ paths:
           description: name use for sorting (name ,  total followers , created date )
             default value is created date
           required: false
-          example: created date
+          example: "" 
           schema:
             type: string
         - name: orderBy
           in: query
           description: sorting order (asc , desc)
           required: false
-          example: asc
+          example: ""
           schema:
             type: string
         - name: page
@@ -351,7 +351,7 @@ paths:
           in: query
           description: Id of the influencer
           required: true
-          example: "47612437311"
+          example: "96"
           schema:
             type: string
       responses:
