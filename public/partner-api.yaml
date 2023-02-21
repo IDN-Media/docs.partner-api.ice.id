@@ -559,7 +559,7 @@ paths:
         "400":
           description: "Invalid input"
 
-  /campaign/listCampaigns:
+  /api/v1/campaign/listCampaigns:
     get:
       tags:
         - "Discover campaigns"
@@ -574,77 +574,77 @@ paths:
           schema:
             type: "integer"
             format: "int32"
-            example: "1"
+            example: "36"
         - name: "searchQuery"
           in: "query"
-          description: ""
+          description: "Unilever"
           required: false
           schema:
             type: "string"
-          example: "Unilever"
+            example: ""
         - name: "status"
           in: "query"
-          description: ""
+          description: "AWAITING_PAYMENT,COMPLETED"
           required: false
           schema:
             type: "string"
-            example: "AWAITING_PAYMENT,COMPLETED" 
+            example: "" 
         - name: "influencerId"
           in: "query"
-          description: ""
+          description: "1,2"
           required: false
           schema:
             type: "string"
-            example: "1,2"
+            example: ""
         - name: "categoryId"
           in: "query"
-          description: ""
+          description: "1,2"
           required: false
           schema:
             type: "string"
-            example: "1,2"
+            example: ""
         - name: "createdTimeFromInMillis"
           in: "query"
-          description: ""
+          description: "6413984634"
           required: false
           schema:
             type: "string"
-            example: "6413984634"
+            example: ""
         - name: "createdTimeToInMillis"
           in: "query"
-          description: ""
+          description: "6413984634"
           required: false
           schema:
             type: "string"
-            example: "6413984634"
+            example: ""
         - name: "startTimeFromInMillis"
           in: "query"
-          description: ""
+          description: "6413984634"
           required: false
           schema:
             type: "string"
-            example: "6413984634"
+            example: ""
         - name: "startTimeToInMillis"
           in: "query"
-          description: ""
+          description: "6413984634"
           required: false
           schema:
             type: "string"
-            example: "6413984634"
+            example: ""
         - name: "sortBy"
           in: "query"
           description: "Can have one of the following value: CREATED_TIME, TITLE, PRICE, INFLUENCERS_COUNT"
           required: false
           schema:
             type: "string"
-            example: "TITLE"
+            example: ""
         - name: "orderBy"
           in: "query"
           description: "Can have one of the following value: ASCENDING, DESCENDING"
           required: false
           schema:
             type: "string"
-            example: "ASCENDING"
+            example: ""
         - name: "page"
           in: "query"
           description: ""
@@ -669,7 +669,7 @@ paths:
         "405":
           description: "Invalid input"
 
-  /campaign/listSubCampaigns:
+  /api/v1/campaign/listSubCampaigns:
     get:
       tags:
         - "Discover campaigns"
@@ -684,77 +684,77 @@ paths:
           schema:
             type: "integer"
             format: "int32"
-            example: "1"
+            example: "36"
         - name: "searchQuery"
           in: "query"
-          description: ""
+          description: "Unilever"
           required: false
           schema:
             type: "string"
-            example: "Unilever"
+            example: ""
         - name: "status"
           in: "query"
-          description: ""
+          description: "AWAITING_PAYMENT,COMPLETED"
           required: false
           schema:
             type: "string"
-            example: "AWAITING_PAYMENT,COMPLETED" 
+            example: "" 
         - name: "influencerId"
           in: "query"
-          description: ""
+          description: "1,2"
           required: false
           schema:
             type: "string"
-            example: "1,2"
+            example: ""
         - name: "categoryId"
           in: "query"
-          description: ""
+          description: "1,2"
           required: false
           schema:
             type: "string"
-            example: "1,2"
+            example: ""
         - name: "createdTimeFromInMillis"
           in: "query"
-          description: ""
+          description: "6413984634"
           required: false
           schema:
             type: "string"
-            example: "6413984634"
+            example: ""
         - name: "createdTimeToInMillis"
           in: "query"
-          description: ""
+          description: "6413984634"
           required: false
           schema:
             type: "string"
-            example: "6413984634"
+            example: ""
         - name: "startTimeFromInMillis"
           in: "query"
           description: ""
           required: false
           schema:
             type: "string"
-            example: "6413984634"
+            example: ""
         - name: "startTimeToInMillis"
           in: "query"
-          description: ""
+          description: "6413984634"
           required: false
           schema:
             type: "string"
-            example: "6413984634"
+            example: ""
         - name: "sortBy"
           in: "query"
           description: "Can have one of the following value: CREATED_TIME, PRICE"
           required: false
           schema:
             type: "string"
-            example: "PRICE"
+            example: ""
         - name: "orderBy"
           in: "query"
           description: "Can have one of the following value: ASCENDING, DESCENDING"
           required: false
           schema:
             type: "string"
-            example: "ASCENDING"
+            example: ""
         - name: "page"
           in: "query"
           description: ""
@@ -779,7 +779,7 @@ paths:
         "405":
           description: "Invalid input"
 
-  /campaign/getCampaign:
+  /api/v1/campaign/getCampaign:
     get:
       tags:
         - "Discover campaigns"
@@ -794,7 +794,7 @@ paths:
           schema:
             type: "integer"
             format: "int32"
-            example: "47612437311"
+            example: ""
         - name: "forBusinessUserId"
           in: "query"
           description: "Id of business user"
@@ -802,7 +802,7 @@ paths:
           schema:
             type: "integer"
             format: "int32"
-            example: "1"
+            example: "36"
         # - name: "includeSubCampaigns"
         #   in: "query"
         #   description: "default value is false"
@@ -1054,7 +1054,7 @@ paths:
           schema:
             type: "integer"
             format: "int32"
-            example: "16481234"
+            example: ""
         - name: "forBusinessUserId"
           in: "query"
           description: "Id of the business user"
@@ -1062,7 +1062,7 @@ paths:
           schema:
             type: "integer"
             format: "int32"
-            example: "32451234"
+            example: "36"
       responses:
         "200":
           description: "Successful operation"
@@ -1339,18 +1339,18 @@ paths:
           schema:
             type: "integer"
             format: "int32"
-            example: "1230873425"
+            example: "100"
         - name: "isContentValid"
           in: "query"
           description: ""
           required: true
           schema:
             type: "boolean"
-            example: "false"
+            example: "true"
         - name: "rejectionReason"
           in: "query"
           description: "Reason why the content is invalid."
-          required: true
+          required: false
           schema:
             type: "string"
             example: "Need more croud in the photo"
@@ -1361,7 +1361,7 @@ paths:
           schema:
             type: "integer"
             format: "int32"
-            example: "1230873425"
+            example: "36"
       responses:
         "200":
           description: "Successful operation"
@@ -1420,18 +1420,18 @@ paths:
           schema:
             type: "integer"
             format: "int32"
-            example: "1230873425"
+            example: "100"
         - name: "isProofOfPostValid"
           in: "query"
           description: ""
           required: true
           schema:
             type: "boolean"
-            example: "false"
+            example: "true"
         - name: "rejectionReason"
           in: "query"
           description: "Reason why the proof is invalid."
-          required: true
+          required: false
           schema:
             type: "string"
             example: "Unable to open the file."
@@ -1442,7 +1442,7 @@ paths:
           schema:
             type: "integer"
             format: "int32"
-            example: "1230873425"
+            example: "36"
       responses:
         "200":
           description: "Successful operation"
@@ -1501,18 +1501,18 @@ paths:
           schema:
             type: "integer"
             format: "int32"
-            example: "1230873425"
+            example: "100"
         - name: "isProofOfInsightValid"
           in: "query"
           description: ""
           required: true
           schema:
             type: "boolean"
-            example: "false"
+            example: "true"
         - name: "rejectionReason"
           in: "query"
           description: "Reason why the proof is invalid."
-          required: true
+          required: false
           schema:
             type: "string"
             example: "Unable to open the file."
@@ -1523,7 +1523,7 @@ paths:
           schema:
             type: "integer"
             format: "int32"
-            example: "1230873425"
+            example: "36"
       responses:
         "200":
           description: "Successful operation"
@@ -1900,7 +1900,7 @@ components:
           example: "Nature Shop"
         createdByUserType:
           type: "string"
-          example: "ICE_OP"
+          example: "PARTNER"
         createdByUserName:
           type: "string"
           example: "Ahmed Ali"
@@ -1948,7 +1948,7 @@ components:
       properties:
         forBusinessUserId:
           type: "integer"
-          example: "713827463"
+          example: "36"
         title:
           type: "string"
           example: "This is the title of the campaign"
@@ -1989,10 +1989,10 @@ components:
       properties:
         campaignId:
           type: "integer"
-          example: "39847239764"
+          example: "100"
         forBusinessUserId:
           type: "integer"
-          example: "76514983635"
+          example: "36"
         title:
           type: "string"
           example: "This is the title of the campaign"
@@ -2256,22 +2256,22 @@ components:
       properties:
         forBusinessUserId:
           type: "integer"
-          example: "76514983635"
+          example: "36"
         campaignId:
           type: "integer"
-          example: "2759723423466"
+          example: "100"
         serviceId:
           type: "integer"
-          example: "62353463753"
+          example: "109"
         isSubServiceSelected:
           type: "boolean"
           example: "true"
         subServiceId:
           type: "integer"
-          example: "62353463753"
+          example: "35"
         quantity:
           type: "integer"
-          example: "3"
+          example: "1"
 
     SubCampaign:
       type: "object"
@@ -2653,13 +2653,13 @@ components:
       properties:
         forBusinessUserId:
           type: "integer"
-          example: "32451234"
+          example: "36"
         campaignId:
           type: "integer"
-          example: "632918649128"
+          example: "100"
         bankId:
           type: "integer"
-          example: "2"
+          example: "999"
         bankAccNumber:
           type: "string"
           example: "0001011389453"
@@ -2991,10 +2991,10 @@ components:
         language:
           type: string
           example: ENGLISH
-        portfolios:
-          type: array
-          items:
-            $ref: "#/components/schemas/InfluencerPortfolios"
+        # portfolios:
+        #   type: array
+        #   items:
+        #     $ref: "#/components/schemas/InfluencerPortfolios"
         termsAndConditions:
           type: string
           example: 1) Only halal products. 2) Payment in advance.
