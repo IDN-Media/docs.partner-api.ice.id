@@ -34,14 +34,14 @@ paths:
             schema:
               type: object
               properties:
-                grant_type:
+                grantType:
                   type: string
                   description: Set this to 'client_credentials'
                   example: client_credentials
-                client_id:
+                clientId:
                   description: Your application's client_id
                   type: string
-                client_secret:
+                clientSecret:
                   description: Your application's client_secret
                   type: string
                 scope:
@@ -55,13 +55,13 @@ paths:
               schema:
                 type: object
                 properties:
-                  access_key:
+                  accessKey:
                     type: string
                     example: eyJz93a...k4laUWw
-                  token_type:
+                  tokenType:
                     type: string
                     example: Bearer
-                  expires_in:
+                  expiresIn:
                     type: integer
                     example: 315360000
         "400":
