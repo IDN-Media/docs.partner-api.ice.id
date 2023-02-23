@@ -537,26 +537,52 @@ paths:
         "405":
           description: Invalid input
 
-  /businessUser/listChatRoom:
+  /businessUser/listChatRooms:
     get:
       tags:
         - "Discover business users"
       summary: "Returns list of available chat room for business user"
       description: ""
-      operationId: "businessUser/listChatRoom"
+      operationId: "businessUser/listChatRooms"
       parameters:
         - name: businessUserId
           in: query
           description: "Business User Id"
+          schema:
+            type: number
+        - name: page
+          in: query
+          description: "Page number. Default = 1"
+          schema:
+            type: number
+        - name: pageSize
+          in: query
+          description: "Page size. Default = 10"
+          schema:
+            type: number
+        - name: recordCount
+          in: query
+          description: "Search keyword for influencer name"
           schema:
             type: string
       responses:
         "200":
           description: "Successful operation"
           content:
-            applcation/json:
+            application/json:
               schema:
-                $ref: "#/components/schemas/BusinessUserChatRoom"
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/BusinessUserChatRoom"
+                  page:
+                    type: number
+                  pageLength:
+                    type: number
+                  recordCount:
+                    type: number
         "400":
           description: "Invalid input"
 
