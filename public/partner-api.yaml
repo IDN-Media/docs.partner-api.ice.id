@@ -55,7 +55,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  accessKey:
+                  accessToken:
                     type: string
                     example: eyJz93a...k4laUWw
                   tokenType:
