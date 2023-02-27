@@ -369,11 +369,11 @@ paths:
         "500":
           description: internal server error
 
-  /businessUser/listBusinessUsers:
+  /api/v1/businessUser/listBusinessUsers:
     get:
       tags:
         - Discover business users
-      summary: Get list of business users based on supplied filters and sorting rule
+      summary: Get list of business users based on supplied filters and sorting rule (TESTED)
       operationId: businessUser/listBusinessUsers
       parameters:
         - name: searchQuery
