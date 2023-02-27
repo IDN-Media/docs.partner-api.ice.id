@@ -437,11 +437,11 @@ paths:
         "400":
           description: Invalid input
 
-  /businessUser/getBusinessUser:
+  /api/v1/businessUser/getBusinessUser:
     get:
       tags:
         - Discover business users
-      summary: Returns business user's profile object with full details
+      summary: Returns business user's profile object with full details (TESTED)
       operationId: businessUser/getBusinessUser
       parameters:
         - name: businessUserId
