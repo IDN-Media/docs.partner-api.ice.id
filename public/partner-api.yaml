@@ -517,11 +517,11 @@ paths:
         "400":
           description: "Invalid input"
   
-  /businessUser/deleteBusinessUser:
+  /api/v1/businessUser/deleteBusinessUser:
     delete:
       tags:
         - Manage business users
-      summary: Deletes the business user profile
+      summary: Deletes the business user profile (TESTED)
       operationId: businessUser/deleteBusinessUser
       parameters:
         - name: businessUserId
