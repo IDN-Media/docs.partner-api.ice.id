@@ -485,11 +485,11 @@ paths:
         "400":
           description: Invalid input
   
-  /businessUser/updateBusinessUser:
+  /api/v1/businessUser/updateBusinessUser:
     put:
       tags:
         - "Manage business users"
-      summary: "Updates the business users profile details"
+      summary: "Updates the business users profile details (TESTED)"
       operationId: "businessUser/updateBusinessUser"
       requestBody:
         description: "Object containing details of the business user"
@@ -497,7 +497,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/BusinessUserDraft"
+              $ref: "#/components/schemas/BusinessUserUpdateDraft"
       parameters:
         - name: businessUserId
           in: "query"
@@ -1874,6 +1874,13 @@ components:
         phoneNumber:
           type: string
           example: 62854555936
+
+    BusinessUserUpdateDraft:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Unilever
 
     BusinessUser:
       type: object
