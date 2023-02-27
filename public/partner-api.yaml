@@ -461,12 +461,12 @@ paths:
         "400":
           description: Invalid input
   
-  /businessUser/createBusinessUser:
+  /api/v1/businessUser/createBusinessUser:
     post:
       tags:
         - Manage business users
       summary: Creates a new business user profile
-      description: "Please note: Can provide businessUserId as blank while hitting this api."
+      description: "Please note: Can provide businessUserId as blank while hitting this api. (TESTED)"
       operationId: businessUser/createBusinessUser
       requestBody:
         description: Object containing details of the new business user
