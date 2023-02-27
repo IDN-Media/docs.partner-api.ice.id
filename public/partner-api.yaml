@@ -3163,6 +3163,9 @@ components:
         price:
           type: number
           example: 10000
+        markupPrice:
+          type: number
+          example: 10000
         description:
           type: string
           example: This is service description for Story.
@@ -3193,6 +3196,9 @@ components:
           type: string
           example: ONE IMAGE SLIDE
         price:
+          type: number
+          example: 1000
+        markupPrice:
           type: number
           example: 1000
 
