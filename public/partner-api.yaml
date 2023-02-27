@@ -847,11 +847,11 @@ paths:
         "400":
           description: "Invalid input"
 
-  /campaign/getSubCampaign:
+  /api/v1/campaign/getSubCampaign:
     get:
       tags:
         - "Discover campaigns"
-      summary: "Returns sub-campaign object with full details"
+      summary: "Returns sub-campaign object with full details (TESTED)"
       description: ""
       operationId: "campaign/getSubCampaign"
       parameters:
@@ -2392,6 +2392,9 @@ components:
         servicePrice:
           type: "number"
           example: "10000.00"
+        serviceMarkupPrice:
+          type: "number"
+          example: "10000.00"
         isSubServiceSelected:
           type: "boolean"
           example: "true"
@@ -2401,10 +2404,16 @@ components:
         subServicePrice:
           type: "number"
           example: "1000.00"
+        subServiceMarkupPrice:
+          type: "number"
+          example: "1000.00"
         quantity:
           type: "integer"
           example: "3"
         price:
+          type: "number"
+          example: "33000"
+        markupPrice:
           type: "number"
           example: "33000"
         invoiceNumber:
