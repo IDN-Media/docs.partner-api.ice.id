@@ -537,11 +537,11 @@ paths:
         "405":
           description: Invalid input
 
-  /businessUser/listChatRooms:
+  /api/v1/businessUser/listChatRooms:
     get:
       tags:
         - "Discover business users"
-      summary: "Returns list of available chat room for business user"
+      summary: "Returns list of available chat room for business user (TESTED)"
       description: ""
       operationId: "businessUser/listChatRooms"
       parameters:
@@ -579,7 +579,7 @@ paths:
                       $ref: "#/components/schemas/BusinessUserChatRoom"
                   currentPage:
                     type: number
-                  pageLength:
+                  pageSize:
                     type: number
                   recordCount:
                     type: number
