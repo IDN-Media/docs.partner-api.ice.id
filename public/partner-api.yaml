@@ -410,12 +410,6 @@ paths:
             format: int64
             example: 100
             default: 10
-        - name: businessPartnerId
-          in: query
-          schema:
-            type: integer
-            format: int64
-            example: 1
       responses:
         "200":
           description: Successful operation
@@ -465,8 +459,8 @@ paths:
     post:
       tags:
         - Manage business users
-      summary: Creates a new business user profile
-      description: "Please note: Can provide businessUserId as blank while hitting this api. (TESTED)"
+      summary: "Creates a new business user profile. (TESTED)"
+      description: "Please note: Can provide businessUserId as blank while hitting this api"
       operationId: businessUser/createBusinessUser
       requestBody:
         description: Object containing details of the new business user
@@ -1563,7 +1557,7 @@ paths:
         "500":
           description: "Internal server error"
 
-  /util/getMetaData:
+  /api/v1/util/getMetaData:
     get:
       tags:
         - "List constants"
