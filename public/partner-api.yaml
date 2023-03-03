@@ -929,11 +929,11 @@ paths:
         "400":
           description: "Invalid input"
 
-  /campaign/getCart:
+  /api/v1/campaign/getCart:
     get:
       tags:
         - "Discover campaigns"
-      summary: "Returns this campaign's cart details"
+      summary: "Returns this campaign's cart details (TESTED)"
       description: ""
       operationId: "campaign/getCart"
       parameters:
@@ -954,11 +954,11 @@ paths:
         "400":
           description: "Invalid input"
 
-  /campaign/getCampaignInvoice:
+  /api/v1/campaign/getCampaignInvoice:
     get:
       tags:
         - "Discover campaigns"
-      summary: "Returns this campaign's invoice details"
+      summary: "Returns this campaign's invoice details (TESTED)"
       description: ""
       operationId: "campaign/getCampaignInvoice"
       parameters:
@@ -1228,11 +1228,11 @@ paths:
         "500":
           description: "Internal server error"
 
-  /campaign/removeSubCampaign:
+  /api/v1/campaign/removeSubCampaign:
     delete:
       tags:
         - "Manage sub-campaign"
-      summary: "Removes a sub-campaign (or sub-service) from the campaign."
+      summary: "Removes a sub-campaign (or sub-service) from the campaign. (TESTED)"
       description: ""
       operationId: "campaign/removeSubCampaign"
       parameters:
