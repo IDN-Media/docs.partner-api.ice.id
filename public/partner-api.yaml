@@ -167,7 +167,7 @@ paths:
         "400":
           description: "Invalid input"
 
-  /api/v1/chats/generateUploadUrl:
+  /api/v1/chats/getUploadUrl:
     post:
       tags:
         - "Chat Room"
@@ -204,7 +204,7 @@ paths:
                   fileKey:
                     type: string
 
-  /api/v1/chats/getSignedUrl:
+  /api/v1/chats/getDownloadUrl:
     get:
       tags:
         - "Chat Room"
