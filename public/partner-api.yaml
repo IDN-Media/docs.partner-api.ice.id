@@ -1202,7 +1202,7 @@ paths:
     post:
       tags:
         - "Manage sub-campaign"
-      summary: "Adds a sub-service to the campaign. This later becomes a sub-campaign."
+      summary: "Adds a sub-service to the campaign. This later becomes a sub-campaign. (TESTED)"
       description: ""
       operationId: "campaign/addSubCampaign"
       requestBody:
@@ -2120,10 +2120,10 @@ components:
         referenceLink:
           type: "string"
           example: "https://example.com/refLink"
-        startTimeInMillis:
+        campaignStartTimeInMillis:
           type: "integer"
           example: "763192836821"
-        endTimeInMillis:
+        campaignEndTimeInMillis:
           type: "integer"
           example: "63129836213"
         createdTimeInMillis:
