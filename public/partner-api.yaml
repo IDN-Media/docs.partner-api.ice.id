@@ -539,7 +539,7 @@ paths:
       description: ""
       operationId: "businessUser/listChatRooms"
       parameters:
-        - name: businessUserId
+        - name: forBusinessUserId
           in: query
           description: "Business User Id"
           schema:
@@ -554,7 +554,7 @@ paths:
           description: "Page size. Default = 10"
           schema:
             type: number
-        - name: recordCount
+        - name: querySearch
           in: query
           description: "Search keyword for influencer name"
           schema:
