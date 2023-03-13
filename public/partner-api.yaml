@@ -1202,7 +1202,7 @@ paths:
     post:
       tags:
         - "Manage sub-campaign"
-      summary: "Adds a sub-service to the campaign. This later becomes a sub-campaign."
+      summary: "Adds a sub-service to the campaign. This later becomes a sub-campaign. (TESTED)"
       description: ""
       operationId: "campaign/addSubCampaign"
       requestBody:
@@ -1709,39 +1709,48 @@ paths:
         "400":
           description: "Invalid input"
 
-  /util/generateUploadUrl:
+  /api/v1/util/getUploadUrl:
     post:
       tags:
         - "S3 Presigned URL"
-      summary: "Generate S3 Presgined URL for uploading file"
-      description: "Generate S3 Presgined URL for uploading file"
-      operationId: "util/generateUploadUrl"
+      summary: "Get S3 Presgined URL for uploading file"
+      description: "Get S3 Presgined URL for uploading file"
+      operationId: "util/getUploadUrl"
       requestBody:
+        required: true
         content:
           applcation/json:
             schema:
               type: object
               properties:
-                fileKey:
+                roomName:
                   type: string
-                contentType:
+                  description: Room Name
+                  example: room_name
+                fileExtension:
+                  description: Uploaded file extension
                   type: string
+                  example: jpeg
       responses:
         "200":
           description: "Successful operation"
           content:
             schema:
-              example: "https://dev-core-s3stack-bucket83908e77-kp6y3g61zd1h.s3.ap-southeast-1.amazonaws.com/temporary/cat-2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIATFJYCJXTTPXUSJ56%2F20230118%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Date=20230118T092514Z&X-Amz-Expires=216000&X-Amz-Signature=fc7facb4a0bd37d799e48305c3b5a59bf46ab59d2644a74312975917e7e2e11a&X-Amz-SignedHeaders=host&x-id=PutObject"
-        "400":
-          description: "Invalid input"
+              schema:
+                type: object
+                properties:
+                  uploadUrl:
+                    type: string
+                  fileKey:
+                    type: string
 
-  /util/getSignedUrl:
+  /api/v1/util/getDownloadUrl:
     get:
       tags:
         - "S3 Presigned URL"
-      summary: "Generate S3 Presgined URL for downloading file"
-      description: "Generate S3 Presgined URL for downloading file"
-      operationId: "util/getSignedUrl"
+      summary: "Get S3 Presgined URL for downloading file"
+      description: "Get S3 Presgined URL for downloading file"
+      operationId: "util/getDownloadUrl"
       parameters:
         - name: "key"
           in: "query"
@@ -1755,9 +1764,7 @@ paths:
           content:
             applcation/json:
               schema:
-                type: "string"
-        "400":
-          description: "Invalid input"
+                type: string
 
   /health:
     get:
@@ -2120,10 +2127,10 @@ components:
         referenceLink:
           type: "string"
           example: "https://example.com/refLink"
-        startTimeInMillis:
+        campaignStartTimeInMillis:
           type: "integer"
           example: "763192836821"
-        endTimeInMillis:
+        campaignEndTimeInMillis:
           type: "integer"
           example: "63129836213"
         createdTimeInMillis:
