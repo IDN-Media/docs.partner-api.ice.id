@@ -1382,37 +1382,6 @@ paths:
         "204":
           description: "Successful operation"
 
-  /util/downloadTemplate:
-    get:
-      tags:
-        - "Download template"
-      summary: "To download a template"
-      description: ""
-      operationId: "/util/downloadTemplate"
-      parameters:
-        - name: "templateFor"
-          in: "query"
-          required: true
-          description: "(bulkCreateInfluencers)"
-          schema:
-            type: "string"
-        - name: "fileExtension"
-          in: "query"
-          description: "(.csv)"
-          schema:
-            type: "string"
-            default: ".csv"
-      responses:
-        "200":
-          description: "Successful operation"
-          content:
-            applcation/json:
-              schema:
-                type: string
-                format: binary
-        "400":
-          description: "Invalid input"
-
   /util/generateUploadUrl:
     post:
       tags:
