@@ -1243,6 +1243,13 @@ paths:
           schema:
             type: "integer"
             example: "1230873425"
+        - name: "forBusinessUserId"
+          in: "query"
+          description: "Id of the business user"
+          required: true
+          schema:
+            type: "integer"
+            example: "1230873425"
       responses:
         "200":
           description: "Successful operation"
