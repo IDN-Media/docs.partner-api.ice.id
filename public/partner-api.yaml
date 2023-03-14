@@ -1818,14 +1818,14 @@ components:
                 type: "string"
               id:
                 type: "string"
-              sendTime:
+              sortKey:
                 type: "string"
         messageLastKey:
           type: "object"
           properties:
             id:
               type: "string"
-            sendTime:
+            sortKey:
               type: "string"
 
     ListMessageHistoryResponse:
