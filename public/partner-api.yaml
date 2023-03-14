@@ -1668,7 +1668,7 @@ paths:
         "400":
           description: "Invalid input"
 
-  /util/refreshMetaData:
+  /api/v1/util/refreshMetaData:
     post:
       tags:
         - "List constants"
