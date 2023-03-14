@@ -539,7 +539,7 @@ paths:
       description: ""
       operationId: "businessUser/listChatRooms"
       parameters:
-        - name: forBusinessUserId
+        - name: businessUserId
           in: query
           description: "Business User Id"
           schema:
@@ -554,7 +554,7 @@ paths:
           description: "Page size. Default = 10"
           schema:
             type: number
-        - name: querySearch
+        - name: recordCount
           in: query
           description: "Search keyword for influencer name"
           schema:
@@ -856,6 +856,14 @@ paths:
           schema:
             type: "string"
             example: "47612437311"
+        - name: "forBusinessUserId"
+          in: "query"
+          description: "Id of business user"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+            example: "1"
       responses:
         "200":
           description: "Successful operation"
@@ -893,7 +901,7 @@ paths:
         "400":
           description: "Invalid input"
 
-  /campaign/listSubCampaignActivityHistory:
+  /api/v1/campaign/listSubCampaignActivityHistory:
     get:
       tags:
         - "Discover campaigns"
@@ -1716,48 +1724,39 @@ paths:
         "400":
           description: "Invalid input"
 
-  /api/v1/util/getUploadUrl:
+  /util/generateUploadUrl:
     post:
       tags:
         - "S3 Presigned URL"
-      summary: "Get S3 Presgined URL for uploading file"
-      description: "Get S3 Presgined URL for uploading file"
-      operationId: "util/getUploadUrl"
+      summary: "Generate S3 Presgined URL for uploading file"
+      description: "Generate S3 Presgined URL for uploading file"
+      operationId: "util/generateUploadUrl"
       requestBody:
-        required: true
         content:
           applcation/json:
             schema:
               type: object
               properties:
-                roomName:
+                fileKey:
                   type: string
-                  description: Room Name
-                  example: room_name
-                fileExtension:
-                  description: Uploaded file extension
+                contentType:
                   type: string
-                  example: jpeg
       responses:
         "200":
           description: "Successful operation"
           content:
             schema:
-              schema:
-                type: object
-                properties:
-                  uploadUrl:
-                    type: string
-                  fileKey:
-                    type: string
+              example: "https://dev-core-s3stack-bucket83908e77-kp6y3g61zd1h.s3.ap-southeast-1.amazonaws.com/temporary/cat-2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIATFJYCJXTTPXUSJ56%2F20230118%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Date=20230118T092514Z&X-Amz-Expires=216000&X-Amz-Signature=fc7facb4a0bd37d799e48305c3b5a59bf46ab59d2644a74312975917e7e2e11a&X-Amz-SignedHeaders=host&x-id=PutObject"
+        "400":
+          description: "Invalid input"
 
-  /api/v1/util/getDownloadUrl:
+  /util/getSignedUrl:
     get:
       tags:
         - "S3 Presigned URL"
-      summary: "Get S3 Presgined URL for downloading file"
-      description: "Get S3 Presgined URL for downloading file"
-      operationId: "util/getDownloadUrl"
+      summary: "Generate S3 Presgined URL for downloading file"
+      description: "Generate S3 Presgined URL for downloading file"
+      operationId: "util/getSignedUrl"
       parameters:
         - name: "key"
           in: "query"
@@ -1771,7 +1770,9 @@ paths:
           content:
             applcation/json:
               schema:
-                type: string
+                type: "string"
+        "400":
+          description: "Invalid input"
 
   /health:
     get:
