@@ -554,7 +554,7 @@ paths:
           description: "Page size. Default = 10"
           schema:
             type: number
-        - name: recordCount
+        - name: querySearch
           in: query
           description: "Search keyword for influencer name"
           schema:
