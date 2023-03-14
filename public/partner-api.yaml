@@ -539,7 +539,7 @@ paths:
       description: ""
       operationId: "businessUser/listChatRooms"
       parameters:
-        - name: forBusinessUserId
+        - name: businessUserId
           in: query
           description: "Business User Id"
           schema:
@@ -554,7 +554,7 @@ paths:
           description: "Page size. Default = 10"
           schema:
             type: number
-        - name: querySearch
+        - name: recordCount
           in: query
           description: "Search keyword for influencer name"
           schema:
@@ -856,6 +856,14 @@ paths:
           schema:
             type: "string"
             example: "47612437311"
+        - name: "forBusinessUserId"
+          in: "query"
+          description: "Id of business user"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+            example: "1"
       responses:
         "200":
           description: "Successful operation"
@@ -866,34 +874,7 @@ paths:
         "400":
           description: "Invalid input"
 
-  /campaign/listCampaignActivityHistory:
-    get:
-      tags:
-        - "Discover campaigns"
-      summary: "Returns campaign's activity history details"
-      description: ""
-      operationId: "campaign/listCampaignActivityHistory"
-      parameters:
-        - name: "campaignId"
-          in: "query"
-          description: "Id of the campaign"
-          required: true
-          schema:
-            type: "string"
-            example: "47612437311"
-      responses:
-        "200":
-          description: "Successful operation"
-          content:
-            application/json:
-              schema:
-                type: "array"
-                items:
-                $ref: "#/components/schemas/CampaignActivity"
-        "400":
-          description: "Invalid input"
-
-  /campaign/listSubCampaignActivityHistory:
+  /api/v1/campaign/listSubCampaignActivityHistory:
     get:
       tags:
         - "Discover campaigns"
@@ -929,31 +910,6 @@ paths:
         "400":
           description: "Invalid input"
 
-  /api/v1/campaign/getCart:
-    get:
-      tags:
-        - "Discover campaigns"
-      summary: "Returns this campaign's cart details (TESTED)"
-      description: ""
-      operationId: "campaign/getCart"
-      parameters:
-        - name: "campaignId"
-          in: "query"
-          description: "Id of the campaign"
-          required: true
-          schema:
-            type: "string"
-            example: "47612437311"
-      responses:
-        "200":
-          description: "Successful operation"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Cart"
-        "400":
-          description: "Invalid input"
-
   /api/v1/campaign/getCampaignInvoice:
     get:
       tags:
@@ -976,31 +932,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CampaignInvoice"
-        "400":
-          description: "Invalid input"
-
-  /campaign/getSubCampaignInvoice:
-    get:
-      tags:
-        - "Discover campaigns"
-      summary: "Returns this sub-campaign's invoice details"
-      description: ""
-      operationId: "campaign/getSubCampaignInvoice"
-      parameters:
-        - name: "subCampaignId"
-          in: "query"
-          description: "Id of the sub-campaign"
-          required: true
-          schema:
-            type: "string"
-            example: "47612437311"
-      responses:
-        "200":
-          description: "Successful operation"
-          content:
-            applcation/json:
-              schema:
-                $ref: "#/components/schemas/SubCampaignInvoice"
         "400":
           description: "Invalid input"
 
@@ -1122,82 +1053,6 @@ paths:
         "500":
           description: "Internal server error"
 
-  /campaign/setNonUpFrontPayment:
-    put:
-      tags:
-        - "Manage campaign"
-      summary: "Moves the campaign out of draft state and sets status as AWAITING_PAYMENT"
-      description: ""
-      operationId: "campaign/setNonUpFrontPayment"
-      parameters:
-        - name: "campaignId"
-          in: "query"
-          description: "Id of the campaign"
-          required: true
-          schema:
-            type: "integer"
-            example: "16481234"
-      responses:
-        "200":
-          description: "Successful operation"
-        "405":
-          description: "Invalid input"
-
-  /campaign/setProofOfPayment:
-    put:
-      tags:
-        - "Manage campaign"
-      summary: "Uploads the payment proof."
-      description: "Uploads the payment proof. Also, moves the campaign from AWAITING_PAYMENT status to AWAITING_PAYMENT_VERIFICATION"
-      operationId: "campaign/setProofOfPayment"
-      requestBody:
-        description: "Object containing details of payment"
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SetProofOfPaymentReqObj"
-      responses:
-        "200":
-          description: "Successful operation"
-        "405":
-          description: "Invalid input"
-
-  /campaign/verifyProofOfPayment:
-    put:
-      tags:
-        - "Manage campaign"
-      summary: "Verifies the payment proof."
-      description: "Moves the campaign from AWAITING_PAYMENT_VERIFICATION status to IN_PROGRESS or REJECTED"
-      operationId: "campaign/verifyProofOfPayment"
-      parameters:
-        - name: "campaignId"
-          in: "query"
-          description: "Id of the campaign"
-          required: true
-          schema:
-            type: "integer"
-            example: "16481234"
-        - name: "isPaymentProofValid"
-          in: "query"
-          description: ""
-          required: true
-          schema:
-            type: "boolean"
-            example: "true"
-        - name: "rejectionReason"
-          in: "query"
-          description: ""
-          required: true
-          schema:
-            type: "string"
-            example: "reason of acceptance/rejection/etc, goes here"
-      responses:
-        "200":
-          description: "Successful operation"
-        "405":
-          description: "Invalid input"
-
   /api/v1/campaign/addSubCampaign:
     post:
       tags:
@@ -1243,106 +1098,17 @@ paths:
           schema:
             type: "integer"
             example: "1230873425"
-      responses:
-        "200":
-          description: "Successful operation"
-        "405":
-          description: "Invalid input"
-
-  /campaign/setSubCampaignQuantity:
-    put:
-      tags:
-        - "Manage sub-campaign"
-      summary: "Sets the quanitity of the sub-service selected as part of this sub-campaign"
-      description: ""
-      operationId: "campaign/setSubCampaignQuantity"
-      parameters:
-        - name: "subCampaignId"
+        - name: "forBusinessUserId"
           in: "query"
-          description: "Corresponding subCampaignId for this sub-service"
+          description: "Id of the business user"
           required: true
           schema:
             type: "integer"
-            format: "int32"
             example: "1230873425"
-        - name: "quantity"
-          in: "query"
-          description: ""
-          required: true
-          schema:
-            type: "integer"
-            format: "int32"
-            example: "3"
       responses:
         "200":
           description: "Successful operation"
         "405":
-          description: "Invalid input"
-
-  /campaign/confirmSubCampaign:
-    put:
-      tags:
-        - "Manage sub-campaign"
-      summary: "Moves the sub-campaign from AWAITING_CONFIRMATION status to AWAITING_CONTENT"
-      description: ""
-      operationId: "campaign/confirmSubCampaign"
-      parameters:
-        - name: "subCampaignId"
-          in: "query"
-          description: "Id of the sub-campaign"
-          required: true
-          schema:
-            type: "integer"
-            example: "16481234"
-        - name: "isConfirmed"
-          in: "query"
-          description: "Is sub-campaign confirmed or rejected"
-          required: true
-          schema:
-            type: "boolean"
-            example: "true"
-        - name: "rejectionReason"
-          in: "query"
-          description: "Reason of rejection"
-          required: true
-          schema:
-            type: "string"
-            example: "(Rejection reason goes here)"
-      responses:
-        "200":
-          description: "Successful operation"
-        "405":
-          description: "Invalid input"
-
-  /campaign/setContent:
-    post:
-      tags:
-        - "Manage sub-campaign"
-      summary: "Adds multiple images/videos links as the sub-campaign content"
-      description: "Adds multiple images/videos links as the sub-campaign content. Also checkout APIs: [ api/v1/util/uploadImage ] and [ api/v1/util/uploadFile ]"
-      operationId: "campaign/setContent"
-      parameters:
-        - name: "subCampaignId"
-          in: "query"
-          description: "Id of the sub-campaign"
-          required: true
-          schema:
-            type: "string"
-            example: "16481234"
-      requestBody:
-        description: "Json array containing the links of the images/videos"
-        required: true
-        content:
-          application/json:
-            schema:
-              type: "array"
-              items:
-                type: "string"
-                example: "https://s3.aws.com/image1.jpg"
-      responses:
-        "200":
-          description: "Successful operation"
-        "400":
           description: "Invalid input"
 
   /api/v1/campaign/verifyContent:
@@ -1395,37 +1161,6 @@ paths:
         "500":
           description: "Internal server error"
 
-  /campaign/setProofOfPost:
-    post:
-      tags:
-        - "Manage sub-campaign"
-      summary: "Adds multiple images/videos links as the sub-campaign's proof of post."
-      description: "Adds multiple images/videos links as the sub-campaign's proof of post. Also checkout APIs: [ api/v1/util/uploadImage ] and [ api/v1/util/uploadFile ]"
-      operationId: "campaign/setProofOfPost"
-      parameters:
-        - name: "subCampaignId"
-          in: "query"
-          description: "Id of the sub-campaign"
-          required: true
-          schema:
-            type: "string"
-            example: "16481234"
-      requestBody:
-        description: "Json array containing the links of the images/videos"
-        required: true
-        content:
-          application/json:
-            schema:
-              type: "array"
-              items:
-                type: "string"
-                example: "https://s3.aws.com/image1.jpg"
-      responses:
-        "200":
-          description: "Successful operation"
-        "400":
-          description: "Invalid input"
-
   /api/v1/campaign/verifyProofOfPost:
     put:
       tags:
@@ -1475,37 +1210,6 @@ paths:
           description: "sub campaign do not exist with id : 39847239764"
         "500":
           description: "Internal server error"
-
-  /campaign/setProofOfInsight:
-    post:
-      tags:
-        - "Manage sub-campaign"
-      summary: "Adds multiple images/videos links as the sub-campaign's proof of insight."
-      description: "Adds multiple images/videos links as the sub-campaign's proof of insight. Also checkout APIs: [ api/v1/util/uploadImage ] and [ api/v1/util/uploadFile ]"
-      operationId: "campaign/setProofOfInsight"
-      parameters:
-        - name: "subCampaignId"
-          in: "query"
-          description: "Id of the sub-campaign"
-          required: true
-          schema:
-            type: "string"
-            example: "16481234"
-      requestBody:
-        description: "Json array containing the links of the images/videos"
-        required: true
-        content:
-          application/json:
-            schema:
-              type: "array"
-              items:
-                type: "string"
-                example: "https://s3.aws.com/image1.jpg"
-      responses:
-        "200":
-          description: "Successful operation"
-        "400":
-          description: "Invalid input"
 
   /api/v1/campaign/verifyProofOfInsight:
     put:
@@ -1668,7 +1372,7 @@ paths:
         "400":
           description: "Invalid input"
 
-  /util/refreshMetaData:
+  /api/v1/util/refreshMetaData:
     post:
       tags:
         - "List constants"
@@ -1678,79 +1382,39 @@ paths:
         "204":
           description: "Successful operation"
 
-  /util/downloadTemplate:
-    get:
-      tags:
-        - "Download template"
-      summary: "To download a template"
-      description: ""
-      operationId: "/util/downloadTemplate"
-      parameters:
-        - name: "templateFor"
-          in: "query"
-          required: true
-          description: "(bulkCreateInfluencers)"
-          schema:
-            type: "string"
-        - name: "fileExtension"
-          in: "query"
-          description: "(.csv)"
-          schema:
-            type: "string"
-            default: ".csv"
-      responses:
-        "200":
-          description: "Successful operation"
-          content:
-            applcation/json:
-              schema:
-                type: string
-                format: binary
-        "400":
-          description: "Invalid input"
-
-  /api/v1/util/getUploadUrl:
+  /util/generateUploadUrl:
     post:
       tags:
         - "S3 Presigned URL"
-      summary: "Get S3 Presgined URL for uploading file"
-      description: "Get S3 Presgined URL for uploading file"
-      operationId: "util/getUploadUrl"
+      summary: "Generate S3 Presgined URL for uploading file"
+      description: "Generate S3 Presgined URL for uploading file"
+      operationId: "util/generateUploadUrl"
       requestBody:
-        required: true
         content:
           applcation/json:
             schema:
               type: object
               properties:
-                roomName:
+                fileKey:
                   type: string
-                  description: Room Name
-                  example: room_name
-                fileExtension:
-                  description: Uploaded file extension
+                contentType:
                   type: string
-                  example: jpeg
       responses:
         "200":
           description: "Successful operation"
           content:
             schema:
-              schema:
-                type: object
-                properties:
-                  uploadUrl:
-                    type: string
-                  fileKey:
-                    type: string
+              example: "https://dev-core-s3stack-bucket83908e77-kp6y3g61zd1h.s3.ap-southeast-1.amazonaws.com/temporary/cat-2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIATFJYCJXTTPXUSJ56%2F20230118%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Date=20230118T092514Z&X-Amz-Expires=216000&X-Amz-Signature=fc7facb4a0bd37d799e48305c3b5a59bf46ab59d2644a74312975917e7e2e11a&X-Amz-SignedHeaders=host&x-id=PutObject"
+        "400":
+          description: "Invalid input"
 
-  /api/v1/util/getDownloadUrl:
+  /util/getSignedUrl:
     get:
       tags:
         - "S3 Presigned URL"
-      summary: "Get S3 Presgined URL for downloading file"
-      description: "Get S3 Presgined URL for downloading file"
-      operationId: "util/getDownloadUrl"
+      summary: "Generate S3 Presgined URL for downloading file"
+      description: "Generate S3 Presgined URL for downloading file"
+      operationId: "util/getSignedUrl"
       parameters:
         - name: "key"
           in: "query"
@@ -1764,7 +1428,9 @@ paths:
           content:
             applcation/json:
               schema:
-                type: string
+                type: "string"
+        "400":
+          description: "Invalid input"
 
   /health:
     get:
