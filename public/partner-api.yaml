@@ -85,7 +85,7 @@ paths:
             type: "string"
         - name: "userId"
           in: "query"
-          description: "User ID for chat room"
+          description: "This params combination BU_{businessUserId}, example: BU_16"
           required: true
           schema:
             type: "string"
@@ -1506,14 +1506,14 @@ components:
                 type: "string"
               id:
                 type: "string"
-              sendTime:
+              sortKey:
                 type: "string"
         messageLastKey:
           type: "object"
           properties:
             id:
               type: "string"
-            sendTime:
+            sortKey:
               type: "string"
 
     FilterSortDetails:
