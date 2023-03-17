@@ -337,6 +337,9 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/InfluencerLite"
+                  totalRecords:
+                    type: number
+                    example: 10
         "405":
           description: Invalid input
 
@@ -1512,6 +1515,8 @@ components:
         roomName:
           type: "string"
         roomStatus:
+          type: "string"
+        userProfileUrl:
           type: "string"
         lastMessages:
           type: "array"
