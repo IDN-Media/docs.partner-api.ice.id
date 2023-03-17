@@ -539,7 +539,7 @@ paths:
       description: ""
       operationId: "businessUser/listChatRooms"
       parameters:
-        - name: businessUserId
+        - name: forBusinessUserId
           in: query
           description: "Business User Id"
           schema:
@@ -2512,38 +2512,32 @@ components:
         provinces:
           type: "array"
           items:
-            $ref: "#/definitions/Province"
-
-    Province:
-      type: "object"
-      properties:
-        id:
-          type: "integer"
-          format: "int64"
-          example: "0"
-        name:
-          type: "string"
-          example: "DKI Jakarta"
-        slug:
-          type: "string"
-          example: "dki-jakarta"
-        cities:
-          type: "array"
-          items:
-            $ref: "#/definitions/City"
-
-    City:
-      type: "object"
-      properties:
-        id:
-          type: "integer"
-          example: "0"
-        name:
-          type: "string"
-          example: "Kota Adm. Jakarta Pusat"
-        slug:
-          type: "string"
-          example: "kota-adm-jakarta-pusat"
+            type: "object"
+            properties:
+              id:
+                type: "integer"
+                format: "int64"
+                example: "0"
+              name:
+                type: "string"
+                example: "DKI Jakarta"
+              slug:
+                type: "string"
+                example: "dki-jakarta"
+              cities:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    id:
+                      type: "integer"
+                      example: "0"
+                    name:
+                      type: "string"
+                      example: "Kota Adm. Jakarta Pusat"
+                    slug:
+                      type: "string"
+                      example: "kota-adm-jakarta-pusat"
 
     Language:
       type: "object"
@@ -2587,17 +2581,15 @@ components:
         serviceTypes:
           type: "array"
           items:
-            $ref: "#/definitions/ServiceType"
-
-    ServiceType:
-      type: "object"
-      properties:
-        id:
-          type: "integer"
-          example: "0"
-        name:
-          type: "string"
-          example: "Story"
+            type: "object"
+            properties:
+              id:
+                type: "integer"
+                example: "0"
+              name:
+                type: "string"
+                example: "Story"
+      
 
     BusinessUserChatRoom:
       type: "array"
