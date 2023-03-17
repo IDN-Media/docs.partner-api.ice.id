@@ -925,6 +925,14 @@ paths:
           schema:
             type: "string"
             example: "47612437311"
+        - name: "forBusinessUserId"
+          in: "query"
+          description: "Id of business user"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+            example: "1"
       responses:
         "200":
           description: "Successful operation"
@@ -1455,6 +1463,14 @@ paths:
           schema:
             type: "string"
             example: "47612437311"
+        - name: "forBusinessUserId"
+          in: "query"
+          description: "Id of business user"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+            example: "1"
       responses:
         "200":
           description: "Successful operation"
