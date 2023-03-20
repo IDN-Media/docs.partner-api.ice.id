@@ -381,12 +381,12 @@ paths:
       parameters:
         - name: searchQuery
           in: query
-          description: name or email, partial
+          description: name or email
           schema:
             type: string
         - name: sortBy
           in: query
-          description: column name to use for sorting (businessUserId, name, email, status, createdAt)
+          description: column name to use for sorting (businessUserId, name, email, createdAt)
           schema:
             default: businessUserId
             type: string
@@ -1518,6 +1518,8 @@ components:
           type: "string"
         userProfileUrl:
           type: "string"
+        userProfileImage:
+          type: "string"
         lastMessages:
           type: "array"
           items:
@@ -1639,6 +1641,9 @@ components:
         title:
           type: "string"
           example: "This is the title of the campaign"
+        productName:
+          type: "string"
+          example: "This is the product name of the campaign"
         forBusinessUserName:
           type: "string"
           example: "Nature Shop"
@@ -1654,26 +1659,12 @@ components:
         campaignImageLinkKey:
           type: "string"
           example: "https://s3.aws/image1.jpg"
-        productFileLinks:
-          type: array
-          items:
-            type: "object"
-            properties:
-              link:
-                type: "string"
-                example: "https://s3.aws/image1.jpg"
-              linkKey:
-                type: "string"
-                example: "https://s3.aws/image1.jpg"
-        totalInfluencers:
-          type: "integer"
-          example: "4"
-        totalSubCampaigns:
-          type: "integer"
-          example: "6"
         totalPrice:
           type: "integer"
           example: "10000"
+        invoiceNumber:
+          type: "string"
+          example: "INV/2023217/IPL/3099402376"
         startTimeInMillis:
           type: "integer"
           example: "763192836821"
@@ -1686,6 +1677,40 @@ components:
         status:
           type: "string"
           example: "DRAFT"
+        totalServices:
+          type: "integer"
+          example: "6"
+        totalSubServices:
+          type: "integer"
+          example: "12"
+        totalInfluencers:
+          type: "integer"
+          example: "4"
+        totalChargeablePriceWithTaxAndDeduction:
+          type: "integer"
+          example: "10000"
+        productFileLinks:
+          type: array
+          items:
+            type: "object"
+            properties:
+              link:
+                type: "string"
+                example: "https://s3.aws/image1.jpg"
+              linkKey:
+                type: "string"
+                example: "https://s3.aws/image1.jpg"
+        categories:
+          type: array
+          items:
+            type: "object"
+            properties:
+              categoryId:
+                type: "integer"
+                example: "3"
+              category:
+                type: "string"
+                example: "FOOD"
 
     CampaignDraft:
       type: "object"
