@@ -1419,7 +1419,13 @@ paths:
           description: "Successful operation"
           content:
             schema:
-              example: "https://dev-core-s3stack-bucket83908e77-kp6y3g61zd1h.s3.ap-southeast-1.amazonaws.com/temporary/cat-2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIATFJYCJXTTPXUSJ56%2F20230118%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Date=20230118T092514Z&X-Amz-Expires=216000&X-Amz-Signature=fc7facb4a0bd37d799e48305c3b5a59bf46ab59d2644a74312975917e7e2e11a&X-Amz-SignedHeaders=host&x-id=PutObject"
+              schema:
+                type: object
+                properties:
+                  uploadUrl:
+                    type: string
+                  fileKey:
+                    type: string
         "400":
           description: "Invalid input"
 
