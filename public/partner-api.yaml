@@ -1029,7 +1029,7 @@ paths:
       responses:
         "200":
           description: "Successful operation"
-        "405":
+        "400":
           description: "Invalid input"
         "403":
           description: "User not authorize to perform operation on campaign id : 16481234"
@@ -1119,8 +1119,14 @@ paths:
       responses:
         "200":
           description: "Successful operation"
-        "405":
+        "400":
           description: "Invalid input"
+        "403":
+          description: "User not authorize to perform operation on sub campaign id : 2759723423466"
+        "404":
+          description: "Campaign do not exist with id : 2759723423466"
+        "500":
+          description: "Internal server error"
 
   /api/v1/campaign/verifyContent:
     put:
