@@ -1,0 +1,46 @@
+name: production
+on:
+  push:
+    tags:
+      - release/**
+jobs:
+  Deploy:
+    name: Deploy
+    permissions:
+      contents: read
+      id-token: write
+    environment: production
+    runs-on:
+      - self-hosted
+      - codebuild-x64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Authenticate Via OIDC Role
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ap-southeast-1
+          role-duration-seconds: 1800
+          role-skip-session-tagging: true
+          role-to-assume: arn:aws:iam::616010153635:role/GitHubActionRole
+      - name: Assume CDK Deploy Role
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ap-southeast-1
+          role-duration-seconds: 1800
+          role-skip-session-tagging: true
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ env.AWS_SESSION_TOKEN }}
+          role-to-assume: arn:aws:iam::459021761895:role/cdk-hnb659fds-deploy-role-459021761895-ap-southeast-1
+          role-external-id: Pipeline
+      - name: CDK Deploy
+        run: |-
+          cd cdk
+          npm ci
+          npm run build
+          npx cdk synth
+          npx cdk deploy --all --require-approval never
