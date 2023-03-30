@@ -42,6 +42,6 @@ jobs:
           cd cdk
           pwd
           npm i
-          npm run build
+          #npm run build
           npx cdk synth 'Prod-IceDocsPartnerWebsite/**'
           npx cdk deploy 'Prod-IceDocsPartnerWebsite/**' --require-approval never
