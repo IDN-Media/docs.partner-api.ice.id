@@ -44,4 +44,4 @@ jobs:
           npm i
           #npm run build
           npx cdk synth 'Beta-IceDocsPartnerWebsite/**'
-          npx cdk deploy 'Beta-IceDocsPartnerWebsite/**' --all --require-approval never
+          npx cdk deploy 'Beta-IceDocsPartnerWebsite/**' --require-approval never
