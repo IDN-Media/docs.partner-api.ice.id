@@ -43,5 +43,5 @@ jobs:
           pwd
           npm i
           #npm run build
-          npx cdk synth
-          npx cdk deploy --all --require-approval never
+          npx cdk synth 'Beta-IceDocsPartnerWebsite/**'
+          npx cdk deploy 'Beta-IceDocsPartnerWebsite/**' --all --require-approval never
