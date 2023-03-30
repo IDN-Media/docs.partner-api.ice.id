@@ -40,7 +40,8 @@ jobs:
       - name: CDK Deploy
         run: |-
           cd cdk
-          npm ci
+          pwd
+          npm i
           npm run build
           npx cdk synth
           npx cdk deploy --all --require-approval never
