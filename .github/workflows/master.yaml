@@ -41,7 +41,7 @@ jobs:
         run: |-
           cd cdk
           pwd
-          yarn
-          yarn run build
-          yarn cdk synth
-          yarn cdk deploy --all --require-approval never
+          npm i
+          npm run build
+          npx cdk synth
+          npx cdk deploy --all --require-approval never
