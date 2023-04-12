@@ -1677,10 +1677,10 @@ components:
         invoiceNumber:
           type: "string"
           example: "INV/2023217/IPL/3099402376"
-        startTimeInMillis:
+        campaignStartTimeInMillis:
           type: "integer"
           example: "763192836821"
-        endTimeInMillis:
+        campaignEndTimeInMillis:
           type: "integer"
           example: "63129836213"
         createdTimeInMillis:
@@ -1758,10 +1758,10 @@ components:
         referenceLink:
           type: "string"
           example: "https://example.com/refLink"
-        startTimeInMillis:
+        campaignStartTimeInMillis:
           type: "integer"
           example: "763192836821"
-        endTimeInMillis:
+        campaignEndTimeInMillis:
           type: "integer"
           example: "63129836213"
 
@@ -1802,10 +1802,10 @@ components:
         referenceLink:
           type: "string"
           example: "https://example.com/refLink"
-        startTimeInMillis:
+        campaignStartTimeInMillis:
           type: "integer"
           example: "763192836821"
-        endTimeInMillis:
+        campaignEndTimeInMillis:
           type: "integer"
           example: "63129836213"
 
@@ -1974,10 +1974,10 @@ components:
         referenceLink:
           type: "string"
           example: "https://example.com/refLink"
-        startTimeInMillis:
+        campaignStartTimeInMillis:
           type: "integer"
           example: "763192836821"
-        endTimeInMillis:
+        campaignEndTimeInMillis:
           type: "integer"
           example: "63129836213"
         createdTimeInMillis:
