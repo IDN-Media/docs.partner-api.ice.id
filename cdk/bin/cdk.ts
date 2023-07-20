@@ -5,7 +5,7 @@ import { AppStage, AppStageProps } from '../lib/app-stage';
 
 export const paramStoreNameSpace = '/idn/ice/docsPartnerApi';
 export const cfnExportNameSpace = 'IceDocsPartnerWebsite';
-const trustedAccount: string = '616010153635';
+const trustedAccount: string = '727174507127';
 const region: string = 'ap-southeast-1';
 
 const commonProps = {
@@ -23,7 +23,7 @@ const ghRef = app.node.tryGetContext('ghRef');
 const DEV: AppStageProps = {
   ...commonProps,
   env: {
-    account: '217550310887',
+    account: '240130819307',
     region: region,
   }
 }
@@ -31,7 +31,7 @@ const DEV: AppStageProps = {
 const BETA: AppStageProps = {
   ...commonProps,
   env: {
-    account: '182828636299',
+    account: '590411560808',
     region: region
   },
 }
@@ -39,7 +39,7 @@ const BETA: AppStageProps = {
 const PROD: AppStageProps = {
   ...commonProps,
   env: {
-    account: '459021761895',
+    account: '137890044737',
     region: region
   }
 }
