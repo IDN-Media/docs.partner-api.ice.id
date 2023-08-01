@@ -257,17 +257,17 @@ paths:
             type: string
         - name: gender
           in: query
-          description: "male,female"
+          description: "Can have one of the following value: male,female"
           required: false
           example: "" 
           schema:
             type: string
         - name: profileStatus
           in: query
-          description: "DRAFT,AWAITING_APPROVAL,REJECTED,APPROVED"
+          description: "Can have one of the following value: DRAFT,AWAITING_APPROVAL,REJECTED,APPROVED"
           required: false
           example: "" 
-          schema:
+          schema: 
             type: string
         - name: isVisible
           in: query
@@ -285,7 +285,7 @@ paths:
             type: string
         - name: sortBy
           in: query
-          description: name use for sorting (name ,  total followers , created date )
+          description: name use for sorting (name, total_followers, created_date)
             default value is created date
           required: false
           example: "" 
