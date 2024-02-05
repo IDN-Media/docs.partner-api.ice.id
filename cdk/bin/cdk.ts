@@ -20,14 +20,6 @@ const app = new cdk.App({
 
 const ghRef = app.node.tryGetContext('ghRef');
 
-const DEV: AppStageProps = {
-  ...commonProps,
-  env: {
-    account: '240130819307',
-    region: region,
-  }
-}
-
 const BETA: AppStageProps = {
   ...commonProps,
   env: {
@@ -36,33 +28,11 @@ const BETA: AppStageProps = {
   },
 }
 
-const PROD: AppStageProps = {
-  ...commonProps,
-  env: {
-    account: '137890044737',
-    region: region
-  }
-}
-
 if (ghRef === 'refs/heads/master') {
   // Deploy to beta/staging environment ...
   new AppStage(
     app,
     `Beta-${cfnExportNameSpace}`,
     { ...BETA},
-  );
-} else if (ghRef.includes('refs/tags/release')) {
-  // Deploy to production environment ...
-  new AppStage(
-    app,
-    `Prod-${cfnExportNameSpace}`,
-    {...PROD},
-  );
-} else {
-  // Deploy to development environment ...
-  new AppStage(
-    app,
-    `${ghRef}-${cfnExportNameSpace}`,
-    {...DEV}
   );
 }
