@@ -5,7 +5,7 @@ import { AppStage, AppStageProps } from '../lib/app-stage';
 
 export const paramStoreNameSpace = '/idn/ice/docsPartnerApi';
 export const cfnExportNameSpace = 'IceDocsPartnerWebsite';
-const trustedAccount: string = '727174507127';
+const trustedAccount: string = '616010153635';
 const region: string = 'ap-southeast-1';
 
 const commonProps = {
