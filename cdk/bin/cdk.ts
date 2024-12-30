@@ -30,9 +30,5 @@ const BETA: AppStageProps = {
 
 if (ghRef === 'refs/heads/master') {
   // Deploy to beta/staging environment ...
-  new AppStage(
-    app,
-    `Beta-${cfnExportNameSpace}`,
-    { ...BETA},
-  );
+  new AppStage(app, `Beta-${cfnExportNameSpace}`, { ...BETA});
 }
