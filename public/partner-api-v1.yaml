@@ -204,6 +204,89 @@ paths:
                     error:
                       message: "Internal Server Error"
                       reason: "Internal Server Error"
+  /businessUser/{ID}:
+    get:
+      tags:
+      - Business User
+      summary: Get business user's profile object
+      description: |
+        API Endpoint for ICE Partner to get business user's profile object with full details
+      operationId: "getBusinessUser"
+      parameters:
+      - name: ID
+        in: path
+        description: Id of the business user
+        required: true
+        schema:
+          type: string
+          example: "456"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/BaseResponse"
+                - type: object
+                  properties:
+                    data:
+                      $ref: "#/components/schemas/BusinessUser"
+              examples:
+                success_getBusinessUser:
+                  summary: "Get business user's profile object"
+                  value:
+                    status: 200
+                    data:
+                      businessUserId: 495
+                      businessPartnerId: 2
+                      name: "Baseus Official Store"
+                      email: "no-reply.ed2d9cc0-6e70-40b9-b197-3b8df2906a5e@ice.id"
+                      phoneNumber: 2191235297156228
+                success_getBusinessUser_not_found:
+                  summary: "Get business user's profile object but not found"
+                  value:
+                    status: 200
+                    data: null
+                    user_message:
+                      title: "Oops, Pencarian Tidak Ditemukan"
+                      message: "Coba ubah filter."
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+              examples:
+                response_getBusinessUser_401:
+                  summary: "Failed  to get business user's profile object  cause unauthorized"
+                  value:
+                    status: 401
+                    data: null
+                    user_message:
+                      title: "Failed"
+                      message: "Unauthorized"
+                    error:
+                      message: "You are unauthorized to make the request."
+                      reason: "You are unauthorized to make the request."
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+              examples:
+                response_getBusinessUser_500:
+                  summary: "Failed to Get business user's profile object "
+                  value:
+                    status: 500
+                    data: null
+                    user_message:
+                      title: "There was an error"
+                      message: "Please try again later"
+                    error:
+                      message: "Internal Server Error"
+                      reason: "Internal Server Error"
   /campaign:
     post:
       tags:
@@ -236,16 +319,16 @@ paths:
                   value:
                     status: 200
                     data:
-                      campaignId: "39847239764"
-                      createdByUserId: "713827463"
+                      campaignId: 39847239764
+                      createdByUserId: 713827463
                       createdByUserType: "ICE_OP"
                       createdByUserName: "Ahmed Ali"
-                      forBusinessUserId: "76514983635"
+                      forBusinessUserId: 76514983635
                       forBusinessUserName: "Nature Shop"
                       title: "This is the title of the campaign"
                       productName: "Name of the product"
                       campaignImageLink: "https://s3.aws/image1.jpg"
-                      campaignImageLinkKey: "https://s3.aws/image1.jpg"
+                      campaignImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                       description: "This is the description of this campaign."
                       objective: "This is the objective of this campaign."
                       referenceLink: "https://example.com/refLink"
@@ -254,11 +337,11 @@ paths:
                       createdTimeInMillis: "342934982374"
                       status: "DRAFT"
                       categories:
-                        categoryId: "3"
+                      - categoryId: 3
                         category: "FOOD"
                       productFileLinks:
                       - link: "https://s3.aws/image1.jpg"
-                        linkKey: "https://s3.aws/image1.jpg"
+                        linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
         400:
           description: Bad Request
           content:
@@ -329,7 +412,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "345"
+          example: 345
       - name: "forBusinessUserId"
         in: query
         description: "Id of business user"
@@ -337,7 +420,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "36"
+          example: 36
       responses:
         200:
           description: Success
@@ -368,10 +451,10 @@ paths:
                       - categoryId: "3"
                         category: "FOOD"
                       campaignImageLink: "https://s3.aws/image1.jpg"
-                      campaignImageLinkKey: "https://s3.aws/image1.jpg"
+                      campaignImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                       productFileLinks:
                       - link: "https://s3.aws/image1.jpg"
-                        linkKey: "https://s3.aws/image1.jpg"
+                        linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                       description: "This is the description of this campaign."
                       objective: "This is the objective of this campaign."
                       referenceLink: "https://example.com/refLink"
@@ -385,7 +468,7 @@ paths:
                       invoiceNumber: "INV/AHJDHJ/4676HG"
                       orderNumber: "429462399"
                       proofOfPaymentFileLink: "https://s3.aws/file1.pdf"
-                      proofOfPaymentFileLinkKey: "https://s3.aws/file1.pdf"
+                      proofOfPaymentFileLinkKey: "BUSINESS_PARTNER/3/822g448b9.pdf"
                       proofOfPaymentBankName: "BCA"
                       proofOfPaymentBankAccNumber: "0000235873947"
                       isProofOfPaymentValid: false
@@ -403,7 +486,7 @@ paths:
                         forBusinessUserName: "Nature Shop"
                         campaignTitle: "Campaign title goes here"
                         campaignImageLink: "https://s3.aws/image1.jpg"
-                        campaignImageLinkKey: "https://s3.aws/image1.jpg"
+                        campaignImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         campaignStartTimeInMillis: "632918649234"
                         campaignEndTimeInMillis: "632918649234"
                         categories:
@@ -413,7 +496,7 @@ paths:
                         influencerName: "Bianca Kartika"
                         influencerCity: "Jakarta"
                         influencerProfileImageLink: "https://s3.aws.com/image1.jpg"
-                        influencerProfileImageLinkKey: "https://s3.aws.com/image1.jpg"
+                        influencerProfileImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         socialPlatformTypeId: "2347"
                         socialPlatformType: "INSTAGRAM"
                         serviceTypeId: "1724"
@@ -437,19 +520,19 @@ paths:
                         contentUpdateTimeInMillis: "62938623957345"
                         contentFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
-                          linkKey: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         isProofOfPostValid: true
                         proofOfPostRejectionReason: "(Rejection reason goes here)"
                         proofOfPostUpdateTimeInMillis: "62938623957345"
                         proofOfPostFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
-                          linkKey: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         isProofOfInsightValid: true
                         proofOfInsightRejectionReason: "(Rejection reason goes here)"
                         proofOfInsightUpdateTimeInMillis: "62938623957345"
                         proofOfInsightFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
-                          linkKey: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         status: "NOT_ACTIVE"
         401:
           description: Unauthorized
@@ -539,10 +622,10 @@ paths:
                       - categoryId: "3"
                         category: "FOOD"
                       campaignImageLink: "https://s3.aws/image1.jpg"
-                      campaignImageLinkKey: "https://s3.aws/image1.jpg"
+                      campaignImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                       productFileLinks:
                       - link: "https://s3.aws/image1.jpg"
-                        linkKey: "https://s3.aws/image1.jpg"
+                        linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                       description: "This is the description of this campaign."
                       objective: "This is the objective of this campaign."
                       referenceLink: "https://example.com/refLink"
@@ -556,7 +639,7 @@ paths:
                       invoiceNumber: "INV/AHJDHJ/4676HG"
                       orderNumber: "429462399"
                       proofOfPaymentFileLink: "https://s3.aws/file1.pdf"
-                      proofOfPaymentFileLinkKey: "https://s3.aws/file1.pdf"
+                      proofOfPaymentFileLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                       proofOfPaymentBankName: "BCA"
                       proofOfPaymentBankAccNumber: "0000235873947"
                       isProofOfPaymentValid: false
@@ -574,7 +657,7 @@ paths:
                         forBusinessUserName: "Nature Shop"
                         campaignTitle: "Campaign title goes here"
                         campaignImageLink: "https://s3.aws/image1.jpg"
-                        campaignImageLinkKey: "https://s3.aws/image1.jpg"
+                        campaignImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         campaignStartTimeInMillis: "632918649234"
                         campaignEndTimeInMillis: "632918649234"
                         categories:
@@ -584,7 +667,7 @@ paths:
                         influencerName: "Bianca Kartika"
                         influencerCity: "Jakarta"
                         influencerProfileImageLink: "https://s3.aws.com/image1.jpg"
-                        influencerProfileImageLinkKey: "https://s3.aws.com/image1.jpg"
+                        influencerProfileImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         socialPlatformTypeId: "2347"
                         socialPlatformType: "INSTAGRAM"
                         serviceTypeId: "1724"
@@ -608,19 +691,19 @@ paths:
                         contentUpdateTimeInMillis: "62938623957345"
                         contentFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
-                          linkKey: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         isProofOfPostValid: true
                         proofOfPostRejectionReason: "(Rejection reason goes here)"
                         proofOfPostUpdateTimeInMillis: "62938623957345"
                         proofOfPostFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
-                          linkKey: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         isProofOfInsightValid: true
                         proofOfInsightRejectionReason: "(Rejection reason goes here)"
                         proofOfInsightUpdateTimeInMillis: "62938623957345"
                         proofOfInsightFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
-                          linkKey: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         status: "NOT_ACTIVE"
         400:
           description: Bad Request
@@ -699,7 +782,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: ""
+          example: 23424
       - name: "forBusinessUserId"
         in: query
         description: "Id of the business user"
@@ -707,7 +790,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "36"
+          example: 36
       responses:
         200:
           description: Success
@@ -793,7 +876,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "1"
+          example: 1
       responses:
         200:
           description: Success
@@ -827,7 +910,7 @@ paths:
                         forBusinessUserName: "Nature Shop"
                         campaignTitle: "Campaign title goes here"
                         campaignImageLink: "https://s3.aws/image1.jpg"
-                        campaignImageLinkKey: "https://s3.aws/image1.jpg"
+                        campaignImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         campaignStartTimeInMillis: "632918649234"
                         campaignEndTimeInMillis: "632918649234"
                         categories:
@@ -837,7 +920,7 @@ paths:
                         influencerName: "Bianca Kartika"
                         influencerCity: "Jakarta"
                         influencerProfileImageLink: "https://s3.aws.com/image1.jpg"
-                        influencerProfileImageLinkKey: "https://s3.aws.com/image1.jpg"
+                        influencerProfileImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         socialPlatformTypeId: "2347"
                         socialPlatformType: "INSTAGRAM"
                         serviceTypeId: "1724"
@@ -861,19 +944,19 @@ paths:
                         contentUpdateTimeInMillis: "62938623957345"
                         contentFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
-                          linkKey: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         isProofOfPostValid: true
                         proofOfPostRejectionReason: "(Rejection reason goes here)"
                         proofOfPostUpdateTimeInMillis: "62938623957345"
                         proofOfPostFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
-                          linkKey: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         isProofOfInsightValid: true
                         proofOfInsightRejectionReason: "(Rejection reason goes here)"
                         proofOfInsightUpdateTimeInMillis: "62938623957345"
                         proofOfInsightFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
-                          linkKey: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         status: "NOT_ACTIVE"
         401:
           description: Unauthorized
@@ -1109,14 +1192,14 @@ paths:
         required: false
         schema:
           type: integer
-          example: "1"
+          example: 1
       - name: "pageSize"
         in: query
         description: ""
         required: false
         schema:
           type: integer
-          example: "10"
+          example: 10
       responses:
         200:
           description: Success
@@ -1142,11 +1225,11 @@ paths:
                       - campaignId: 39847239764
                         title: "This is the title of the campaign"
                         productName: "This is the product name of the campaign"
-                        forBusinessUsername: "Nature Shop"
+                        forBusinessUserName: "Nature Shop"
                         createdByUserType: "PARTNER"
                         createdByUserName: "Ahmed Ali"
                         campaignImageLink: "https://s3.aws/image1.jpg"
-                        campaignImageLinkKey: "https://s3.aws/image1.jpg"
+                        campaignImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         totalPrice: 10000
                         invoiceNumber: "INV/2023217/IPL/3099402376"
                         campaignStartTimeInMillis: 763192836821
@@ -1159,7 +1242,7 @@ paths:
                         totalChargeablePriceWithTaxAndDeduction: 10000
                         productFileLinks:
                         - link: "https://s3.aws/image1.jpg"
-                          linkKey: "https://s3.aws/image1.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         categories:
                         - categoryId: 3
                           category: "Food"
@@ -1202,6 +1285,234 @@ paths:
               examples:
                 response_getListCampaign_500:
                   summary: "Failed to get list of campaign"
+                  value:
+                    status: 500
+                    data: null
+                    user_message:
+                      title: "There was an error"
+                      message: "Please try again later"
+                    error:
+                      message: "Internal Server Error"
+                      reason: "Internal Server Error"
+  /campaign/listSubCampaigns:
+    get:
+      tags:
+      - Campaign
+      summary: "Get list of sub campaigns"
+      description: |
+        API Endpoint for ICE Partner to get list of sub campaigns based on supplied filters and sorting rule
+      operationId: "getListSubCampaign"
+      parameters:
+      - name: "forBusinessUserId"
+        in: query
+        description: "Id of business user"
+        required: true
+        schema:
+          type: integer
+          format: "int32"
+          example: 36
+      - name: "searchQuery"
+        in: query
+        description: "Unilever"
+        required: false
+        schema:
+          type: string
+          example: ""
+      - name: "status"
+        in: query
+        description: "AWAITING_PAYMENT,COMPLETED"
+        required: false
+        schema:
+          type: string
+          example: ""
+      - name: "influencerId"
+        in: query
+        description: "id of influencer"
+        required: false
+        schema:
+          type: integer
+          example: 23132
+      - name: "categoryId"
+        in: query
+        description: "id of category"
+        required: false
+        schema:
+          type: integer
+          example: 2343225
+      - name: "createdTimeFromInMillis"
+        in: query
+        description: "6413984634"
+        required: false
+        schema:
+          type: integer
+          example: 6413984634
+      - name: "createdTimeToInMillis"
+        in: query
+        description: "6413984634"
+        required: false
+        schema:
+          type: integer
+          example: 6413984634
+      - name: "startTimeFromInMillis"
+        in: query
+        description: "6413984634"
+        required: false
+        schema:
+          type: integer
+          example: 6413984634
+      - name: "startTimeToInMillis"
+        in: query
+        description: "6413984634"
+        required: false
+        schema:
+          type: integer
+          example: 6413984634
+      - name: "sortBy"
+        in: query
+        description: "Can have one of the following value: CREATED_TIME, PRICE"
+        required: false
+        schema:
+          type: string
+          example: ""
+      - name: "orderBy"
+        in: query
+        description: "Can have one of the following value: ASCENDING, DESCENDING"
+        required: false
+        schema:
+          type: string
+          example: ""
+      - name: "page"
+        in: query
+        description: ""
+        required: false
+        schema:
+          type: integer
+          example: 1
+      - name: "pageSize"
+        in: query
+        description: ""
+        required: false
+        schema:
+          type: integer
+          example: 10
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/BaseResponse"
+                - type: object
+                  properties:
+                    data:
+                      $ref: "#/components/schemas/SubcampaignList"
+              examples:
+                success_getListSubCampaign:
+                  summary: "Get list of subcampaign"
+                  value:
+                    status: 200
+                    data:
+                      totalRecords: 2
+                      currentPage: 1
+                      pageSize: 10
+                      subCampaigns:
+                      - subCampaignId: 24325452
+                        campaignId: 39847239764
+                        campaignCreatedByUserId: 4362424
+                        campaignCreatedByUserType: "BUSINESS_PARTNER"
+                        campaignCreatedByUserName: "Seedbacklink"
+                        forBusinessUserId: 4362424
+                        forBusinessUserName: "Nature Shop"
+                        campaignTitle: "Campaign title goes here"
+                        campaignImageLink: "https://s3.aws/image1.jpg"
+                        campaignImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
+                        campaignStartTimeInMillis: 632918649234
+                        campaignEndTimeInMillis: 632918649234
+                        categories:
+                        - categoryId: 3
+                          category: "Food"
+                        influencerId: 652149649324
+                        influencerName: "Bianca Kartika"
+                        influencerCity: "Jakarta Selatan"
+                        influencerProfileImageLink: "https://s3.aws.com/image1.jpg"
+                        influencerProfileImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
+                        socialPlatformTypeId: 2347
+                        socialPlatformType: "Instagram"
+                        serviceTypeId: 1724
+                        serviceType: "Feed"
+                        serviceDescription: "Feed"
+                        servicePrice: 10000
+                        isSubServiceSelected: true
+                        subServiceType: "PLUS ONE PHOTO"
+                        subServicePrice: 1000
+                        quantity: 3
+                        price: 33000
+                        invoiceNumber: "INV/22131927873"
+                        orderNumber: "5346477"
+                        totalTax: 1000
+                        totalChargeablePrice: 34000
+                        isConfirmedByInfluencer: true
+                        influencerRejectionReason: "(Rejection reason goes here)"
+                        isConfirmedTimeInMillis: 7146239354653
+                        isContentValid: true
+                        contentRejectionReason: "(Rejection reason goes here)"
+                        contentUpdateTimeInMillis: 62938623957345
+                        contentFileLinks:
+                        - link: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
+                        isProofOfPostValid: true
+                        proofOfPostRejectionReason: "(Rejection reason goes here)"
+                        proofOfPostUpdateTimeInMillis: 62938623957345
+                        proofOfPostFileLinks:
+                        - link: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
+                        isProofOfInsightValid: true
+                        proofOfInsightRejectionReason: "(Rejection reason goes here)"
+                        proofOfInsightUpdateTimeInMillis: 62938623957345
+                        proofOfInsightFileLinks:
+                        - link: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
+                        status: "NOT_ACTIVE"
+                success_getListSubCampaign_filtering_not_found:
+                  summary: "Get list of subcampaign but not found"
+                  value:
+                    status: 200
+                    data:
+                      totalRecords: 0
+                      currentPage: 1
+                      pageSize: 10
+                      subCampaigns: []
+                    user_message:
+                      title: "Oops, Pencarian Tidak Ditemukan"
+                      message: "Coba ubah filter."
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+              examples:
+                response_getListSubCampaign_401:
+                  summary: "Failed  to get list of subcampaign cause unauthorized"
+                  value:
+                    status: 401
+                    data: null
+                    user_message:
+                      title: "Failed"
+                      message: "Unauthorized"
+                    error:
+                      message: "You are unauthorized to make the request."
+                      reason: "You are unauthorized to make the request."
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+              examples:
+                response_getListSubCampaign_500:
+                  summary: "Failed to get list of subcampaign"
                   value:
                     status: 500
                     data: null
@@ -1335,7 +1646,7 @@ paths:
                       campaignImageLinkKey: "https://s3.aws/image1.jpg"
                       productFileLinks:
                       - link: "https://s3.aws/image1.jpg"
-                        linkKey: "https://s3.aws/image1.jpg"
+                        linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                       description: "This is the description of this campaign."
                       objective: "This is the objective of this campaign."
                       referenceLink: "https://example.com/refLink"
@@ -1401,19 +1712,19 @@ paths:
                         contentUpdateTimeInMillis: "62938623957345"
                         contentFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
-                          linkKey: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         isProofOfPostValid: true
                         proofOfPostRejectionReason: "(Rejection reason goes here)"
                         proofOfPostUpdateTimeInMillis: "62938623957345"
                         proofOfPostFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
-                          linkKey: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         isProofOfInsightValid: true
                         proofOfInsightRejectionReason: "(Rejection reason goes here)"
                         proofOfInsightUpdateTimeInMillis: "62938623957345"
                         proofOfInsightFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
-                          linkKey: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         status: "NOT_ACTIVE"
 
         400:
@@ -1571,7 +1882,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "1"
+          example: 1
       - name: "forBusinessUserId"
         in: query
         description: "Id of business user"
@@ -1579,7 +1890,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "1"
+          example: 1
       responses:
         200:
           description: Success
@@ -1647,19 +1958,19 @@ paths:
                         contentUpdateTimeInMillis: "62938623957345"
                         contentFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
-                          linkKey: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         isProofOfPostValid: true
                         proofOfPostRejectionReason: "(Rejection reason goes here)"
                         proofOfPostUpdateTimeInMillis: "62938623957345"
                         proofOfPostFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
-                          linkKey: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         isProofOfInsightValid: true
                         proofOfInsightRejectionReason: "(Rejection reason goes here)"
                         proofOfInsightUpdateTimeInMillis: "62938623957345"
                         proofOfInsightFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
-                          linkKey: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         status: "NOT_ACTIVE"
         401:
           description: Unauthorized
@@ -1697,7 +2008,7 @@ paths:
                     error:
                       message: "Internal Server Error"
                       reason: "Internal Server Error"
-  /campaign/subcampaign/verifyContent:
+  /campaign/verifyContent:
     put:
       tags:
       - Campaign
@@ -1715,7 +2026,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "100"
+          example: 100
       - name: "isContentValid"
         in: query
         description: ""
@@ -1737,7 +2048,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "36"
+          example: 36
       responses:
         200:
           description: Success
@@ -1800,7 +2111,7 @@ paths:
                     error:
                       message: "Internal Server Error"
                       reason: "Internal Server Error"
-  /campaign/subcampaign/verifyInsight:
+  /campaign/verifyInsight:
     put:
       tags:
       - Campaign
@@ -1818,7 +2129,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "100"
+          example: 100
       - name: "isProofOfInsightValid"
         in: query
         description: ""
@@ -1840,7 +2151,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "36"
+          example: 36
       responses:
         200:
           description: Success
@@ -1903,7 +2214,7 @@ paths:
                     error:
                       message: "Internal Server Error"
                       reason: "Internal Server Error"
-  /campaign/subcampaign/verifyPost:
+  /campaign/verifyPost:
     put:
       tags:
       - Campaign
@@ -1921,7 +2232,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "100"
+          example: 100
       - name: "isProofOfPostValid"
         in: query
         description: ""
@@ -1943,7 +2254,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "36"
+          example: 36
       responses:
         200:
           description: Success
@@ -2135,11 +2446,11 @@ paths:
                     status: 200
                     data:
                       items:
-                      - payload: 'example_payload'
+                      - payload: '{"MessageId":"1jN6n7KvHkyy","Content":"1946a1c04f6b4e13313ec87b50116aa6111.mp4","Attributes":{"FileKey":"I_737_C_5776/chat-8680c5bcg.mp4","FileType":"mp4","FileUrl":"https://amazon.com/I_737_C_5776/chat-8680c5bcg.mp4","IsUploading":false,"MessageType":"DOCUMENT","RoomName":"I_737_C_5776","SendTime":"2024-07-18T06:31:20.006Z","UniqueId":"I_737_C_5776_lyqw7umf"},"RoomArn":"arn:aws:ivschat:us-east-1:590411560808:room/Tb90IX5N7lyI","Sender":{"UserId":"B_456","Ip":"202.6.237.2","Attributes":{"email":"muchammad.marom@idntimes.com","roomName":"I_737_C_5776","userId":"B_456","userName":"Muchammad Aufal Marom","userProfileImage":""}}}'
                         id: "I_737_C_5776"
                         sendTime: "2024-07-18T06:20:20.935Z#I_737_C_5776_lyqvtq2w"
                         sortkey: "2024-07-18T06:20:20.935Z#I_737_C_5776_lyqvtq2w"
-                      - payload: 'example_payload'
+                      - payload: '{"MessageId":"1jN6n7KvHkyy","Content":"1946a1c04f6b4e13313ec87b50116aa6111.mp4","Attributes":{"FileKey":"I_737_C_5776/chat-8680c5bcg.mp4","FileType":"mp4","FileUrl":"https://amazon.com/I_737_C_5776/chat-8680c5bcg.mp4","IsUploading":false,"MessageType":"DOCUMENT","RoomName":"I_737_C_5776","SendTime":"2024-07-18T06:31:20.006Z","UniqueId":"I_737_C_5776_lyqw7umf"},"RoomArn":"arn:aws:ivschat:us-east-1:590411560808:room/Tb90IX5N7lyI","Sender":{"UserId":"B_456","Ip":"202.6.237.2","Attributes":{"email":"muchammad.marom@idntimes.com","roomName":"I_737_C_5776","userId":"B_456","userName":"Muchammad Aufal Marom","userProfileImage":""}}}'
                         id: "I_737_C_5776"
                         sendTime: "2024-07-18T06:20:20.935Z#I_737_C_5776_lyqvtq2w"
                         sortkey: "2024-07-18T06:20:20.935Z#I_737_C_5776_lyqvtq2w"
@@ -2242,7 +2553,7 @@ paths:
                       roomId: "arn:aws:ivschat:us-east-1:590411560808:room/Tb90IX5N7lyI"
                       roomName: "I_737_C_5776"
                       lastMessages:
-                      - payload: 'example_payload'
+                      - payload: '{"MessageId":"1jN6n7KvHkyy","Content":"1946a1c04f6b4e13313ec87b50116aa6111.mp4","Attributes":{"FileKey":"I_737_C_5776/chat-8680c5bcg.mp4","FileType":"mp4","FileUrl":"https://amazon.com/I_737_C_5776/chat-8680c5bcg.mp4","IsUploading":false,"MessageType":"DOCUMENT","RoomName":"I_737_C_5776","SendTime":"2024-07-18T06:31:20.006Z","UniqueId":"I_737_C_5776_lyqw7umf"},"RoomArn":"arn:aws:ivschat:us-east-1:590411560808:room/Tb90IX5N7lyI","Sender":{"UserId":"B_456","Ip":"202.6.237.2","Attributes":{"email":"muchammad.marom@idntimes.com","roomName":"I_737_C_5776","userId":"B_456","userName":"Muchammad Aufal Marom","userProfileImage":""}}}'
                         id: "I_737_C_5776"
                         sendTime: "2024-07-18T06:20:20.935Z#I_737_C_5776_lyqvtq2w"
                         sortkey: "2024-07-18T06:20:20.935Z#I_737_C_5776_lyqvtq2w"
@@ -2504,6 +2815,39 @@ paths:
                     error:
                       message: "Internal Server Error"
                       reason: "Internal Server Error"
+  /health:
+    get:
+      tags:
+      - Other
+      summary: "Server health check API"
+      description: "Server health check API"
+      operationId: "healthCheck"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/BaseResponse"
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+              examples:
+                response_healthCheck_500:
+                  summary: "Failed to do health checking"
+                  value:
+                    status: 500
+                    data: null
+                    user_message:
+                      title: "There was an error"
+                      message: "Please try again later"
+                    error:
+                      message: "Internal Server Error"
+                      reason: "Internal Server Error"
   /influencer/{ID}:
     get:
       tags:
@@ -2590,6 +2934,30 @@ paths:
                           engagementRate: "1.2%"
                           permalink: "https://www.instagram.com/p/C4IUiBfSHe1/"
                           publishedAt: 1709636212000
+                        insights:
+                        - name: "Engagement Rate"
+                          value: "1.2%"
+                          iconUrl: "/assets/icon-er.png"
+                          description: "This is calculated by adding the follower changes over 4 weeks and dividing by 4."
+                        - name: "Avg Likes / Post"
+                          value: "14K"
+                          iconUrl: "/assets/icon-er.png"
+                          description: "This is calculated by adding the follower changes over 4 weeks and dividing by 4."
+                        followersGrowth:
+                          avgGrowth: "726.382"
+                          growth:
+                          - period: "1 Jan - 7 Jan 24"
+                            followersCount: 1800000
+                            followersCountTxt: "1.8M"
+                          - period: "8 Jan - 14 Jan 24"
+                            followersCount: 1000000
+                            followersCountTxt: "1M"
+                          - period: "15 Jan - 21 Jan 24"
+                            followersCount: 900000
+                            followersCountTxt: "900K"
+                          - period: "22 Jan - 28 Jan 24"
+                            followersCount: 1000000
+                            followersCountTxt: "1M"
                         rateCards:
                         - id: "9WL0yP+aar6LozlV+gpQpw=="
                           title: "Post -  Carousel 2 Post"
@@ -2758,8 +3126,7 @@ paths:
                           detailRating:
                           - rating: 5
                             rater: 428
-                        minimumMarkupPrice: 1031250
-                        discount: 40
+                        minimumPrice: 1031250
                         profileImageLink: "https://cdn.ice.id/mobile/1716814739295_image_cropper_3C08FCB9-C8AC-40F6-A269-A4FE388CD01D-8926-000005C06D414862.jpg"
                 success_getListInfluencer_filtering_not_found:
                   summary: "Get list influencer by filter but not found"
@@ -2948,20 +3315,20 @@ paths:
                         - "SUPER_ADMIN"
                         accessStatuses:
                         - "ACTIVE"
-                      influencer:
-                        categories:
-                        - id: 312
-                          name: "Food"
-                          slug: "food"
-                        socialPlatformTypes:
-                        - id: 35
-                          name: "Instagram"
-                          slug: "instagram"
-                          serviceTypes:
-                          - id: 24
-                            name: "Story"
-                        approvalStatuses:
-                        - "APPROVED"
+                        influencer:
+                          categories:
+                          - id: 312
+                            name: "Food"
+                            slug: "food"
+                          socialPlatformTypes:
+                          - id: 35
+                            name: "Instagram"
+                            slug: "instagram"
+                            serviceTypes:
+                            - id: 24
+                              name: "Story"
+                          approvalStatuses:
+                          - "APPROVED"
                       campaign:
                         statuses:
                         - "DRAFT"
@@ -3009,6 +3376,63 @@ paths:
               examples:
                 response_getMetadata_500:
                   summary: "Failed to get list of constants"
+                  value:
+                    status: 500
+                    data: null
+                    user_message:
+                      title: "There was an error"
+                      message: "Please try again later"
+                    error:
+                      message: "Internal Server Error"
+                      reason: "Internal Server Error"
+  /util/metadataRefresh:
+    post:
+      tags:
+      - Util
+      summary: "Refresh metadata from DB"
+      description: |
+        API Endpoint for ICE Partner to refresh metadata returned in getMetaData API from DB
+
+        ---
+
+        ***Should NOT be called from front-end***
+        *Should only be called when there are any db changes for the related data*
+      operationId: "refreshMeta"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/BaseResponse"
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+              examples:
+                response_refreshMeta_401:
+                  summary: "Failed to refresh metadata from DB cause unauthorized"
+                  value:
+                    status: 401
+                    data: null
+                    user_message:
+                      title: "Failed"
+                      message: "Unauthorized"
+                    error:
+                      message: "You are unauthorized to make the request."
+                      reason: "You are unauthorized to make the request."
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+              examples:
+                response_refreshMeta_500:
+                  summary: "Failed to refresh metadata from DB"
                   value:
                     status: 500
                     data: null
@@ -3145,7 +3569,7 @@ components:
       properties:
         id:
           type: integer
-          example: "0"
+          example: 0
         code:
           type: string
           example: "ABC"
@@ -3233,10 +3657,10 @@ components:
       properties:
         campaignId:
           type: integer
-          example: "39847239764"
+          example: 39847239764
         createdByUserId:
           type: integer
-          example: "713827463"
+          example: 713827463
         createdByUserType:
           type: string
           example: "ICE_OP"
@@ -3245,7 +3669,7 @@ components:
           example: "Ahmed Ali"
         forBusinessUserId:
           type: integer
-          example: "76514983635"
+          example: 76514983635
         forBusinessUserName:
           type: string
           example: "Nature Shop"
@@ -3262,7 +3686,7 @@ components:
             properties:
               categoryId:
                 type: integer
-                example: "3"
+                example: 3
               category:
                 type: string
                 example: "FOOD"
@@ -3282,7 +3706,7 @@ components:
                 example: "https://s3.aws/image1.jpg"
               linkKey:
                 type: string
-                example: "https://s3.aws/image1.jpg"
+                example: "BUSINESS_PARTNER/3/822g448b9.jpg"
         description:
           type: string
           example: "This is the description of this campaign."
@@ -3294,25 +3718,25 @@ components:
           example: "https://example.com/refLink"
         campaignStartTimeInMillis:
           type: integer
-          example: "763192836821"
+          example: 763192836821
         campaignEndTimeInMillis:
           type: integer
-          example: "63129836213"
+          example: 63129836213
         createdTimeInMillis:
           type: integer
-          example: "342934982374"
+          example: 342934982374
         totalPrice:
           type: integer
-          example: "4000000"
+          example: 4000000
         totalTax:
           type: integer
-          example: "100000"
+          example: 100000
         totalTaxDeduction:
           type: integer
-          example: "50000"
+          example: 50000
         totalChargeablePriceWithTaxAndDeduction:
           type: integer
-          example: "4050000"
+          example: 4050000
         invoiceNumber:
           type: string
           example: "INV/AHJDHJ/4676HG"
@@ -3339,7 +3763,7 @@ components:
           example: "Cannot open the file."
         proofOfPaymentUpdateTimeInMillis:
           type: integer
-          example: "923084792342"
+          example: 923084792342
         status:
           type: string
           example: "DRAFT"
@@ -3355,19 +3779,19 @@ components:
       properties:
         campaignId:
           type: integer
-          example: "39847239764"
+          example: 39847239764
         totalPrice:
           type: integer
-          example: "4000000"
+          example: 4000000
         totalTax:
           type: integer
-          example: "100000"
+          example: 100000
         totalTaxDeduction:
           type: integer
-          example: "50000"
+          example: 50000
         totalChargeablePriceWithTaxAndDeduction:
           type: integer
-          example: "4050000"
+          example: 4050000
         subCampaigns:
           type: array
           items:
@@ -3377,10 +3801,10 @@ components:
       properties:
         campaignId:
           type: integer
-          example: "39847239764"
+          example: 39847239764
         createdByUserId:
           type: integer
-          example: "713827463"
+          example: 713827463
         createdByUserType:
           type: string
           example: "ICE_OP"
@@ -3389,7 +3813,7 @@ components:
           example: "Ahmed Ali"
         forBusinessUserId:
           type: integer
-          example: "76514983635"
+          example: 76514983635
         forBusinessUserName:
           type: string
           example: "Nature Shop"
@@ -3416,13 +3840,13 @@ components:
           example: "https://example.com/refLink"
         campaignStartTimeInMillis:
           type: integer
-          example: "763192836821"
+          example: 763192836821
         campaignEndTimeInMillis:
           type: integer
-          example: "63129836213"
+          example: 63129836213
         createdTimeInMillis:
           type: integer
-          example: "342934982374"
+          example: 342934982374
         status:
           type: string
           example: "DRAFT"
@@ -3433,7 +3857,7 @@ components:
             properties:
               categoryId:
                 type: integer
-                example: "3"
+                example: 3
               category:
                 type: string
                 example: "FOOD"
@@ -3447,22 +3871,22 @@ components:
                 example: "https://s3.aws/image1.jpg"
               linkKey:
                 type: string
-                example: "https://s3.aws/image1.jpg"
+                example: "BUSINESS_PARTNER/3/822g448b9.jpg"
     CampaignInvoice:
       type: object
       properties:
         campaignId:
           type: integer
-          example: "632918649128"
+          example: 632918649128
         invoiceNumber:
           type: string
           example: "INV/AHJDHJ/4676HG"
         orderNumber:
           type: string
-          example: "1213SGYWGSU"
+          example: 1213SGYWGSU
         paymentTimeInMillis:
           type: integer
-          example: "734543536547"
+          example: 734543536547
         paymentMethod:
           type: string
           example: "Transfer Bank BCA"
@@ -3482,7 +3906,7 @@ components:
             properties:
               influencerId:
                 type: integer
-                example: "24235346"
+                example: 24235346
               influencerName:
                 type: string
                 example: "Zahra Abigail"
@@ -3492,7 +3916,7 @@ components:
               servicePrice:
                 type: "number"
                 format: double
-                example: "10000000"
+                example: 10000000
               isSubServiceSelected:
                 type: boolean
                 example: true
@@ -3505,44 +3929,44 @@ components:
                 example: "1000"
               quantity:
                 type: integer
-                example: "3"
+                example: 3
               price:
                 type: number
                 format: double
-                example: "30003000"
+                example: 30003000
         totalPrice:
           type: integer
-          example: "4000000"
+          example: 4000000
         totalTax:
           type: integer
-          example: "100000"
+          example: 100000
         taxName:
           type: string
           example: "PPN 11%"
         totalTaxDeduction:
           type: integer
-          example: "50000"
+          example: 50000
         totalChargeablePriceWithTaxAndDeduction:
           type: integer
-          example: "4050000"
+          example: 4050000
         isPaid:
           type: boolean
           example: true
         lastUpdatedTimeInMillis:
           type: integer
-          example: "734543536547"
+          example: 734543536547
     CampaignList:
       type: object
       properties:
-        totalResults:
+        totalRecords:
           type: integer
-          example: "100"
+          example: 100
         pageSize:
           type: integer
-          example: "10"
+          example: 10
         currentPage:
           type: integer
-          example: "2"
+          example: 2
         campaigns:
           type: array
           items:
@@ -3552,7 +3976,7 @@ components:
       properties:
         campaignId:
           type: integer
-          example: "39847239764"
+          example: 39847239764
         title:
           type: string
           example: "This is the title of the campaign"
@@ -3576,34 +4000,34 @@ components:
           example: "https://s3.aws/image1.jpg"
         totalPrice:
           type: integer
-          example: "10000"
+          example: 10000
         invoiceNumber:
           type: string
           example: "INV/2023217/IPL/3099402376"
         campaignStartTimeInMillis:
           type: integer
-          example: "763192836821"
+          example: 763192836821
         campaignEndTimeInMillis:
           type: integer
-          example: "63129836213"
+          example: 63129836213
         createdTimeInMillis:
           type: integer
-          example: "342934982374"
+          example: 342934982374
         status:
           type: string
           example: "DRAFT"
         totalServices:
           type: integer
-          example: "6"
+          example: 6
         totalSubServices:
           type: integer
-          example: "12"
+          example: 12
         totalInfluencers:
           type: integer
-          example: "4"
+          example: 4
         totalChargeablePriceWithTaxAndDeduction:
           type: integer
-          example: "10000"
+          example: 10000
         productFileLinks:
           type: array
           items:
@@ -3614,7 +4038,7 @@ components:
                 example: "https://s3.aws/image1.jpg"
               linkKey:
                 type: string
-                example: "https://s3.aws/image1.jpg"
+                example: "BUSINESS_PARTNER/3/822g448b9.jpg"
         categories:
           type: array
           items:
@@ -3622,7 +4046,7 @@ components:
             properties:
               categoryId:
                 type: integer
-                example: "3"
+                example: 3
               category:
                 type: string
                 example: "FOOD"
@@ -3631,7 +4055,7 @@ components:
       properties:
         forBusinessUserId:
           type: integer
-          example: "36"
+          example: 36
         title:
           type: string
           example: "This is the title of the campaign"
@@ -3642,15 +4066,15 @@ components:
           type: array
           items:
             type: integer
-            example: "2"
+            example: 2
         campaignImageLinkKey:
           type: string
-          example: "https://s3.aws/image1.jpg"
+          example: "BUSINESS_PARTNER/3/822g448b9.jpg"
         productFileLinkKeys:
           type: array
           items:
             type: string
-            example: "https://s3.aws/image1.jpg"
+            example: "BUSINESS_PARTNER/3/822g448b9.jpg"
         description:
           type: string
           example: "This is the description of this campaign."
@@ -3662,22 +4086,22 @@ components:
           example: "https://example.com/refLink"
         campaignStartTimeInMillis:
           type: integer
-          example: "763192836821"
+          example: 763192836821
         campaignEndTimeInMillis:
           type: integer
-          example: "63129836213"
+          example: 63129836213
     CampaignPayment:
       type: object
       properties:
         forBusinessUserId:
           type: integer
-          example: "36"
+          example: 36
         campaignId:
           type: integer
-          example: "100"
+          example: 100
         bankId:
           type: integer
-          example: "999"
+          example: 999
         bankAccNumber:
           type: string
           example: "0001011389453"
@@ -3689,10 +4113,10 @@ components:
       properties:
         campaignId:
           type: integer
-          example: "100"
+          example: 100
         forBusinessUserId:
           type: integer
-          example: "36"
+          example: 36
         title:
           type: string
           example: "This is the title of the campaign"
@@ -3703,15 +4127,15 @@ components:
           type: array
           items:
             type: integer
-            example: "2"
+            example: 2
         campaignImageLinkKey:
           type: string
-          example: "https://s3.aws/image1.jpg"
+          example: "BUSINESS_PARTNER/3/822g448b9.jpg"
         productFileLinkKeys:
           type: array
           items:
             type: string
-            example: "https://s3.aws/image1.jpg"
+            example: "BUSINESS_PARTNER/3/822g448b9.jpg"
         description:
           type: string
           example: "This is the description of this campaign."
@@ -3723,16 +4147,16 @@ components:
           example: "https://example.com/refLink"
         campaignStartTimeInMillis:
           type: integer
-          example: "763192836821"
+          example: 763192836821
         campaignEndTimeInMillis:
           type: integer
-          example: "63129836213"
+          example: 63129836213
     Category:
       type: object
       properties:
         id:
           type: integer
-          example: "0"
+          example: 0
         name:
           type: string
           example: "Food"
@@ -3745,7 +4169,7 @@ components:
         id:
           type: integer
           format: "int64"
-          example: "0"
+          example: 0
         isoCode2:
           type: string
           example: "ID"
@@ -3769,7 +4193,7 @@ components:
               id:
                 type: integer
                 format: "int64"
-                example: "0"
+                example: 0
               name:
                 type: string
                 example: "DKI Jakarta"
@@ -3783,7 +4207,7 @@ components:
                   properties:
                     id:
                       type: integer
-                      example: "0"
+                      example: 0
                     name:
                       type: string
                       example: "Kota Adm. Jakarta Pusat"
@@ -3799,6 +4223,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GrowthGraphData'
+    GrowthGraphData:
+      type: object
+      properties:
+        period:
+          type: string
+        followersCount:
+          type: integer
+        followersCountTxt:
+          type: string
     InfluencerContents:
       type: object
       properties:
@@ -3862,6 +4295,17 @@ components:
           $ref: '#/components/schemas/InfluencerRating'
         socialPlatforms:
           $ref: '#/components/schemas/SocialPlatforms'
+    InfluencerInsights:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        iconUrl:
+          type: string
+        description:
+          type: string
     InfluencerListRecords:
       type: object
       properties:
@@ -3905,9 +4349,7 @@ components:
                     type: integer
                   rater:
                     type: integer
-        minimumMarkupPrice:
-          type: integer
-        discount:
+        minimumPrice:
           type: integer
         profileImageLink:
           type: string
@@ -3998,7 +4440,7 @@ components:
       properties:
         id:
           type: integer
-          example: "0"
+          example: 0
         name:
           type: string
           example: "English"
@@ -4163,7 +4605,7 @@ components:
       properties:
         id:
           type: integer
-          example: "0"
+          example: 0
         name:
           type: string
           example: "Food"
@@ -4225,7 +4667,7 @@ components:
       properties:
         id:
           type: integer
-          example: "0"
+          example: 0
         name:
           type: string
           example: "Instagram"
@@ -4239,7 +4681,7 @@ components:
             properties:
               id:
                 type: integer
-                example: "0"
+                example: 0
               name:
                 type: string
                 example: "Story"
@@ -4266,6 +4708,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InfluencerContents'
+        insights:
+          type: array
+          items:
+            $ref: '#/components/schemas/InfluencerInsights'
+        followersGrowth:
+          $ref: '#/components/schemas/GrowthGraphData'
         rateCards:
           type: array
           items:
@@ -4275,13 +4723,13 @@ components:
       properties:
         subCampaignId:
           type: integer
-          example: "2759723423466"
+          example: 2759723423466
         campaignId:
           type: integer
-          example: "2759723423466"
+          example: 2759723423466
         campaignCreatedByUserId:
           type: integer
-          example: "4362424"
+          example: 4362424
         campaignCreatedByUserType:
           type: string
           example: "BUSINESS_PARTNER"
@@ -4290,7 +4738,7 @@ components:
           example: "Tokopedia"
         forBusinessUserId:
           type: integer
-          example: "76514983635"
+          example: 76514983635
         forBusinessUserName:
           type: string
           example: "Nature Shop"
@@ -4302,13 +4750,13 @@ components:
           example: "https://s3.aws/image1.jpg"
         campaignImageLinkKey:
           type: string
-          example: "https://s3.aws/image1.jpg"
+          example: "BUSINESS_PARTNER/3/822g448b9.jpg"
         campaignStartTimeInMillis:
           type: integer
-          example: "632918649234"
+          example: 632918649234
         campaignEndTimeInMillis:
           type: integer
-          example: "632918649234"
+          example: 632918649234
         categories:
           type: array
           items:
@@ -4316,13 +4764,13 @@ components:
             properties:
               categoryId:
                 type: integer
-                example: "3"
+                example: 3
               category:
                 type: string
                 example: "FOOD"
         influencerId:
           type: integer
-          example: "652149649324"
+          example: 652149649324
         influencerName:
           type: string
           example: "Bianca Kartika"
@@ -4337,13 +4785,13 @@ components:
           example: "https://s3.aws.com/image1.jpg"
         socialPlatformTypeId:
           type: integer
-          example: "2347"
+          example: 2347
         socialPlatformType:
           type: string
           example: "INSTAGRAM"
         serviceTypeId:
           type: integer
-          example: "1724"
+          example: 1724
         serviceType:
           type: string
           example: "FEED"
@@ -4352,7 +4800,7 @@ components:
           example: "FEED"
         servicePrice:
           type: "number"
-          example: "10000.00"
+          example: 10000.00
         isSubServiceSelected:
           type: boolean
           example: true
@@ -4361,25 +4809,25 @@ components:
           example: "PLUS ONE PHOTO"
         subServicePrice:
           type: "number"
-          example: "1000.00"
+          example: 1000.00
         quantity:
           type: integer
-          example: "3"
+          example: 3
         price:
           type: "number"
-          example: "33000"
+          example: 33000
         invoiceNumber:
           type: string
           example: "INV/22131927873"
         orderNumber:
           type: string
-          example: "5346477"
+          example: 5346477
         totalTax:
           type: "number"
-          example: "1000"
+          example: 1000
         totalChargeablePrice:
           type: "number"
-          example: "34000"
+          example: 34000
         isConfirmedByInfluencer:
           type: boolean
           example: true
@@ -4388,7 +4836,7 @@ components:
           example: "(Rejection reason goes here)"
         isConfirmedTimeInMillis:
           type: integer
-          example: "7146239354653"
+          example: 7146239354653
         isContentValid:
           type: boolean
           example: true
@@ -4397,7 +4845,7 @@ components:
           example: "(Rejection reason goes here)"
         contentUpdateTimeInMillis:
           type: integer
-          example: "62938623957345"
+          example: 62938623957345
         contentFileLinks:
           type: array
           items:
@@ -4408,7 +4856,7 @@ components:
                 example: "https://www.amazon.com/image.jpg"
               linkKey:
                 type: string
-                example: "https://www.amazon.com/image.jpg"
+                example: "BUSINESS_PARTNER/3/822g448b9.jpg"
         isProofOfPostValid:
           type: boolean
           example: true
@@ -4417,7 +4865,7 @@ components:
           example: "(Rejection reason goes here)"
         proofOfPostUpdateTimeInMillis:
           type: integer
-          example: "62938623957345"
+          example: 62938623957345
         proofOfPostFileLinks:
           type: array
           items:
@@ -4428,7 +4876,7 @@ components:
                 example: "https://www.amazon.com/image.jpg"
               linkKey:
                 type: string
-                example: "https://www.amazon.com/image.jpg"
+                example: "BUSINESS_PARTNER/3/822g448b9.jpg"
         isProofOfInsightValid:
           type: boolean
           example: true
@@ -4437,7 +4885,7 @@ components:
           example: "(Rejection reason goes here)"
         proofOfInsightUpdateTimeInMillis:
           type: integer
-          example: "62938623957345"
+          example: 62938623957345
         proofOfInsightFileLinks:
           type: array
           items:
@@ -4448,7 +4896,7 @@ components:
                 example: "https://www.amazon.com/image.jpg"
               linkKey:
                 type: string
-                example: "https://www.amazon.com/image.jpg"
+                example: "BUSINESS_PARTNER/3/822g448b9.jpg"
         status:
           type: string
           example: "NOT_ACTIVE"
@@ -4457,27 +4905,27 @@ components:
       properties:
         timeInMillis:
           type: integer
-          example: "239875234646"
+          example: 239875234646
         action:
           type: string
           example: "ACTION_SET_CONTENT"
         contentRevisionNumber:
           type: integer
-          example: "0"
+          example: 0
         subCampaign:
           $ref: "#/components/schemas/SubCampaign"
     SubcampaignList:
       type: object
       properties:
-        totalResults:
+        totalRecords:
           type: integer
-          example: "100"
+          example: 100
         pageSize:
           type: integer
-          example: "10"
+          example: 10
         currentPage:
           type: integer
-          example: "2"
+          example: 2
         subCampaigns:
           type: array
           items:
@@ -4487,22 +4935,22 @@ components:
       properties:
         forBusinessUserId:
           type: integer
-          example: "36"
+          example: 36
         campaignId:
           type: integer
-          example: "100"
+          example: 100
         serviceId:
           type: integer
-          example: "109"
+          example: 109
         isSubServiceSelected:
           type: boolean
           example: true
         subServiceId:
           type: integer
-          example: "35"
+          example: 35
         quantity:
           type: integer
-          example: "1"
+          example: 1
     TierFollower:
       type: object
       properties:
