@@ -1,3 +1,73 @@
-# Upload File
+# File Upload Flow Documentation
 
-![get room credential](upload-flow.jpg)
+This document outlines the steps required to upload and download files using the Estidar Partner API.
+
+## 1. Request Upload URL
+### Endpoint:
+**POST** `https://partner-api.estidar.com/api/v2/util/uploadUrl`
+
+### Request Body:
+```json
+{
+    "fileExtension": "jpg"
+}
+```
+
+### Response:
+```json
+{
+    "status": 200,
+    "data": {
+        "uploadUrl": "https://beta-icecore-s3stack-bucket83908e77-l03wrn3881nm.s3.ap-southeast-1.amazonaws.com/BUSINESS_PARTNER/2213/88430cda8.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAYS52FO5UG6HRXNPH%2F20250106%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Date=20250106T054845Z&X-Amz-Expires=216000&X-Amz-Signature=89a2935ff3d273e640a92aef128c657b6c8d9119604ebbd481eab6e9b1223b04&X-Amz-SignedHeaders=host&x-id=PutObject",
+        "fileKey": "BUSINESS_PARTNER/2213/88430cda8.jpg"
+    }
+}
+```
+
+### Description:
+- **uploadUrl**: Pre-signed URL for uploading the file.
+- **fileKey**: Unique key identifying the uploaded file.
+
+---
+
+## 2. Upload File
+### Endpoint:
+**PUT** `uploadUrl` (obtained from Step 1)
+
+### Request Headers:
+- Content-Type: Based on the file type (e.g., `image/jpeg` for JPG files).
+
+### Request Body:
+- Binary content of the file to be uploaded.
+
+### Description:
+Use the `uploadUrl` from the response of Step 1 to upload the file. The file should be sent as binary data.
+
+---
+
+## 3. Download File
+### Endpoint:
+**GET** `https://partner-api.estidar.com/api/v2/util/downloadUrl`
+
+### Query Parameters:
+- **key**: The `fileKey` obtained from Step 1.
+
+### Example:
+```
+https://partner-api.estidar.com/api/v2/util/downloadUrl?key=BUSINESS_PARTNER/2213/88430cda8.jpg
+```
+
+### Description:
+Use the `fileKey` to retrieve the file. The API will return the file for download.
+
+---
+
+## Sequence Diagram
+![get room credential](upload-flow-v2.jpg)
+
+---
+
+## Summary
+1. Obtain a pre-signed upload URL by calling the `POST` endpoint.
+2. Use the provided `uploadUrl` to upload the file via a `PUT` request.
+3. Download the file using the `GET` endpoint and the provided `fileKey`.
