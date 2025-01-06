@@ -28,6 +28,10 @@ This document outlines the steps required to upload and download files using the
 - **uploadUrl**: Pre-signed URL for uploading the file.
 - **fileKey**: Unique key identifying the uploaded file.
 
+
+### Example:
+![get room credential](UPLOAD URL EXAMPLE.png)
+
 ---
 
 ## 2. Upload File
@@ -42,6 +46,9 @@ This document outlines the steps required to upload and download files using the
 
 ### Description:
 Use the `uploadUrl` from the response of Step 1 to upload the file. The file should be sent as binary data.
+
+### Example:
+![get room credential](PUT IMAGE EXAMPLE.png)
 
 ---
 
@@ -59,6 +66,9 @@ https://partner-api.estidar.com/api/v2/util/downloadUrl?key=BUSINESS_PARTNER/221
 
 ### Description:
 Use the `fileKey` to retrieve the file. The API will return the file for download.
+
+### Example:
+![get room credential](DOWNLOAD URL EXAMPLE.png)
 
 ---
 
