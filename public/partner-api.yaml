@@ -1697,7 +1697,7 @@ paths:
                     error:
                       message: "Internal Server Error"
                       reason: "Internal Server Error"
-  /campaign/verifyContent:
+  /campaign/subcampaign/verifyContent:
     put:
       tags:
       - Campaign
@@ -1800,7 +1800,7 @@ paths:
                     error:
                       message: "Internal Server Error"
                       reason: "Internal Server Error"
-  /campaign/verifyInsight:
+  /campaign/subcampaign/verifyInsight:
     put:
       tags:
       - Campaign
@@ -1903,7 +1903,7 @@ paths:
                     error:
                       message: "Internal Server Error"
                       reason: "Internal Server Error"
-  /campaign/verifyPost:
+  /campaign/subcampaign/verifyPost:
     put:
       tags:
       - Campaign
@@ -2590,30 +2590,6 @@ paths:
                           engagementRate: "1.2%"
                           permalink: "https://www.instagram.com/p/C4IUiBfSHe1/"
                           publishedAt: 1709636212000
-                        insights:
-                        - name: "Engagement Rate"
-                          value: "1.2%"
-                          iconUrl: "/assets/icon-er.png"
-                          description: "This is calculated by adding the follower changes over 4 weeks and dividing by 4."
-                        - name: "Avg Likes / Post"
-                          value: "14K"
-                          iconUrl: "/assets/icon-er.png"
-                          description: "This is calculated by adding the follower changes over 4 weeks and dividing by 4."
-                        followersGrowth:
-                          avgGrowth: "726.382"
-                          growth:
-                          - period: "1 Jan - 7 Jan 24"
-                            followersCount: 1800000
-                            followersCountTxt: "1.8M"
-                          - period: "8 Jan - 14 Jan 24"
-                            followersCount: 1000000
-                            followersCountTxt: "1M"
-                          - period: "15 Jan - 21 Jan 24"
-                            followersCount: 900000
-                            followersCountTxt: "900K"
-                          - period: "22 Jan - 28 Jan 24"
-                            followersCount: 1000000
-                            followersCountTxt: "1M"
                         rateCards:
                         - id: "9WL0yP+aar6LozlV+gpQpw=="
                           title: "Post -  Carousel 2 Post"
@@ -3823,15 +3799,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GrowthGraphData'
-    GrowthGraphData:
-      type: object
-      properties:
-        period:
-          type: string
-        followersCount:
-          type: integer
-        followersCountTxt:
-          type: string
     InfluencerContents:
       type: object
       properties:
@@ -3895,17 +3862,6 @@ components:
           $ref: '#/components/schemas/InfluencerRating'
         socialPlatforms:
           $ref: '#/components/schemas/SocialPlatforms'
-    InfluencerInsights:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-        iconUrl:
-          type: string
-        description:
-          type: string
     InfluencerListRecords:
       type: object
       properties:
@@ -4310,12 +4266,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InfluencerContents'
-        insights:
-          type: array
-          items:
-            $ref: '#/components/schemas/InfluencerInsights'
-        followersGrowth:
-          $ref: '#/components/schemas/GrowthGraphData'
         rateCards:
           type: array
           items:
