@@ -2948,20 +2948,20 @@ paths:
                         - "SUPER_ADMIN"
                         accessStatuses:
                         - "ACTIVE"
-                        influencer:
-                          categories:
-                          - id: 312
-                            name: "Food"
-                            slug: "food"
-                          socialPlatformTypes:
-                          - id: 35
-                            name: "Instagram"
-                            slug: "instagram"
-                            serviceTypes:
-                            - id: 24
-                              name: "Story"
-                          approvalStatuses:
-                          - "APPROVED"
+                      influencer:
+                        categories:
+                        - id: 312
+                          name: "Food"
+                          slug: "food"
+                        socialPlatformTypes:
+                        - id: 35
+                          name: "Instagram"
+                          slug: "instagram"
+                          serviceTypes:
+                          - id: 24
+                            name: "Story"
+                        approvalStatuses:
+                        - "APPROVED"
                       campaign:
                         statuses:
                         - "DRAFT"
