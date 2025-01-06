@@ -1,3 +1,148 @@
-# Upload File
+import React from 'react';
 
-![get room credential](upload-flow.jpg)
+export const Highlight = ({ children }) => (
+  <div
+    style={{
+      background: '#fffae6',
+      padding: '10px',
+      borderLeft: '5px solid #ffeb3b',
+      borderRadius: '4px',
+      marginBottom: '20px',
+    }}
+  >
+    {children}
+  </div>
+);
+
+export const CodeBlock = ({ children }) => (
+  <pre
+    style={{
+      background: '#f4f4f4',
+      padding: '10px',
+      border: '1px solid #ddd',
+      borderRadius: '4px',
+      overflowX: 'auto',
+    }}
+  >
+    <code>{children}</code>
+  </pre>
+);
+
+export const Image = ({ src, alt }) => (
+  <img
+    src={src}
+    alt={alt}
+    style={{
+      display: 'block',
+      maxWidth: '100%',
+      margin: '20px 0',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+    }}
+  />
+);
+
+export const Header = ({ children }) => (
+  <header
+    style={{
+      backgroundColor: '#007acc',
+      color: 'white',
+      padding: '20px',
+      textAlign: 'center',
+    }}
+  >
+    <h1>{children}</h1>
+  </header>
+);
+
+
+<Header>File Upload Flow Documentation</Header>
+
+<Highlight>
+**baseURL:**
+- **staging**: https://partner-api.estidar.com
+- **production**: https://partner-api.ice.id
+</Highlight>
+
+# 1. Request Upload URL
+
+### Endpoint:
+**POST** `{baseURL}/api/v2/util/uploadUrl`
+
+### Request Body:
+<CodeBlock>
+{`{
+  "fileExtension": "jpg"
+}`}
+</CodeBlock>
+
+### Response:
+<CodeBlock>
+{`{
+  "status": 200,
+  "data": {
+    "uploadUrl": "https://...",
+    "fileKey": "BUSINESS_PARTNER/2213/88430cda8.jpg"
+  }
+}`}
+</CodeBlock>
+
+<Highlight>
+**Description:**
+- **uploadUrl**: Pre-signed URL for uploading the file.
+- **fileKey**: Unique key identifying the uploaded file.
+</Highlight>
+
+### Example:
+<Image src="UPLOAD_URL_EXAMPLE.png" alt="Upload URL Example" />
+
+---
+
+# 2. Upload File
+
+### Endpoint:
+**PUT** `uploadUrl` (obtained from Step 1)
+
+### Request Body:
+Binary content of the file to be uploaded.
+
+<Highlight>
+**Description:**  
+Use the `uploadUrl` from the response of Step 1 to upload the file. The file should be sent as binary data.
+</Highlight>
+
+### Example:
+<Image src="PUT_IMAGE_EXAMPLE.png" alt="PUT File Example" />
+
+---
+
+# 3. Download File
+
+### Endpoint:
+**GET** `{baseURL}/api/v2/util/downloadUrl`
+
+### Query Parameters:
+- **key**: The `fileKey` obtained from Step 1.
+
+### Example:
+<CodeBlock>
+{`{baseURL}/api/v2/util/downloadUrl?key=BUSINESS_PARTNER/2213/88430cda8.jpg`}
+</CodeBlock>
+<Image src="DOWNLOAD_URL_EXAMPLE.png" alt="Download URL Example" />
+
+<Highlight>
+**Description:**  
+Use the `fileKey` to retrieve the file. The API will return the file for download.
+</Highlight>
+
+---
+
+# Sequence Diagram
+<Image src="upload-flow-v2.png" alt="Sequence Diagram" />
+
+---
+
+# Summary
+1. Obtain a pre-signed upload URL by calling the `POST` endpoint.
+2. Use the provided `uploadUrl` to upload the file via a `PUT` request.
+3. Download the file using the `GET` endpoint and the provided `fileKey`.
