@@ -3125,63 +3125,6 @@ paths:
                     error:
                       message: "Internal Server Error"
                       reason: "Internal Server Error"
-  /util/metadataRefresh:
-    post:
-      tags:
-      - Util
-      summary: "Refresh metadata from DB"
-      description: |
-        API Endpoint for ICE Partner to refresh metadata returned in getMetaData API from DB
-
-        ---
-
-        ***Should NOT be called from front-end***
-        *Should only be called when there are any db changes for the related data*
-      operationId: "refreshMeta"
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: "#/components/schemas/BaseResponse"
-        401:
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServerError"
-              examples:
-                response_refreshMeta_401:
-                  summary: "Failed to refresh metadata from DB cause unauthorized"
-                  value:
-                    status: 401
-                    data: null
-                    user_message:
-                      title: "Failed"
-                      message: "Unauthorized"
-                    error:
-                      message: "You are unauthorized to make the request."
-                      reason: "You are unauthorized to make the request."
-        500:
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServerError"
-              examples:
-                response_refreshMeta_500:
-                  summary: "Failed to refresh metadata from DB"
-                  value:
-                    status: 500
-                    data: null
-                    user_message:
-                      title: "There was an error"
-                      message: "Please try again later"
-                    error:
-                      message: "Internal Server Error"
-                      reason: "Internal Server Error"
   /util/uploadUrl:
     post:
       tags:
