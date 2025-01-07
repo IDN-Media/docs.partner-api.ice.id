@@ -1447,7 +1447,7 @@ paths:
           description: "Successful operation"
           content:
             schema:
-              example: "https://dev-core-s3stack-bucket83908e77-8nvgr9nmne.s3.ap-southeast-1.amazonaws.com/BUSINESS_PARTNER/53/810b8nl1g.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIATFJYCJXTTPXUSJ56%2F20230314%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Date=20230314T084003Z&X-Amz-Expires=216000&X-Amz-Signature=cd20efc95abc53a33dc99877ee398c24744c5e55212a9802900b92dd47e73cdc&X-Amz-SignedHeaders=host&x-id=GetObject"
+              example: "https://dev-core-s3stack-bucket83908e77-8nvgr9nmne.s3.ap-southeast-1.amazonaws.com/BUSINESS_PARTNER/53/810b8nl1g.jpg"
         "400":
           description: "Invalid input"
 
