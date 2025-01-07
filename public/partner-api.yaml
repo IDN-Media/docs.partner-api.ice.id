@@ -118,9 +118,9 @@ paths:
       summary: Create a new business user profile
       description: |
         API Endpoint for ICE Partner to creates a new business user profile
-
-        ***Please note: Can provide businessUserId as blank while hitting this api***
       operationId: "postBusinessUser"
+      security:
+      - JWT: []
       requestBody:
         description: Object containing details of the new business user
         required: true
@@ -212,6 +212,8 @@ paths:
       description: |
         API Endpoint for ICE Partner to create a campaign
       operationId: "postCampaign"
+      security:
+      - JWT: []
       requestBody:
         description: "Object containing details of the new campaign"
         required: true
@@ -321,6 +323,8 @@ paths:
       description: |
         API Endpoint for ICE Partner to get detail of campaign
       operationId: "getCampaign"
+      security:
+      - JWT: []
       parameters:
       - name: "ID"
         in: "path"
@@ -494,6 +498,8 @@ paths:
       description: |
         API Endpoint for ICE Partner to edit a campaign
       operationId: "putCampaign"
+      security:
+      - JWT: []
       requestBody:
         description: "Object containing details of the campaign"
         required: true
@@ -683,6 +689,8 @@ paths:
       description: |
         API Endpoint for ICE Partner to delete a campaign
       operationId: "delCampaign"
+      security:
+      - JWT: []
       parameters:
       - name: "ID"
         in: "path"
@@ -778,6 +786,8 @@ paths:
       description: |
         API Endpoint for ICE Partner to get detail of campaign cart
       operationId: "getCampaignCart"
+      security:
+      - JWT: []
       parameters:
       - name: "campaignId"
         in: query
@@ -1024,6 +1034,8 @@ paths:
       description: |
         API Endpoint for ICE Partner to get list of campaigns based on supplied filters and sorting rule
       operationId: "getListCampaign"
+      security:
+      - JWT: []
       parameters:
       - name: "forBusinessUserId"
         in: query
@@ -1219,6 +1231,8 @@ paths:
       description: |
         API Endpoint for ICE Partner to moves the campaign out of draft state and sets status as IN_PROGRESS
       operationId: "putCampaignPay"
+      security:
+      - JWT: []
       requestBody:
         description: "Object containing details of payment"
         required: true
@@ -1296,6 +1310,8 @@ paths:
       description: |
         API Endpoint for ICE Partner to create a sub campaign
       operationId: "postSubCampaign"
+      security:
+      - JWT: []
       requestBody:
         description: "Object containing sub-service details"
         required: true
@@ -1478,6 +1494,8 @@ paths:
       description: |
         API Endpoint for ICE Partner to remove a sub campaign
       operationId: "delSubCampaign"
+      security:
+      - JWT: []
       parameters:
       - name: "ID"
         in: "path"
@@ -1563,6 +1581,8 @@ paths:
       description: |
         API Endpoint for ICE Partner to get sub campaign's activity history details
       operationId: "getSubCampaignHistory"
+      security:
+      - JWT: []
       parameters:
       - name: "subCampaignId"
         in: query
@@ -1707,6 +1727,8 @@ paths:
 
         Also, moves the sub campaign from AWAITING_CONTENT_VERIFICATION status to LIVE or REJECTED status.
       operationId: "putVerifContent"
+      security:
+      - JWT: []
       parameters:
       - name: "subCampaignId"
         in: query
@@ -1810,6 +1832,8 @@ paths:
 
         Also, moves the sub campaign from AWAITING_POI_VERIFICATION status to COMPLETED or REJECTED status.
       operationId: "putVerifInsight"
+      security:
+      - JWT: []
       parameters:
       - name: "subCampaignId"
         in: query
@@ -1913,6 +1937,8 @@ paths:
 
         Also, moves the sub campaign from AWAITING_POP_VERIFICATION status to LIVE or REJECTED status.
       operationId: "putVerifPost"
+      security:
+      - JWT: []
       parameters:
       - name: "subCampaignId"
         in: query
@@ -2512,6 +2538,8 @@ paths:
       description: |
         API Endpoint for ICE Partner to get detail influencer
       operationId: "getInfluencer"
+      security:
+      - JWT: []
       parameters:
       - name: ID
         in: path
@@ -2814,6 +2842,8 @@ paths:
       description: |
         API Endpoint for ICE Partner to generate S3 Presigned URL for downloading file
       operationId: "getDownloadURL"
+      security:
+      - JWT: []
       parameters:
       - name: "key"
         in: query
@@ -2888,6 +2918,8 @@ paths:
       description: |
         API Endpoint for ICE Partner to get list cities, categories, banks, etc
       operationId: "getMetadata"
+      security:
+      - JWT: []
       responses:
         200:
           description: Success
@@ -3023,6 +3055,8 @@ paths:
       description: |
         API Endpoint for ICE Partner to generate S3 Presigned URL for uploading file
       operationId: "postUploadURL"
+      security:
+      - JWT: []
       requestBody:
         content:
           applcation/json:
