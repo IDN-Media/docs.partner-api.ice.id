@@ -2538,7 +2538,7 @@ paths:
                   value:
                     status: 200
                     data:
-                      id: "9WL0yP+aar6LozlV+gpQpw=="
+                      id: 234325
                       fullName: "Segun Adebayo"
                       slug: "segun-adebayo"
                       cityName: "Surabaya"
@@ -2550,14 +2550,11 @@ paths:
                       phoneNumber: "628123456789"
                       profileStatus: "APPROVED"
                       categories:
-                      - id: "9WL0yP+aar6LozlV+gpQpw=="
-                        name: "Beauty & Wellness Enthusiast"
+                      - name: "Beauty & Wellness Enthusiast"
                         slug: "beauty-welness-enthusiast"
-                      - id: "9WL0yP+aar6LozlV+gpQpw=="
-                        name: "Beauty & Wellness Enthusiast"
+                      - name: "Beauty & Wellness Enthusiast"
                         slug: "beauty-welness-enthusiast"
-                      - id: "9WL0yP+aar6LozlV+gpQpw=="
-                        name: "Beauty & Wellness Enthusiast"
+                      - name: "Beauty & Wellness Enthusiast"
                         slug: "beauty-welness-enthusiast"
                       rating:
                         totalRating: 5
@@ -2569,7 +2566,7 @@ paths:
                         - rating: 4
                           rater: 5
                       socialPlatforms:
-                      - id: "9WL0yP+aar6LozlV+gpQpw=="
+                      - id: 534
                         socialPlatformTypeName: "Instagram"
                         socialPlatformTypeSlug: "instagram"
                         followers: 30000000
@@ -2591,10 +2588,10 @@ paths:
                           permalink: "https://www.instagram.com/p/C4IUiBfSHe1/"
                           publishedAt: 1709636212000
                         rateCards:
-                        - id: "9WL0yP+aar6LozlV+gpQpw=="
+                        - id: 235
                           title: "Post -  Carousel 2 Post"
-                          markupPrice: 500000
-                          markupPriceTxt: "Rp500.000"
+                          price: 500000
+                          priceTxt: "Rp500.000"
                           remarks: ""
                           spesifications:
                           - description: "Tidak ada revisi draft"
@@ -2603,12 +2600,12 @@ paths:
                           additionalCosts:
                           - subServiceId: "4526d8b1-c71b-471a-b7ff-1888b2fac272"
                             subServiceType: "Konten Jadi Milik Brand"
-                            subServiceMarkupPrice: 1000000
-                            subServiceMarkupPriceTxt: "Rp1.000.000"
+                            subServicePrice: 1000000
+                            subServicePriceTxt: "Rp1.000.000"
                           - subServiceId: "4526d8b1-c71b-471a-b7ff-1888b2fac272"
                             subServiceType: "Keep Content 14 Hari"
-                            subServiceMarkupPrice: 1000000
-                            subServiceMarkupPriceTxt: "Rp1.000.000"
+                            subServicePrice: 1000000
+                            subServicePriceTxt: "Rp1.000.000"
                 success_getInfluencer_not_found:
                   summary: "Get detail influencer but not found"
                   value:
@@ -3832,7 +3829,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
         fullName:
           type: string
         slug:
@@ -3857,7 +3854,12 @@ components:
         categories:
           type: array
           items:
-            $ref: '#/components/schemas/Category'
+            type: object
+            properties:
+              name:
+                type: string
+              slug:
+                type: string
         rating:
           $ref: '#/components/schemas/InfluencerRating'
         socialPlatforms:
@@ -3928,12 +3930,12 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
         title:
           type: string
-        markupPrice:
+        price:
           type: integer
-        markupPriceTxt:
+        priceTxt:
           type: string
         remarks:
           type: string
@@ -4175,9 +4177,9 @@ components:
           format: uuid
         subServiceType:
           type: string
-        subServiceMarkupPrice:
+        subServicePrice:
           type: integer
-        subServiceMarkupPriceTxt:
+        subServicePriceTxt:
           type: string
     RateCardSpec:
       type: object
@@ -4247,7 +4249,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
         socialPlatformTypeName:
           type: string
         socialPlatformTypeSlug:
