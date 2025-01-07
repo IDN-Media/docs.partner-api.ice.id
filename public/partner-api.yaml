@@ -333,7 +333,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "345"
+          example: 345
       - name: "forBusinessUserId"
         in: query
         description: "Id of business user"
@@ -341,7 +341,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "36"
+          example: 36
       responses:
         200:
           description: Success
@@ -360,16 +360,16 @@ paths:
                   value:
                     status: 200
                     data:
-                      campaignId: "39847239764"
-                      createdByUserId: "713827463"
+                      campaignId: 39847239764
+                      createdByUserId: 713827463
                       createdByUserType: "ICE_OP"
                       createdByUserName: "Ahmed Ali"
-                      forBusinessUserId: "76514983635"
+                      forBusinessUserId: 76514983635
                       forBusinessUserName: "Nature Shop"
                       title: "This is the title of the campaign"
                       productName: "Name of the product"
                       categories:
-                      - categoryId: "3"
+                      - categoryId: 3
                         category: "FOOD"
                       campaignImageLink: "https://s3.aws/image1.jpg"
                       campaignImageLinkKey: "https://s3.aws/image1.jpg"
@@ -379,13 +379,13 @@ paths:
                       description: "This is the description of this campaign."
                       objective: "This is the objective of this campaign."
                       referenceLink: "https://example.com/refLink"
-                      campaignStartTimeInMillis: "763192836821"
-                      campaignEndTimeInMillis: "63129836213"
-                      createdTimeInMillis: "342934982374"
-                      totalPrice: "4000000"
-                      totalTax: "100000"
-                      totalTaxDeduction: "50000"
-                      totalChargeablePriceWithTaxAndDeduction: "4050000"
+                      campaignStartTimeInMillis: 763192836821
+                      campaignEndTimeInMillis: 63129836213
+                      createdTimeInMillis: 342934982374
+                      totalPrice: 4000000
+                      totalTax: 100000
+                      totalTaxDeduction: 50000
+                      totalChargeablePriceWithTaxAndDeduction: 4050000
                       invoiceNumber: "INV/AHJDHJ/4676HG"
                       orderNumber: "429462399"
                       proofOfPaymentFileLink: "https://s3.aws/file1.pdf"
@@ -394,63 +394,63 @@ paths:
                       proofOfPaymentBankAccNumber: "0000235873947"
                       isProofOfPaymentValid: false
                       proofOfPaymentRejectionReason: "Cannot open the file."
-                      proofOfPaymentUpdateTimeInMillis: "923084792342"
+                      proofOfPaymentUpdateTimeInMillis: 923084792342
                       status: "DRAFT"
                       rejectionReason: "Campaign rejection reason goes here"
                       subCampaigns:
-                      - subCampaignId: "2759723423466"
-                        campaignId: "2759723423466"
-                        campaignCreatedByUserId: "4362424"
+                      - subCampaignId: 2759723423466
+                        campaignId: 2759723423466
+                        campaignCreatedByUserId: 4362424
                         campaignCreatedByUserType: "BUSINESS_PARTNER"
                         campaignCreatedByUserName: "Tokopedia"
-                        forBusinessUserId: "76514983635"
+                        forBusinessUserId: 76514983635
                         forBusinessUserName: "Nature Shop"
                         campaignTitle: "Campaign title goes here"
                         campaignImageLink: "https://s3.aws/image1.jpg"
                         campaignImageLinkKey: "https://s3.aws/image1.jpg"
-                        campaignStartTimeInMillis: "632918649234"
-                        campaignEndTimeInMillis: "632918649234"
+                        campaignStartTimeInMillis: 632918649234
+                        campaignEndTimeInMillis: 632918649234
                         categories:
-                        - categoryId: "3"
+                        - categoryId: 3
                           category: "FOOD"
-                        influencerId: "652149649324"
+                        influencerId: 652149649324
                         influencerName: "Bianca Kartika"
                         influencerCity: "Jakarta"
                         influencerProfileImageLink: "https://s3.aws.com/image1.jpg"
                         influencerProfileImageLinkKey: "https://s3.aws.com/image1.jpg"
-                        socialPlatformTypeId: "2347"
+                        socialPlatformTypeId: 2347
                         socialPlatformType: "INSTAGRAM"
-                        serviceTypeId: "1724"
+                        serviceTypeId: 1724
                         serviceType: "FEED"
                         serviceDescription: "FEED"
-                        servicePrice: "10000.00"
+                        servicePrice: 10000
                         isSubServiceSelected: true
                         subServiceType: "PLUS ONE PHOTO"
-                        subServicePrice: "1000.00"
-                        quantity: "3"
-                        price: "33000"
+                        subServicePrice: 1000
+                        quantity: 3
+                        price: 33000
                         invoiceNumber: "INV/22131927873"
                         orderNumber: "5346477"
-                        totalTax: "1000"
-                        totalChargeablePrice: "34000"
+                        totalTax: 1000
+                        totalChargeablePrice: 34000
                         isConfirmedByInfluencer: true
                         influencerRejectionReason: "(Rejection reason goes here)"
-                        isConfirmedTimeInMillis: "7146239354653"
+                        isConfirmedTimeInMillis: 7146239354653
                         isContentValid: true
                         contentRejectionReason: "(Rejection reason goes here)"
-                        contentUpdateTimeInMillis: "62938623957345"
+                        contentUpdateTimeInMillis: 62938623957345
                         contentFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
                           linkKey: "https://www.amazon.com/image.jpg"
                         isProofOfPostValid: true
                         proofOfPostRejectionReason: "(Rejection reason goes here)"
-                        proofOfPostUpdateTimeInMillis: "62938623957345"
+                        proofOfPostUpdateTimeInMillis: 62938623957345
                         proofOfPostFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
                           linkKey: "https://www.amazon.com/image.jpg"
                         isProofOfInsightValid: true
                         proofOfInsightRejectionReason: "(Rejection reason goes here)"
-                        proofOfInsightUpdateTimeInMillis: "62938623957345"
+                        proofOfInsightUpdateTimeInMillis: 62938623957345
                         proofOfInsightFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
                           linkKey: "https://www.amazon.com/image.jpg"
@@ -3256,10 +3256,10 @@ components:
       properties:
         campaignId:
           type: integer
-          example: "39847239764"
+          example: 39847239764
         createdByUserId:
           type: integer
-          example: "713827463"
+          example: 713827463
         createdByUserType:
           type: string
           example: "ICE_OP"
@@ -3268,7 +3268,7 @@ components:
           example: "Ahmed Ali"
         forBusinessUserId:
           type: integer
-          example: "76514983635"
+          example: 76514983635
         forBusinessUserName:
           type: string
           example: "Nature Shop"
@@ -3285,7 +3285,7 @@ components:
             properties:
               categoryId:
                 type: integer
-                example: "3"
+                example: 3
               category:
                 type: string
                 example: "FOOD"
@@ -3317,25 +3317,25 @@ components:
           example: "https://example.com/refLink"
         campaignStartTimeInMillis:
           type: integer
-          example: "763192836821"
+          example: 763192836821
         campaignEndTimeInMillis:
           type: integer
-          example: "63129836213"
+          example: 63129836213
         createdTimeInMillis:
           type: integer
-          example: "342934982374"
+          example: 342934982374
         totalPrice:
           type: integer
-          example: "4000000"
+          example: 4000000
         totalTax:
           type: integer
-          example: "100000"
+          example: 100000
         totalTaxDeduction:
           type: integer
-          example: "50000"
+          example: 50000
         totalChargeablePriceWithTaxAndDeduction:
           type: integer
-          example: "4050000"
+          example: 4050000
         invoiceNumber:
           type: string
           example: "INV/AHJDHJ/4676HG"
@@ -3362,7 +3362,7 @@ components:
           example: "Cannot open the file."
         proofOfPaymentUpdateTimeInMillis:
           type: integer
-          example: "923084792342"
+          example: 923084792342
         status:
           type: string
           example: "DRAFT"
@@ -4303,13 +4303,13 @@ components:
       properties:
         subCampaignId:
           type: integer
-          example: "2759723423466"
+          example: 2759723423466
         campaignId:
           type: integer
-          example: "2759723423466"
+          example: 2759723423466
         campaignCreatedByUserId:
           type: integer
-          example: "4362424"
+          example: 4362424
         campaignCreatedByUserType:
           type: string
           example: "BUSINESS_PARTNER"
@@ -4318,7 +4318,7 @@ components:
           example: "Tokopedia"
         forBusinessUserId:
           type: integer
-          example: "76514983635"
+          example: 76514983635
         forBusinessUserName:
           type: string
           example: "Nature Shop"
@@ -4333,10 +4333,10 @@ components:
           example: "https://s3.aws/image1.jpg"
         campaignStartTimeInMillis:
           type: integer
-          example: "632918649234"
+          example: 632918649234
         campaignEndTimeInMillis:
           type: integer
-          example: "632918649234"
+          example: 632918649234
         categories:
           type: array
           items:
@@ -4344,13 +4344,13 @@ components:
             properties:
               categoryId:
                 type: integer
-                example: "3"
+                example: 3
               category:
                 type: string
                 example: "FOOD"
         influencerId:
           type: integer
-          example: "652149649324"
+          example: 652149649324
         influencerName:
           type: string
           example: "Bianca Kartika"
@@ -4365,13 +4365,13 @@ components:
           example: "https://s3.aws.com/image1.jpg"
         socialPlatformTypeId:
           type: integer
-          example: "2347"
+          example: 2347
         socialPlatformType:
           type: string
           example: "INSTAGRAM"
         serviceTypeId:
           type: integer
-          example: "1724"
+          example: 1724
         serviceType:
           type: string
           example: "FEED"
@@ -4380,7 +4380,7 @@ components:
           example: "FEED"
         servicePrice:
           type: "number"
-          example: "10000.00"
+          example: 10000
         isSubServiceSelected:
           type: boolean
           example: true
@@ -4389,13 +4389,13 @@ components:
           example: "PLUS ONE PHOTO"
         subServicePrice:
           type: "number"
-          example: "1000.00"
+          example: 1000
         quantity:
           type: integer
-          example: "3"
+          example: 3
         price:
           type: "number"
-          example: "33000"
+          example: 33000
         invoiceNumber:
           type: string
           example: "INV/22131927873"
@@ -4404,10 +4404,10 @@ components:
           example: "5346477"
         totalTax:
           type: "number"
-          example: "1000"
+          example: 1000
         totalChargeablePrice:
           type: "number"
-          example: "34000"
+          example: 34000
         isConfirmedByInfluencer:
           type: boolean
           example: true
@@ -4416,7 +4416,7 @@ components:
           example: "(Rejection reason goes here)"
         isConfirmedTimeInMillis:
           type: integer
-          example: "7146239354653"
+          example: 7146239354653
         isContentValid:
           type: boolean
           example: true
@@ -4425,7 +4425,7 @@ components:
           example: "(Rejection reason goes here)"
         contentUpdateTimeInMillis:
           type: integer
-          example: "62938623957345"
+          example: 62938623957345
         contentFileLinks:
           type: array
           items:
@@ -4445,7 +4445,7 @@ components:
           example: "(Rejection reason goes here)"
         proofOfPostUpdateTimeInMillis:
           type: integer
-          example: "62938623957345"
+          example: 62938623957345
         proofOfPostFileLinks:
           type: array
           items:
@@ -4465,7 +4465,7 @@ components:
           example: "(Rejection reason goes here)"
         proofOfInsightUpdateTimeInMillis:
           type: integer
-          example: "62938623957345"
+          example: 62938623957345
         proofOfInsightFileLinks:
           type: array
           items:
@@ -4485,13 +4485,13 @@ components:
       properties:
         timeInMillis:
           type: integer
-          example: "239875234646"
+          example: 239875234646
         action:
           type: string
           example: "ACTION_SET_CONTENT"
         contentRevisionNumber:
           type: integer
-          example: "0"
+          example: 0
         subCampaign:
           $ref: "#/components/schemas/SubCampaign"
     SubcampaignList:
@@ -4499,13 +4499,13 @@ components:
       properties:
         totalResults:
           type: integer
-          example: "100"
+          example: 100
         pageSize:
           type: integer
-          example: "10"
+          example: 10
         currentPage:
           type: integer
-          example: "2"
+          example: 2
         subCampaigns:
           type: array
           items:
@@ -4515,22 +4515,28 @@ components:
       properties:
         forBusinessUserId:
           type: integer
-          example: "36"
+          example: 36
         campaignId:
           type: integer
-          example: "100"
+          example: 100
         serviceId:
           type: integer
-          example: "109"
+          example: 109
         isSubServiceSelected:
           type: boolean
           example: true
         subServiceId:
           type: integer
-          example: "35"
+          example: 35
         quantity:
           type: integer
-          example: "1"
+          example: 1
+        servicePrice:
+          type: integer
+          example: 1000000
+        subServicePrice:
+          type: integer
+          example: 100000
     TierFollower:
       type: object
       properties:
