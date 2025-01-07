@@ -2600,12 +2600,12 @@ paths:
                           additionalCosts:
                           - subServiceId: "4526d8b1-c71b-471a-b7ff-1888b2fac272"
                             subServiceType: "Konten Jadi Milik Brand"
-                            subServiceMarkupPrice: 1000000
-                            subServiceMarkupPriceTxt: "Rp1.000.000"
+                            subServicePrice: 1000000
+                            subServicePriceTxt: "Rp1.000.000"
                           - subServiceId: "4526d8b1-c71b-471a-b7ff-1888b2fac272"
                             subServiceType: "Keep Content 14 Hari"
-                            subServiceMarkupPrice: 1000000
-                            subServiceMarkupPriceTxt: "Rp1.000.000"
+                            subServicePrice: 1000000
+                            subServicePriceTxt: "Rp1.000.000"
                 success_getInfluencer_not_found:
                   summary: "Get detail influencer but not found"
                   value:
@@ -4177,9 +4177,9 @@ components:
           format: uuid
         subServiceType:
           type: string
-        subServiceMarkupPrice:
+        subServicePrice:
           type: integer
-        subServiceMarkupPriceTxt:
+        subServicePriceTxt:
           type: string
     RateCardSpec:
       type: object
