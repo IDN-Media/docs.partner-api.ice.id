@@ -15,7 +15,7 @@ info:
 
     Tags represent as a group which use on the scope access
 
-    For testing purposes, you may use the Alpha (testing) server with client_id xxxxxx
+    For testing purposes, you may use the Beta (staging) server with client_id xxxxxx
     and client_secret xxxxx.
 
   version: 2.0.0
@@ -31,7 +31,7 @@ paths:
     post:
       tags:
       - Authentication
-      summary: "Get bearer token"
+      summary: "Get bearer token (Beta Ready)"
       description: |
         API to get bearer token for accessing all ICE Partner API
       operationId: "postAuth"
@@ -115,7 +115,7 @@ paths:
     post:
       tags:
       - Business User
-      summary: Create a new business user profile
+      summary: "Create a new business user profile (Beta Ready)"
       description: |
         API Endpoint for ICE Partner to creates a new business user profile
       operationId: "postBusinessUser"
@@ -208,7 +208,7 @@ paths:
     post:
       tags:
       - Campaign
-      summary: "Create a campaign"
+      summary: "Create a campaign (Beta Ready)"
       description: |
         API Endpoint for ICE Partner to create a campaign
       operationId: "postCampaign"
@@ -1030,7 +1030,7 @@ paths:
     get:
       tags:
       - Campaign
-      summary: "Get list of campaigns"
+      summary: "Get list of campaigns (Beta Ready)"
       description: |
         API Endpoint for ICE Partner to get list of campaigns based on supplied filters and sorting rule
       operationId: "getListCampaign"
@@ -2430,7 +2430,7 @@ paths:
     post:
       tags:
       - Chat
-      summary: "Generate Presigned URL to upload file"
+      summary: "Generate Presigned URL to upload file (Beta Ready)"
       description: |
         API Endpoint for ICE Partner to generate Presigned URL to upload file
       operationId: "postChatUploadURL"
@@ -2534,7 +2534,7 @@ paths:
     get:
       tags:
       - Influencer
-      summary: "Get detail influencer"
+      summary: "Get detail influencer (Beta Ready)"
       description: |
         API Endpoint for ICE Partner to get detail influencer
       operationId: "getInfluencer"
@@ -2682,7 +2682,7 @@ paths:
     get:
       tags:
       - Influencer
-      summary: "Get list influencer"
+      summary: "Get list influencer (Beta Ready)"
       description: |
         API Endpoint for ICE Partner to get list influencer
       operationId: "getListInfluencer"
@@ -2838,7 +2838,7 @@ paths:
     get:
       tags:
       - Util
-      summary: "Generate S3 Presigned URL for downloading file"
+      summary: "Generate S3 Presigned URL for downloading file (Beta Ready)"
       description: |
         API Endpoint for ICE Partner to generate S3 Presigned URL for downloading file
       operationId: "getDownloadURL"
@@ -2914,7 +2914,7 @@ paths:
     get:
       tags:
       - Util
-      summary: "List of constants"
+      summary: "List of constants (Beta Ready)"
       description: |
         API Endpoint for ICE Partner to get list cities, categories, banks, etc
       operationId: "getMetadata"
@@ -3051,7 +3051,7 @@ paths:
     post:
       tags:
       - Util
-      summary: "Generate S3 Presigned URL for uploading file"
+      summary: "Generate S3 Presigned URL for uploading file (Beta Ready)"
       description: |
         API Endpoint for ICE Partner to generate S3 Presigned URL for uploading file
       operationId: "postUploadURL"
