@@ -700,14 +700,6 @@ paths:
           type: integer
           format: "int32"
           example: 342
-      - name: "campaignId"
-        in: query
-        description: "Id of the campaign"
-        required: true
-        schema:
-          type: integer
-          format: "int32"
-          example: ""
       - name: "forBusinessUserId"
         in: query
         description: "Id of the business user"
