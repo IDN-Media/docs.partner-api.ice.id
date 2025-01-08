@@ -1612,63 +1612,63 @@ paths:
                   value:
                     status: 200
                     data:
-                      timeInMillis: "239875234646"
+                    - timeInMillis: "239875234646"
                       action: "ACTION_SET_CONTENT"
                       contentRevisionNumber: "0"
                       subCampaign:
-                        subCampaignId: "2759723423466"
-                        campaignId: "2759723423466"
-                        campaignCreatedByUserId: "4362424"
+                        subCampaignId: 2759723423466
+                        campaignId: 2759723423466
+                        campaignCreatedByUserId: 4362424
                         campaignCreatedByUserType: "BUSINESS_PARTNER"
                         campaignCreatedByUserName: "Tokopedia"
-                        forBusinessUserId: "76514983635"
+                        forBusinessUserId: 76514983635
                         forBusinessUserName: "Nature Shop"
                         campaignTitle: "Campaign title goes here"
                         campaignImageLink: "https://s3.aws/image1.jpg"
                         campaignImageLinkKey: "https://s3.aws/image1.jpg"
-                        campaignStartTimeInMillis: "632918649234"
-                        campaignEndTimeInMillis: "632918649234"
+                        campaignStartTimeInMillis: 632918649234
+                        campaignEndTimeInMillis: 632918649234
                         categories:
-                        - categoryId: "3"
+                        - categoryId: 3
                           category: "FOOD"
-                        influencerId: "652149649324"
+                        influencerId: 652149649324
                         influencerName: "Bianca Kartika"
                         influencerCity: "Jakarta"
                         influencerProfileImageLink: "https://s3.aws.com/image1.jpg"
                         influencerProfileImageLinkKey: "https://s3.aws.com/image1.jpg"
-                        socialPlatformTypeId: "2347"
+                        socialPlatformTypeId: 2347
                         socialPlatformType: "INSTAGRAM"
-                        serviceTypeId: "1724"
+                        serviceTypeId: 1724
                         serviceType: "FEED"
                         serviceDescription: "FEED"
-                        servicePrice: "10000.00"
+                        servicePrice: 10000
                         isSubServiceSelected: true
                         subServiceType: "PLUS ONE PHOTO"
-                        subServicePrice: "1000.00"
-                        quantity: "3"
-                        price: "33000"
+                        subServicePrice: 1000
+                        quantity: 3
+                        price: 33000
                         invoiceNumber: "INV/22131927873"
                         orderNumber: "5346477"
-                        totalTax: "1000"
-                        totalChargeablePrice: "34000"
+                        totalTax: 1000
+                        totalChargeablePrice: 34000
                         isConfirmedByInfluencer: true
                         influencerRejectionReason: "(Rejection reason goes here)"
-                        isConfirmedTimeInMillis: "7146239354653"
+                        isConfirmedTimeInMillis: 7146239354653
                         isContentValid: true
                         contentRejectionReason: "(Rejection reason goes here)"
-                        contentUpdateTimeInMillis: "62938623957345"
+                        contentUpdateTimeInMillis: 62938623957345
                         contentFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
                           linkKey: "https://www.amazon.com/image.jpg"
                         isProofOfPostValid: true
                         proofOfPostRejectionReason: "(Rejection reason goes here)"
-                        proofOfPostUpdateTimeInMillis: "62938623957345"
+                        proofOfPostUpdateTimeInMillis: 62938623957345
                         proofOfPostFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
                           linkKey: "https://www.amazon.com/image.jpg"
                         isProofOfInsightValid: true
                         proofOfInsightRejectionReason: "(Rejection reason goes here)"
-                        proofOfInsightUpdateTimeInMillis: "62938623957345"
+                        proofOfInsightUpdateTimeInMillis: 62938623957345
                         proofOfInsightFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
                           linkKey: "https://www.amazon.com/image.jpg"
