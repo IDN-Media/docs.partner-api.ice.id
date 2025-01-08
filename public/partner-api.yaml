@@ -45,19 +45,19 @@ paths:
                 grantType:
                   type: string
                   description: Set this to 'client_credentials'
-                  example: client_credentials
+                  example: "{enter your grant type}"
                 clientId:
                   description: Your application's client_id
                   type: string
-                  example: "7v5v3dn3u0dpu22sgetrb3lsj1"
+                  example: "{enter your client id}"
                 clientSecret:
                   description: Your application's client_secret
                   type: string
-                  example: "1uq6hovb6tb27cpptfqmic7e0cm2tltn6k8q33eqvii62toos1ju"
+                  example: "{enter your client secret}"
                 scope:
                   description: Access scope
                   type: string
-                  example: "partner/partner:campaign"
+                  example: "{enter your access scope}"
       responses:
         200:
           description: Success
