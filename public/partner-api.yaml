@@ -31,7 +31,7 @@ paths:
     post:
       tags:
       - Authentication
-      summary: "Get bearer token (Beta Ready)"
+      summary: "Get bearer token **(Beta Ready)**"
       description: |
         API to get bearer token for accessing all ICE Partner API
       operationId: "postAuth"
@@ -115,7 +115,7 @@ paths:
     post:
       tags:
       - Business User
-      summary: "Create a new business user profile (Beta Ready)"
+      summary: "Create a new business user profile **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to creates a new business user profile
       operationId: "postBusinessUser"
@@ -208,7 +208,7 @@ paths:
     post:
       tags:
       - Campaign
-      summary: "Create a campaign (Beta Ready)"
+      summary: "Create a campaign **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to create a campaign
       operationId: "postCampaign"
@@ -319,7 +319,7 @@ paths:
     get:
       tags:
       - Campaign
-      summary: "Get detail of campaign"
+      summary: "Get detail of campaign **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to get detail of campaign
       operationId: "getCampaign"
@@ -685,7 +685,7 @@ paths:
     delete:
       tags:
       - Campaign
-      summary: "Delete a campaign"
+      summary: "Delete a campaign **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to delete a campaign
       operationId: "delCampaign"
@@ -707,7 +707,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "36"
+          example: 36
       responses:
         200:
           description: Success
@@ -795,7 +795,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "1"
+          example: 1
       responses:
         200:
           description: Success
@@ -913,116 +913,11 @@ paths:
                     error:
                       message: "Internal Server Error"
                       reason: "Internal Server Error"
-  /campaign/invoice:
-    get:
-      tags:
-      - Campaign
-      summary: "Get campaign payment invoice"
-      description: |
-        API Endpoint for ICE Partner to get campaign payment invoice
-      operationId: "getCampaignInv"
-      security:
-      - JWT: []
-      parameters:
-      - name: campaignId
-        in: query
-        description: "Id of the campaign"
-        required: true
-        schema:
-          type: string
-          example: "47612437311"
-      - name: forBusinessUserId
-        in: query
-        description: "Id of business user"
-        required: true
-        schema:
-          type: integer
-          format: "int32"
-          example: 1
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: "#/components/schemas/BaseResponse"
-                - type: object
-                  properties:
-                    data:
-                      $ref: "#/components/schemas/CampaignInvoice"
-              examples:
-                response_getPayInv_200:
-                  summary: "Get payment invoice"
-                  value:
-                    status: 200
-                    data:
-                      campaignId: "632918649128"
-                      invoiceNumber: "INV/AHJDHJ/4676HG"
-                      orderNumber: "1213SGYWGSU"
-                      paymentTimeInMillis: "734543536547"
-                      paymentMethod: "Transfer Bank BCA"
-                      campaignTitle: "Campaign title goes here"
-                      businessUserName: "Nature Shop"
-                      businessPartnerName: "Tokopedia"
-                      subCampaigns:
-                      - influencerId: "24235346"
-                        influencerName: "Zahra Abigail"
-                        serviceType: "FEED"
-                        servicePrice: "10000000"
-                        isSubServiceSelected: true
-                        subServiceType: "Tambah 2 slide"
-                        subServicePrice: "1000"
-                        quantity: "3"
-                        price: "30003000"
-                      totalPrice: "4000000"
-                      totalTax: "100000"
-                      taxName: "PPN 12%"
-                      totalTaxDeduction: "50000"
-                      totalChargeablePriceWithTaxAndDeduction: "4050000"
-                      isPaid: true
-                      lastUpdatedTimeInMillis: "734543536547"
-        401:
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServerErrorArray"
-              examples:
-                response_getPayInv_401:
-                  summary: "response failed Get payment invoice cause user unauthorized"
-                  value:
-                    status: 401
-                    data: null
-                    user_message:
-                      title: "Kamu tidak punya akses request ini"
-                      message: "Silahkan hubungi team ICE untuk request hak akses"
-                    error:
-                      message: "Unauthorized"
-                      reason: "unauthorized"
-        500:
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServerErrorArray"
-              examples:
-                response_getPayInv_500:
-                  summary: "Failed to Get payment invoice"
-                  value:
-                    status: 500
-                    data: null
-                    user_message:
-                      title: "Ada eror sepertinya"
-                      message: "Maaf nih sepertinya ada yang salah di system kita. Sabar ya, nanti coba lagi"
-                    error:
-                      message: "Internal Server Error"
-                      reason: "Internal Server Error"
   /campaign/listCampaign:
     get:
       tags:
       - Campaign
-      summary: "Get list of campaigns (Beta Ready)"
+      summary: "Get list of campaigns **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to get list of campaigns based on supplied filters and sorting rule
       operationId: "getListCampaign"
@@ -1113,14 +1008,14 @@ paths:
         required: false
         schema:
           type: integer
-          example: "1"
+          example: 1
       - name: "pageSize"
         in: query
         description: ""
         required: false
         schema:
           type: integer
-          example: "10"
+          example: 10
       responses:
         200:
           description: Success
@@ -1298,7 +1193,7 @@ paths:
     post:
       tags:
       - Campaign
-      summary: "Create a sub campaign"
+      summary: "Create a sub campaign **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to create a sub campaign
       operationId: "postSubCampaign"
@@ -1482,7 +1377,7 @@ paths:
     delete:
       tags:
       - Campaign
-      summary: "Remove a sub campaign"
+      summary: "Remove a sub campaign **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to remove a sub campaign
       operationId: "delSubCampaign"
@@ -1569,7 +1464,7 @@ paths:
     get:
       tags:
       - Campaign
-      summary: "Get sub campaign's activity history details"
+      summary: "Get sub campaign's activity history details **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to get sub campaign's activity history details
       operationId: "getSubCampaignHistory"
@@ -1583,7 +1478,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "1"
+          example: 1
       - name: "forBusinessUserId"
         in: query
         description: "Id of business user"
@@ -1591,7 +1486,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "1"
+          example: 1
       responses:
         200:
           description: Success
@@ -1713,7 +1608,7 @@ paths:
     put:
       tags:
       - Campaign
-      summary: "Verifies the sub campaign content"
+      summary: "Verifies the sub campaign content **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to verifies the sub campaign content.
 
@@ -1729,7 +1624,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "100"
+          example: 100
       - name: "isContentValid"
         in: query
         description: ""
@@ -1751,7 +1646,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "36"
+          example: 36
       responses:
         200:
           description: Success
@@ -1834,7 +1729,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "100"
+          example: 100
       - name: "isProofOfInsightValid"
         in: query
         description: ""
@@ -1856,7 +1751,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "36"
+          example: 36
       responses:
         200:
           description: Success
@@ -1939,7 +1834,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "100"
+          example: 100
       - name: "isProofOfPostValid"
         in: query
         description: ""
@@ -1961,7 +1856,7 @@ paths:
         schema:
           type: integer
           format: "int32"
-          example: "36"
+          example: 36
       responses:
         200:
           description: Success
@@ -2028,7 +1923,7 @@ paths:
     get:
       tags:
       - Chat
-      summary: "Generate Presigned URL to download/open file"
+      summary: "Generate Presigned URL to download/open file **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner for generate Presigned URL to download/open file
       operationId: "getChatDownloadURL"
@@ -2422,7 +2317,7 @@ paths:
     post:
       tags:
       - Chat
-      summary: "Generate Presigned URL to upload file (Beta Ready)"
+      summary: "Generate Presigned URL to upload file **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to generate Presigned URL to upload file
       operationId: "postChatUploadURL"
@@ -2526,7 +2421,7 @@ paths:
     get:
       tags:
       - Influencer
-      summary: "Get detail influencer (Beta Ready)"
+      summary: "Get detail influencer **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to get detail influencer
       operationId: "getInfluencer"
@@ -2674,7 +2569,7 @@ paths:
     get:
       tags:
       - Influencer
-      summary: "Get list influencer (Beta Ready)"
+      summary: "Get list influencer **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to get list influencer
       operationId: "getListInfluencer"
@@ -2830,7 +2725,7 @@ paths:
     get:
       tags:
       - Util
-      summary: "Generate S3 Presigned URL for downloading file (Beta Ready)"
+      summary: "Generate S3 Presigned URL for downloading file **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to generate S3 Presigned URL for downloading file
       operationId: "getDownloadURL"
@@ -2906,7 +2801,7 @@ paths:
     get:
       tags:
       - Util
-      summary: "List of constants (Beta Ready)"
+      summary: "List of constants **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to get list cities, categories, banks, etc
       operationId: "getMetadata"
@@ -3043,7 +2938,7 @@ paths:
     post:
       tags:
       - Util
-      summary: "Generate S3 Presigned URL for uploading file (Beta Ready)"
+      summary: "Generate S3 Presigned URL for uploading file **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to generate S3 Presigned URL for uploading file
       operationId: "postUploadURL"
@@ -3168,7 +3063,7 @@ components:
       properties:
         id:
           type: integer
-          example: "0"
+          example: 0
         code:
           type: string
           example: "ABC"
@@ -3378,19 +3273,19 @@ components:
       properties:
         campaignId:
           type: integer
-          example: "39847239764"
+          example: 39847239764
         totalPrice:
           type: integer
-          example: "4000000"
+          example: 4000000
         totalTax:
           type: integer
-          example: "100000"
+          example: 100000
         totalTaxDeduction:
           type: integer
-          example: "50000"
+          example: 50000
         totalChargeablePriceWithTaxAndDeduction:
           type: integer
-          example: "4050000"
+          example: 4050000
         subCampaigns:
           type: array
           items:
@@ -3400,10 +3295,10 @@ components:
       properties:
         campaignId:
           type: integer
-          example: "39847239764"
+          example: 39847239764
         createdByUserId:
           type: integer
-          example: "713827463"
+          example: 713827463
         createdByUserType:
           type: string
           example: "ICE_OP"
@@ -3412,7 +3307,7 @@ components:
           example: "Ahmed Ali"
         forBusinessUserId:
           type: integer
-          example: "76514983635"
+          example: 76514983635
         forBusinessUserName:
           type: string
           example: "Nature Shop"
@@ -3439,13 +3334,13 @@ components:
           example: "https://example.com/refLink"
         campaignStartTimeInMillis:
           type: integer
-          example: "763192836821"
+          example: 763192836821
         campaignEndTimeInMillis:
           type: integer
-          example: "63129836213"
+          example: 63129836213
         createdTimeInMillis:
           type: integer
-          example: "342934982374"
+          example: 342934982374
         status:
           type: string
           example: "DRAFT"
@@ -3456,7 +3351,7 @@ components:
             properties:
               categoryId:
                 type: integer
-                example: "3"
+                example: 3
               category:
                 type: string
                 example: "FOOD"
@@ -3471,101 +3366,18 @@ components:
               linkKey:
                 type: string
                 example: "https://s3.aws/image1.jpg"
-    CampaignInvoice:
-      type: object
-      properties:
-        campaignId:
-          type: integer
-          example: "632918649128"
-        invoiceNumber:
-          type: string
-          example: "INV/AHJDHJ/4676HG"
-        orderNumber:
-          type: string
-          example: "1213SGYWGSU"
-        paymentTimeInMillis:
-          type: integer
-          example: "734543536547"
-        paymentMethod:
-          type: string
-          example: "Transfer Bank BCA"
-        campaignTitle:
-          type: string
-          example: "Campaign title goes here"
-        businessUserName:
-          type: string
-          example: "Nature Shop"
-        businessPartnerName:
-          type: string
-          example: "Tokopedia"
-        subCampaigns:
-          type: array
-          items:
-            type: object
-            properties:
-              influencerId:
-                type: integer
-                example: "24235346"
-              influencerName:
-                type: string
-                example: "Zahra Abigail"
-              serviceType:
-                type: string
-                example: "FEED"
-              servicePrice:
-                type: "number"
-                format: double
-                example: "10000000"
-              isSubServiceSelected:
-                type: boolean
-                example: true
-              subServiceType:
-                type: string
-                example: "Tambah 2 slide"
-              subServicePrice:
-                type: number
-                format: double
-                example: "1000"
-              quantity:
-                type: integer
-                example: "3"
-              price:
-                type: number
-                format: double
-                example: "30003000"
-        totalPrice:
-          type: integer
-          example: "4000000"
-        totalTax:
-          type: integer
-          example: "100000"
-        taxName:
-          type: string
-          example: "PPN 11%"
-        totalTaxDeduction:
-          type: integer
-          example: "50000"
-        totalChargeablePriceWithTaxAndDeduction:
-          type: integer
-          example: "4050000"
-        isPaid:
-          type: boolean
-          example: true
-        lastUpdatedTimeInMillis:
-          type: integer
-          example: "734543536547"
     CampaignList:
       type: object
       properties:
         totalResults:
           type: integer
-          example: "100"
+          example: 100
         pageSize:
           type: integer
-          example: "10"
+          example: 10
         currentPage:
           type: integer
-          example: "2"
+          example: 2
         campaigns:
           type: array
           items:
@@ -3575,7 +3387,7 @@ components:
       properties:
         campaignId:
           type: integer
-          example: "39847239764"
+          example: 39847239764
         title:
           type: string
           example: "This is the title of the campaign"
@@ -3599,34 +3411,34 @@ components:
           example: "https://s3.aws/image1.jpg"
         totalPrice:
           type: integer
-          example: "10000"
+          example: 10000
         invoiceNumber:
           type: string
           example: "INV/2023217/IPL/3099402376"
         campaignStartTimeInMillis:
           type: integer
-          example: "763192836821"
+          example: 763192836821
         campaignEndTimeInMillis:
           type: integer
-          example: "63129836213"
+          example: 63129836213
         createdTimeInMillis:
           type: integer
-          example: "342934982374"
+          example: 342934982374
         status:
           type: string
           example: "DRAFT"
         totalServices:
           type: integer
-          example: "6"
+          example: 6
         totalSubServices:
           type: integer
-          example: "12"
+          example: 12
         totalInfluencers:
           type: integer
-          example: "4"
+          example: 4
         totalChargeablePriceWithTaxAndDeduction:
           type: integer
-          example: "10000"
+          example: 10000
         productFileLinks:
           type: array
           items:
@@ -3645,7 +3457,7 @@ components:
             properties:
               categoryId:
                 type: integer
-                example: "3"
+                example: 3
               category:
                 type: string
                 example: "FOOD"
@@ -3654,7 +3466,7 @@ components:
       properties:
         forBusinessUserId:
           type: integer
-          example: "36"
+          example: 36
         title:
           type: string
           example: "This is the title of the campaign"
@@ -3665,7 +3477,7 @@ components:
           type: array
           items:
             type: integer
-            example: "2"
+            example: 2
         campaignImageLinkKey:
           type: string
           example: "https://s3.aws/image1.jpg"
@@ -3685,22 +3497,22 @@ components:
           example: "https://example.com/refLink"
         campaignStartTimeInMillis:
           type: integer
-          example: "763192836821"
+          example: 763192836821
         campaignEndTimeInMillis:
           type: integer
-          example: "63129836213"
+          example: 63129836213
     CampaignPayment:
       type: object
       properties:
         forBusinessUserId:
           type: integer
-          example: "36"
+          example: 36
         campaignId:
           type: integer
-          example: "100"
+          example: 100
         bankId:
           type: integer
-          example: "999"
+          example: 999
         bankAccNumber:
           type: string
           example: "0001011389453"
@@ -3712,10 +3524,10 @@ components:
       properties:
         campaignId:
           type: integer
-          example: "100"
+          example: 100
         forBusinessUserId:
           type: integer
-          example: "36"
+          example: 36
         title:
           type: string
           example: "This is the title of the campaign"
@@ -3726,7 +3538,7 @@ components:
           type: array
           items:
             type: integer
-            example: "2"
+            example: 2
         campaignImageLinkKey:
           type: string
           example: "https://s3.aws/image1.jpg"
@@ -3746,16 +3558,16 @@ components:
           example: "https://example.com/refLink"
         campaignStartTimeInMillis:
           type: integer
-          example: "763192836821"
+          example: 763192836821
         campaignEndTimeInMillis:
           type: integer
-          example: "63129836213"
+          example: 63129836213
     Category:
       type: object
       properties:
         id:
           type: integer
-          example: "0"
+          example: 0
         name:
           type: string
           example: "Food"
@@ -3768,7 +3580,7 @@ components:
         id:
           type: integer
           format: "int64"
-          example: "0"
+          example: 0
         isoCode2:
           type: string
           example: "ID"
@@ -3792,7 +3604,7 @@ components:
               id:
                 type: integer
                 format: "int64"
-                example: "0"
+                example: 0
               name:
                 type: string
                 example: "DKI Jakarta"
@@ -3806,7 +3618,7 @@ components:
                   properties:
                     id:
                       type: integer
-                      example: "0"
+                      example: 0
                     name:
                       type: string
                       example: "Kota Adm. Jakarta Pusat"
@@ -4026,7 +3838,7 @@ components:
       properties:
         id:
           type: integer
-          example: "0"
+          example: 0
         name:
           type: string
           example: "English"
@@ -4191,7 +4003,7 @@ components:
       properties:
         id:
           type: integer
-          example: "0"
+          example: 0
         name:
           type: string
           example: "Food"
@@ -4253,7 +4065,7 @@ components:
       properties:
         id:
           type: integer
-          example: "0"
+          example: 0
         name:
           type: string
           example: "Instagram"
@@ -4267,7 +4079,7 @@ components:
             properties:
               id:
                 type: integer
-                example: "0"
+                example: 0
               name:
                 type: string
                 example: "Story"
