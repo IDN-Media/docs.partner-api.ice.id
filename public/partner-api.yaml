@@ -814,68 +814,68 @@ paths:
                   value:
                     status: 200
                     data:
-                      campaignId: "39847239764"
-                      totalPrice: "4000000"
-                      totalTax: "100000"
-                      totalTaxDeduction: "50000"
-                      totalChargeablePriceWithTaxAndDeduction: "4050000"
+                      campaignId: 39847239764
+                      totalPrice: 4000000
+                      totalTax: 100000
+                      totalTaxDeduction: 50000
+                      totalChargeablePriceWithTaxAndDeduction: 4050000
                       subCampaigns:
-                      - subCampaignId: "2759723423466"
-                        campaignId: "2759723423466"
-                        campaignCreatedByUserId: "4362424"
+                      - subCampaignId: 2759723423466
+                        campaignId: 2759723423466
+                        campaignCreatedByUserId: 4362424
                         campaignCreatedByUserType: "BUSINESS_PARTNER"
                         campaignCreatedByUserName: "Tokopedia"
-                        forBusinessUserId: "76514983635"
+                        forBusinessUserId: 76514983635
                         forBusinessUserName: "Nature Shop"
                         campaignTitle: "Campaign title goes here"
                         campaignImageLink: "https://s3.aws/image1.jpg"
-                        campaignImageLinkKey: "https://s3.aws/image1.jpg"
-                        campaignStartTimeInMillis: "632918649234"
-                        campaignEndTimeInMillis: "632918649234"
+                        campaignImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
+                        campaignStartTimeInMillis: 632918649234
+                        campaignEndTimeInMillis: 632918649234
                         categories:
-                        - categoryId: "3"
+                        - categoryId: 3
                           category: "FOOD"
-                        influencerId: "652149649324"
+                        influencerId: 652149649324
                         influencerName: "Bianca Kartika"
                         influencerCity: "Jakarta"
                         influencerProfileImageLink: "https://s3.aws.com/image1.jpg"
-                        influencerProfileImageLinkKey: "https://s3.aws.com/image1.jpg"
-                        socialPlatformTypeId: "2347"
+                        influencerProfileImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
+                        socialPlatformTypeId: 2347
                         socialPlatformType: "INSTAGRAM"
-                        serviceTypeId: "1724"
+                        serviceTypeId: 1724
                         serviceType: "FEED"
                         serviceDescription: "FEED"
-                        servicePrice: "10000.00"
+                        servicePrice: 10000
                         isSubServiceSelected: true
                         subServiceType: "PLUS ONE PHOTO"
-                        subServicePrice: "1000.00"
-                        quantity: "3"
-                        price: "33000"
+                        subServicePrice: 1000
+                        quantity: 3
+                        price: 33000
                         invoiceNumber: "INV/22131927873"
                         orderNumber: "5346477"
-                        totalTax: "1000"
-                        totalChargeablePrice: "34000"
+                        totalTax: 1000
+                        totalChargeablePrice: 34000
                         isConfirmedByInfluencer: true
                         influencerRejectionReason: "(Rejection reason goes here)"
-                        isConfirmedTimeInMillis: "7146239354653"
+                        isConfirmedTimeInMillis: 7146239354653
                         isContentValid: true
                         contentRejectionReason: "(Rejection reason goes here)"
-                        contentUpdateTimeInMillis: "62938623957345"
+                        contentUpdateTimeInMillis: 62938623957345
                         contentFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
-                          linkKey: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         isProofOfPostValid: true
                         proofOfPostRejectionReason: "(Rejection reason goes here)"
-                        proofOfPostUpdateTimeInMillis: "62938623957345"
+                        proofOfPostUpdateTimeInMillis: 62938623957345
                         proofOfPostFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
-                          linkKey: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         isProofOfInsightValid: true
                         proofOfInsightRejectionReason: "(Rejection reason goes here)"
-                        proofOfInsightUpdateTimeInMillis: "62938623957345"
+                        proofOfInsightUpdateTimeInMillis: 62938623957345
                         proofOfInsightFileLinks:
                         - link: "https://www.amazon.com/image.jpg"
-                          linkKey: "https://www.amazon.com/image.jpg"
+                          linkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         status: "NOT_ACTIVE"
         401:
           description: Unauthorized
@@ -2071,15 +2071,9 @@ paths:
         required: true
         schema:
           type: string
-      - name: userId
+      - name: forBusinessUserId
         in: query
-        description: "this params combine BU_{businessUserId}, example: BU_16"
-        required: true
-        schema:
-          type: string
-      - name: email
-        in: query
-        description: "user email"
+        description: "id of business user"
         required: true
         schema:
           type: string
@@ -2122,7 +2116,6 @@ paths:
                         id: "I_737_C_5776"
                         sendTime: "2024-07-18T06:20:20.935Z#I_737_C_5776_lyqvtq2w"
                         sortkey: "2024-07-18T06:20:20.935Z#I_737_C_5776_lyqvtq2w"
-                      userProfileUrl: "https://cdn.estidar.com/INFLUENCER/1715915196300-mie_bebek.jpg"
         401:
           description: Unauthorized
           content:
@@ -3954,8 +3947,6 @@ components:
           type: string
         messageLastKey:
           $ref: "#/components/schemas/MessageList"
-        userProfileUrl:
-          type: string
     ProductType:
       type: object
       properties:
