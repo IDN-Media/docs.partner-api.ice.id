@@ -1625,20 +1625,6 @@ paths:
           type: integer
           format: "int32"
           example: 100
-      - name: "isContentValid"
-        in: query
-        description: ""
-        required: true
-        schema:
-          type: boolean
-          example: true
-      - name: "rejectionReason"
-        in: query
-        description: "Reason why the content is invalid."
-        required: false
-        schema:
-          type: string
-          example: "Need more croud in the photo"
       - name: "forBusinessUserId"
         in: query
         description: ""
@@ -1730,20 +1716,6 @@ paths:
           type: integer
           format: "int32"
           example: 100
-      - name: "isProofOfInsightValid"
-        in: query
-        description: ""
-        required: true
-        schema:
-          type: boolean
-          example: true
-      - name: "rejectionReason"
-        in: query
-        description: "Reason why the proof is invalid."
-        required: false
-        schema:
-          type: string
-          example: "Unable to open the file."
       - name: "forBusinessUserId"
         in: query
         description: ""
@@ -1835,20 +1807,6 @@ paths:
           type: integer
           format: "int32"
           example: 100
-      - name: "isProofOfPostValid"
-        in: query
-        description: ""
-        required: true
-        schema:
-          type: boolean
-          example: true
-      - name: "rejectionReason"
-        in: query
-        description: "Reason why the proof is invalid."
-        required: false
-        schema:
-          type: string
-          example: "Unable to open the file."
       - name: "forBusinessUserId"
         in: query
         description: ""
