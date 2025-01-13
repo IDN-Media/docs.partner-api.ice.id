@@ -494,7 +494,7 @@ paths:
     put:
       tags:
       - Campaign
-      summary: "Edit a campaign"
+      summary: "Edit a campaign **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to edit a campaign
       operationId: "putCampaign"
@@ -1114,7 +1114,7 @@ paths:
     put:
       tags:
       - Campaign
-      summary: "Moves the campaign out of draft state"
+      summary: "Moves the campaign out of draft state **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to moves the campaign out of draft state and sets status as IN_PROGRESS
       operationId: "putCampaignPay"
@@ -1699,7 +1699,7 @@ paths:
     put:
       tags:
       - Campaign
-      summary: "Verifies the sub campaign's proof of insight"
+      summary: "Verifies the sub campaign's proof of insight **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to verifies the sub campaign's proof of insight.
 
@@ -1790,7 +1790,7 @@ paths:
     put:
       tags:
       - Campaign
-      summary: "Verifies the sub campaign's proof of post"
+      summary: "Verifies the sub campaign's proof of post **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to verifies the sub campaign's proof of post.
 
@@ -2058,7 +2058,7 @@ paths:
     get:
       tags:
       - Chat
-      summary: "Get chat room"
+      summary: "Get chat room **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner for get chat room
       operationId: "getChatRoom"
@@ -2156,7 +2156,7 @@ paths:
     get:
       tags:
       - Chat
-      summary: "Get chat room list of business users"
+      summary: "Get chat room list of business users **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to get chat room list of business users
       operationId: "getListChatRooms"
