@@ -1617,6 +1617,20 @@ paths:
       security:
       - JWT: []
       parameters:
+      - name: "isContentValid"
+        in: query
+        description: ""
+        required: true
+        schema:
+          type: boolean
+          example: true
+      - name: "rejectionReason"
+        in: query
+        description: "Reason why the content is invalid."
+        required: false
+        schema:
+          type: string
+          example: "Need more croud in the photo"
       - name: "subCampaignId"
         in: query
         description: ""
