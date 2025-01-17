@@ -774,7 +774,7 @@ paths:
     get:
       tags:
       - Campaign
-      summary: "Get detail of campaign cart"
+      summary: "Get detail of campaign cart **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner to get detail of campaign cart
       operationId: "getCampaignCart"
@@ -1970,7 +1970,7 @@ paths:
     get:
       tags:
       - Chat
-      summary: "Get chat history"
+      summary: "Get chat history **(Beta Ready)**"
       description: |
         API Endpoint for ICE Partner for get chat history
       operationId: "getChatHist"
