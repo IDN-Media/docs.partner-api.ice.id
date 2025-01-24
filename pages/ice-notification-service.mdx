@@ -1,10 +1,15 @@
 # ICE Notification Service
 
+ICE will send POST requests to your server, in which the body will be a JSON representation of the notification.\
+Your server should return a 200 status code. Any other status code will be considered a failure by our backend.\
+ICE will retry later (up to 5 times). The retries follow an [exponential backoff and jitter](https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/) mechanism.\
+After 5 retries, we will stop sending notifications and send you an email containing the event payload.
+
 ### Sample Payload
 
 ```
 {
-  "version": "1",
+  "version": "0",
   "id": "6a7e8feb-b491-4cf7-a9f1-bf3703467718",
   "detailType": "ICE Completed Campaign Notification",
   "source": "idn.ice.campaign",
@@ -24,8 +29,9 @@
     ],
     "createdByUserId": 2354,
     "createdByUsername": "Ahmad Sujana",
+    "forBusinessUserId": 2644,
     "title": "My Campaign",
-    "productName": "Instagram Post",
+    "productName": "Giant Kitchen Ware",
     "categories": [
         {
             "categoryId": 2,
@@ -47,8 +53,24 @@
 }
 ```
 
-### Retries and backoff mechanism
+### Notification Types
 
-Sometimes an event isn't successfully delivered to your endpoint. This can happen when, for example, your endpoint is unavailable, or due to network conditions. When an event isn't successfully delivered to a target because of retriable errors, ICE Notification Service retries sending the event. ICE Nofication Service retries sending the event for 24 hours and 185 times with [exponential backoff and jitter](https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/) mechanism.
+Each notification is identified by its detailType. Below is the list of notification types and their descriptions:
 
-When an event isn't delivered after all the retry attempts are exhausted, the event is dropped and ICE Notification Service sends you and email with the payload of the event.
+1. <b>ICE Subcampaign Rejected</b>: A subcampaign was rejected by the influencer.
+2. <b>ICE Awaiting Content</b>: A subcampaign was accepted by the influencer.
+3. <b>ICE Campaign Rejected</b>: All subcampaigns were rejected by the influencer.
+4. <b>ICE Awaiting Content Verification</b>: Influencer has uploaded draft content.
+5. <b>ICE Awaiting POP</b>: Business user approved the draft content.
+6. <b>ICE Awaiting POP Verification</b>: Influencer has uploaded Proof of Post (POP).
+7. <b>ICE Awaiting POI</b>: Business user approved the Proof of Post (POP).
+8. <b>ICE Awaiting POI Verification</b>: Influencer has uploaded Proof of Insight (POI).
+9. <b>ICE Subcampaign Completed</b>:
+    - Business user approved the Proof of Insight (POI).
+    - Other subcampaigns in the campaign are still incomplete.
+10. <b>ICE Campaign Completed</b>:
+    - Business user approved the Proof of Insight (POI).
+    - All subcampaigns in the campaign are completed.
+
+
+
