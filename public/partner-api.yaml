@@ -3487,9 +3487,6 @@ components:
     CampaignUpdate:
       type: object
       properties:
-        campaignId:
-          type: integer
-          example: 100
         forBusinessUserId:
           type: integer
           example: 36
