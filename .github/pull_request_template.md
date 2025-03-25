@@ -1,0 +1,19 @@
+# Merge/Pull Request (PR)
+
+**Judul PR** : *Judul PR*
+
+**Nomor Tiket PR** : *[SA-1234](https://idnmedia.atlassian.net/browse/SA-1234)*
+
+**Jenis PR** :
+
+Tolong hapus opsi yang tidak relevan.
+
+- [ ] Create New Endpoint
+- [ ] Up Major Version
+- [ ] Up Minor Version (Adjust Endpoint)
+- [ ] Adjust Staging Endpoint
+
+**Penjelasan tentang PR ini** : 
+- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+- Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+- Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
