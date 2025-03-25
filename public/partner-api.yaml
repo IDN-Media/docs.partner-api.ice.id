@@ -1220,7 +1220,7 @@ paths:
       - JWT: []
       requestBody:
         description: |
-          Request body for selecting a service in a campaign.  
+          Request body for create a sub campaign  
           - The `serviceId` field should be retrieved from `GET /influencer/{ID}`  
             response under `socialPlatforms -> rateCards -> id`.  
           - The `isSubServiceSelected` field is `true` if the user selects a sub-service.  
