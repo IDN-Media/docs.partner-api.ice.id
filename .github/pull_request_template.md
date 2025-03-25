@@ -2,7 +2,7 @@
 
 **Judul PR** : *Judul PR*
 
-**Nomor Tiket PR** : *[SA-1234](https://idnmedia.atlassian.net/browse/SA-1234)*
+**Nomor Tiket PR** : *[ICS-1234](https://idnmedia.atlassian.net/browse/ICS-1234)*
 
 **Jenis PR** :
 
