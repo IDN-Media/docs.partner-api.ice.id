@@ -204,6 +204,82 @@ paths:
                     error:
                       message: "Internal Server Error"
                       reason: "Internal Server Error"
+    get:
+      tags:
+      - Business User
+      summary: "Get detail business user"
+      description: |
+        API Endpoint for ICE Partner to get detail of business user
+      operationId: "getDetaiBusinessUser"
+      security:
+      - JWT: []
+      parameters:
+      - name: "email"
+        in: query
+        description: "email of business user"
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/BaseResponse"
+                - type: object
+                  properties:
+                    data:
+                      $ref: "#/components/schemas/BusinessUserDetail"
+              examples:
+                response_getDetailBusinessUser:
+                  summary: "Get detail of business user"
+                  value:
+                    status: 200
+                    data:
+                      businessUserId: 64
+                      businessPartnerId: 713
+                      name: 'Unilever'
+                      email: 'unilever@gmail.com'
+                      phoneNumber: '856242311492'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+              examples:
+                response_getCampaign_401:
+                  summary: "Failed  to get detail of business user cause unauthorized"
+                  value:
+                    status: 401
+                    data: null
+                    user_message:
+                      title: "Failed"
+                      message: "Unauthorized"
+                    error:
+                      message: "You are unauthorized to make the request."
+                      reason: "You are unauthorized to make the request."
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+              examples:
+                response_getCampaign_500:
+                  summary: "Failed to get detail of business user "
+                  value:
+                    status: 500
+                    data: null
+                    user_message:
+                      title: "There was an error"
+                      message: "Please try again later"
+                    error:
+                      message: "Internal Server Error"
+                      reason: "Internal Server Error"
+      
   /campaign:
     post:
       tags:
@@ -4375,3 +4451,16 @@ components:
         range:
           type: string
           example: "1 Juta - 5 Juta"
+    BusinessUserDetail:
+      type: object
+      properties:
+        businessUserId:
+          type: integer
+        businessPartnerId:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
