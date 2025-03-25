@@ -215,7 +215,14 @@ paths:
       security:
       - JWT: []
       requestBody:
-        description: "Object containing details of the new campaign"
+        description: |
+          Request body for creating a campaign.  
+          - The `categoryIds` field should be retrieved from `GET /util/metadata`,  
+            specifically from `productTypes -> id`.  
+          - The `campaignImageLinkKey` and `productFileLinkKeys` should be obtained  
+            from the `fileKey` field in the `POST /util/uploadUrl` response.  
+          - Ensure that the `campaignStartTimeInMillis` and `campaignEndTimeInMillis`  
+            are in milliseconds since the epoch.  
         required: true
         content:
           application/json:
@@ -246,8 +253,8 @@ paths:
                       forBusinessUserName: "Nature Shop"
                       title: "This is the title of the campaign"
                       productName: "Name of the product"
-                      campaignImageLink: "https://s3.aws/image1.jpg"
-                      campaignImageLinkKey: "https://s3.aws/image1.jpg"
+                      campaignImageLink: "https://s3.aws/BUSINESS_PARTNER/2213/88430cda8.jpg"
+                      campaignImageLinkKey: "BUSINESS_PARTNER/2213/88430cda8.jpg"
                       description: "This is the description of this campaign."
                       objective: "This is the objective of this campaign."
                       referenceLink: "https://example.com/refLink"
@@ -259,8 +266,8 @@ paths:
                         categoryId: "3"
                         category: "FOOD"
                       productFileLinks:
-                      - link: "https://s3.aws/image1.jpg"
-                        linkKey: "https://s3.aws/image1.jpg"
+                      - link: "https://s3.aws/BUSINESS_PARTNER/2213/88430cda8.jpg"
+                        linkKey: "BUSINESS_PARTNER/2213/88430cda8.jpg"
         400:
           description: Bad Request
           content:
@@ -371,8 +378,8 @@ paths:
                       categories:
                       - categoryId: 3
                         category: "FOOD"
-                      campaignImageLink: "https://s3.aws/image1.jpg"
-                      campaignImageLinkKey: "https://s3.aws/image1.jpg"
+                      campaignImageLink: "https://s3.aws/BUSINESS_PARTNER/2213/88430cda8.jpg"
+                      campaignImageLinkKey: "BUSINESS_PARTNER/2213/88430cda8.jpg"
                       productFileLinks:
                       - link: "https://s3.aws/image1.jpg"
                         linkKey: "https://s3.aws/image1.jpg"
@@ -406,8 +413,8 @@ paths:
                         forBusinessUserId: 76514983635
                         forBusinessUserName: "Nature Shop"
                         campaignTitle: "Campaign title goes here"
-                        campaignImageLink: "https://s3.aws/image1.jpg"
-                        campaignImageLinkKey: "https://s3.aws/image1.jpg"
+                        campaignImageLink: "https://s3.aws/BUSINESS_PARTNER/2213/88430cda8.jpg"
+                        campaignImageLinkKey: "BUSINESS_PARTNER/2213/88430cda8.jpg"
                         campaignStartTimeInMillis: 632918649234
                         campaignEndTimeInMillis: 632918649234
                         categories:
@@ -416,8 +423,8 @@ paths:
                         influencerId: 652149649324
                         influencerName: "Bianca Kartika"
                         influencerCity: "Jakarta"
-                        influencerProfileImageLink: "https://s3.aws.com/image1.jpg"
-                        influencerProfileImageLinkKey: "https://s3.aws.com/image1.jpg"
+                        influencerProfileImageLink: "https://s3.aws.com/BUSINESS_PARTNER/2213/88430cda8.jpg"
+                        influencerProfileImageLinkKey: "BUSINESS_PARTNER/2213/88430cda8.jpg"
                         socialPlatformTypeId: 2347
                         socialPlatformType: "INSTAGRAM"
                         serviceTypeId: 1724
@@ -501,7 +508,14 @@ paths:
       security:
       - JWT: []
       requestBody:
-        description: "Object containing details of the campaign"
+        description: |
+          Request body for updating a campaign.  
+          - The `categoryIds` field should be retrieved from `GET /util/metadata`,  
+            specifically from `productTypes -> id`.  
+          - The `campaignImageLinkKey` and `productFileLinkKeys` should be obtained  
+            from the `fileKey` field in the `POST /util/uploadUrl` response.  
+          - Ensure that the `campaignStartTimeInMillis` and `campaignEndTimeInMillis`  
+            are in milliseconds since the epoch.
         required: true
         content:
           application/json:
@@ -544,8 +558,8 @@ paths:
                       categories:
                       - categoryId: "3"
                         category: "FOOD"
-                      campaignImageLink: "https://s3.aws/image1.jpg"
-                      campaignImageLinkKey: "https://s3.aws/image1.jpg"
+                      campaignImageLink: "https://s3.aws/BUSINESS_PARTNER/2213/88430cda8.jpg"
+                      campaignImageLinkKey: "BUSINESS_PARTNER/2213/88430cda8.jpg"
                       productFileLinks:
                       - link: "https://s3.aws/image1.jpg"
                         linkKey: "https://s3.aws/image1.jpg"
@@ -579,8 +593,8 @@ paths:
                         forBusinessUserId: "76514983635"
                         forBusinessUserName: "Nature Shop"
                         campaignTitle: "Campaign title goes here"
-                        campaignImageLink: "https://s3.aws/image1.jpg"
-                        campaignImageLinkKey: "https://s3.aws/image1.jpg"
+                        campaignImageLink: "https://s3.aws/BUSINESS_PARTNER/2213/88430cda8.jpg"
+                        campaignImageLinkKey: "BUSINESS_PARTNER/2213/88430cda8.jpg"
                         campaignStartTimeInMillis: "632918649234"
                         campaignEndTimeInMillis: "632918649234"
                         categories:
@@ -828,7 +842,7 @@ paths:
                         forBusinessUserId: 76514983635
                         forBusinessUserName: "Nature Shop"
                         campaignTitle: "Campaign title goes here"
-                        campaignImageLink: "https://s3.aws/image1.jpg"
+                        campaignImageLink: "https://s3.aws/BUSINESS_PARTNER/3/822g448b9.jpg"
                         campaignImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         campaignStartTimeInMillis: 632918649234
                         campaignEndTimeInMillis: 632918649234
@@ -838,7 +852,7 @@ paths:
                         influencerId: 652149649324
                         influencerName: "Bianca Kartika"
                         influencerCity: "Jakarta"
-                        influencerProfileImageLink: "https://s3.aws.com/image1.jpg"
+                        influencerProfileImageLink: "https://s3.aws.com/BUSINESS_PARTNER/3/822g448b9.jpg"
                         influencerProfileImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         socialPlatformTypeId: 2347
                         socialPlatformType: "INSTAGRAM"
@@ -1044,8 +1058,8 @@ paths:
                         forBusinessUsername: "Nature Shop"
                         createdByUserType: "PARTNER"
                         createdByUserName: "Ahmed Ali"
-                        campaignImageLink: "https://s3.aws/image1.jpg"
-                        campaignImageLinkKey: "https://s3.aws/image1.jpg"
+                        campaignImageLink: "https://s3.aws/BUSINESS_PARTNER/3/822g448b9.jpg"
+                        campaignImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         totalPrice: 10000
                         invoiceNumber: "INV/2023217/IPL/3099402376"
                         campaignStartTimeInMillis: 763192836821
@@ -1121,7 +1135,12 @@ paths:
       security:
       - JWT: []
       requestBody:
-        description: "Object containing details of payment"
+        description: | 
+          Request body for submitting payment.  
+          - The `bankId` field should be retrieved from `/util/metadata`,  
+            specifically from `banks -> id`.  
+          - The `proofOfPaymentImageLinkKey` should be obtained from the `fileKey`  
+            field in the `POST /util/uploadUrl` response.  
         required: true
         content:
           application/json:
@@ -1200,7 +1219,17 @@ paths:
       security:
       - JWT: []
       requestBody:
-        description: "Object containing sub-service details"
+        description: |
+          Request body for selecting a service in a campaign.  
+          - The `serviceId` field should be retrieved from `GET /influencer/{ID}`  
+            response under `socialPlatforms -> rateCards -> id`.  
+          - The `isSubServiceSelected` field is `true` if the user selects a sub-service.  
+          - The `subServiceId` field should be retrieved from `GET /influencer/{ID}`  
+            response under `socialPlatforms -> rateCards -> additionalCosts -> subServiceId`.  
+          - The `servicePrice` field should be retrieved from `GET /influencer/{ID}`  
+            response under `socialPlatforms -> rateCards -> price`.  
+          - The `subServicePrice` field should be retrieved from `GET /influencer/{ID}`  
+            response under `socialPlatforms -> rateCards -> additionalCosts -> subServicePrice`.  
         required: true
         content:
           application/json:
@@ -1234,8 +1263,8 @@ paths:
                       categories:
                       - categoryId: "3"
                         category: "FOOD"
-                      campaignImageLink: "https://s3.aws/image1.jpg"
-                      campaignImageLinkKey: "https://s3.aws/image1.jpg"
+                      campaignImageLink: "https://s3.aws/BUSINESS_PARTNER/3/822g448b9.jpg"
+                      campaignImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                       productFileLinks:
                       - link: "https://s3.aws/image1.jpg"
                         linkKey: "https://s3.aws/image1.jpg"
@@ -1269,8 +1298,8 @@ paths:
                         forBusinessUserId: "76514983635"
                         forBusinessUserName: "Nature Shop"
                         campaignTitle: "Campaign title goes here"
-                        campaignImageLink: "https://s3.aws/image1.jpg"
-                        campaignImageLinkKey: "https://s3.aws/image1.jpg"
+                        campaignImageLink: "https://s3.aws/BUSINESS_PARTNER/3/822g448b9.jpgg"
+                        campaignImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         campaignStartTimeInMillis: "632918649234"
                         campaignEndTimeInMillis: "632918649234"
                         categories:
@@ -1386,7 +1415,10 @@ paths:
       parameters:
       - name: "ID"
         in: "path"
-        description: "Id of the sub-campaign"
+        description: | 
+          ID of the sub-campaign.  
+          This value should be retrieved from `GET /campaign/cart`  
+          under `subCampaigns -> subCampaignId`.
         required: true
         schema:
           type: integer
@@ -1473,7 +1505,10 @@ paths:
       parameters:
       - name: "subCampaignId"
         in: query
-        description: "Id of the sub-campaign"
+        description: | 
+          ID of the sub-campaign.  
+          This value should be retrieved from `GET /campaign/{ID}`  
+          under `subCampaigns -> subCampaignId`.
         required: true
         schema:
           type: integer
@@ -1519,8 +1554,8 @@ paths:
                         forBusinessUserId: 76514983635
                         forBusinessUserName: "Nature Shop"
                         campaignTitle: "Campaign title goes here"
-                        campaignImageLink: "https://s3.aws/image1.jpg"
-                        campaignImageLinkKey: "https://s3.aws/image1.jpg"
+                        campaignImageLink: "https://s3.aws/BUSINESS_PARTNER/3/822g448b9.jpg"
+                        campaignImageLinkKey: "BUSINESS_PARTNER/3/822g448b9.jpg"
                         campaignStartTimeInMillis: 632918649234
                         campaignEndTimeInMillis: 632918649234
                         categories:
@@ -1633,7 +1668,10 @@ paths:
           example: "Need more croud in the photo"
       - name: "subCampaignId"
         in: query
-        description: ""
+        description: | 
+          ID of the sub-campaign.  
+          This value should be retrieved from `GET /campaign/subcampaign/histories`  
+          under `subCampaign -> subCampaignId`.
         required: true
         schema:
           type: integer
@@ -1724,7 +1762,10 @@ paths:
       parameters:
       - name: "subCampaignId"
         in: query
-        description: ""
+        description: | 
+          ID of the sub-campaign.  
+          This value should be retrieved from `GET /campaign/subcampaign/histories`  
+          under `subCampaign -> subCampaignId`.
         required: true
         schema:
           type: integer
@@ -1815,7 +1856,10 @@ paths:
       parameters:
       - name: "subCampaignId"
         in: query
-        description: ""
+        description: | 
+          ID of the sub-campaign.  
+          This value should be retrieved from `GET /campaign/subcampaign/histories`  
+          under `subCampaign -> subCampaignId`.
         required: true
         schema:
           type: integer
@@ -3151,10 +3195,10 @@ components:
                 example: "FOOD"
         campaignImageLink:
           type: string
-          example: "https://s3.aws/image1.jpg"
+          example: "https://s3.aws/BUSINESS_PARTNER/3/822g448b9.jpg"
         campaignImageLinkKey:
           type: string
-          example: "https://s3.aws/image1.jpg"
+          example: "BUSINESS_PARTNER/3/822g448b9.jpg"
         productFileLinks:
           type: array
           items:
@@ -3284,10 +3328,10 @@ components:
           example: "Name of the product"
         campaignImageLink:
           type: string
-          example: "https://s3.aws/image1.jpg"
+          example: "https://s3.aws/BUSINESS_PARTNER/3/822g448b9.jpg"
         campaignImageLinkKey:
           type: string
-          example: "https://s3.aws/image1.jpg"
+          example: "BUSINESS_PARTNER/3/822g448b9.jpg"
         description:
           type: string
           example: "This is the description of this campaign."
@@ -3370,10 +3414,10 @@ components:
           example: "Ahmed Ali"
         campaignImageLink:
           type: string
-          example: "https://s3.aws/image1.jpg"
+          example: "https://s3.aws/BUSINESS_PARTNER/3/822g448b9.jpg"
         campaignImageLinkKey:
           type: string
-          example: "https://s3.aws/image1.jpg"
+          example: "BUSINESS_PARTNER/3/822g448b9.jpg"
         totalPrice:
           type: integer
           example: 10000
@@ -3443,14 +3487,15 @@ components:
           items:
             type: integer
             example: 2
+          description: "List of category IDs. These IDs are retrieved from `/util/metadata`, specifically from `productTypes -> id`."
         campaignImageLinkKey:
           type: string
-          example: "https://s3.aws/image1.jpg"
+          example: "BUSINESS_PARTNER/3/822g448b9.jpg"
         productFileLinkKeys:
           type: array
           items:
             type: string
-            example: "https://s3.aws/image1.jpg"
+            example: "BUSINESS_PARTNER/3/822g448b9.jpg"
         description:
           type: string
           example: "This is the description of this campaign."
@@ -3503,12 +3548,12 @@ components:
             example: 2
         campaignImageLinkKey:
           type: string
-          example: "https://s3.aws/image1.jpg"
+          example: "BUSINESS_PARTNER/3/822g448b9.jpg"
         productFileLinkKeys:
           type: array
           items:
             type: string
-            example: "https://s3.aws/image1.jpg"
+            example: "BUSINESS_PARTNER/3/822g448b9.jpg"
         description:
           type: string
           example: "This is the description of this campaign."
@@ -3587,15 +3632,6 @@ components:
                     slug:
                       type: string
                       example: "kota-adm-jakarta-pusat"
-    FollowersGrowth:
-      type: object
-      properties:
-        avgGrowth:
-          type: string
-        growth:
-          type: array
-          items:
-            $ref: '#/components/schemas/GrowthGraphData'
     InfluencerContents:
       type: object
       properties:
@@ -4099,10 +4135,10 @@ components:
           example: "Campaign title goes here"
         campaignImageLink:
           type: string
-          example: "https://s3.aws/image1.jpg"
+          example: "https://s3.aws/BUSINESS_PARTNER/3/822g448b9.jpg"
         campaignImageLinkKey:
           type: string
-          example: "https://s3.aws/image1.jpg"
+          example: "BUSINESS_PARTNER/3/822g448b9.jpg"
         campaignStartTimeInMillis:
           type: integer
           example: 632918649234
